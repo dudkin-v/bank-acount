@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import colors from "../../../utils/colors";
 
 const AuthorizationBlock = styled.section`
   display: flex;
@@ -13,7 +14,7 @@ const LogoBlock = styled.div`
   justify-content: center;
   padding: 40px;
   width: 45%;
-  background: rgb(162, 88, 107);
+  background: ${colors.coralTree};
   background: linear-gradient(
     149deg,
     rgba(162, 88, 107, 1) 0%,
@@ -32,14 +33,14 @@ const FormBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 40px 80px;
-  background-color: #e8e3e3;
+  background-color: ${colors.ebb};
   width: 55%;
   h2 {
     font-size: 30px;
   }
   .app-description {
     font-size: 16px;
-    color: gray;
+    color: ${colors.gray};
     margin: 20px 0 40px;
   }
   form {
@@ -76,7 +77,7 @@ const FormBlock = styled.div`
     margin-top: 20px;
     p {
       font-size: 16px;
-      color: gray;
+      color: ${colors.gray};
     }
     a {
       padding: 0 8px;
@@ -84,7 +85,7 @@ const FormBlock = styled.div`
       color: blue;
 
       :hover {
-        color: rgb(162, 88, 107);
+        color: ${colors.coralTree};
       }
     }
   }

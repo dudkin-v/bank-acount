@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import colors from "../../utils/colors";
 
 const Btn = styled.button`
   width: 100%;
@@ -7,7 +8,7 @@ const Btn = styled.button`
   padding: 8px 20px;
   color: white;
   font-size: 16px;
-  background-color: #282f5b;
+  background-color: ${colors.rhino};
   border-radius: 3px;
   cursor: pointer;
   outline: none;
@@ -16,7 +17,7 @@ const Btn = styled.button`
   :active,
   :focus {
     box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
-    background: rgb(162, 88, 107);
+    background: ${colors.coralTree};
     background: linear-gradient(
       149deg,
       rgba(162, 88, 107, 1) 0%,
