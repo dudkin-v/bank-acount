@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
+import {NavBar} from "./navigation";
+
+import routes from "./utils/routes";
 
 const Container = styled.div`
   display: flex;
@@ -19,9 +22,10 @@ const App = () => {
   console.log("App");
   return (
     <Container>
+        <NavBar />
       <Routes>
-        <Route exact path="/sing-in" element={<SingIn />} />
-        <Route exact path="/sing-up" element={<SingUp />} />
+        <Route exact path={routes.SIGN_IN} element={<SingIn />} />
+        <Route exact path={routes.SIGN_UP} element={<SingUp />} />
       </Routes>
     </Container>
   );

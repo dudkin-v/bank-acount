@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Button = styled.button`
+const Btn = styled.button`
   width: 100%;
   height: 100%;
   padding: 8px 20px;
@@ -26,11 +26,11 @@ const Button = styled.button`
   }
 `;
 
-const SubmitButton = ({ text, type }) => <Button type={type}>{text}</Button>;
+const Button = ({ text, type }) => <Btn type={type}>{text}</Btn>;
 
-SubmitButton.propTypes = {
+Button.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
-export default SubmitButton;
+export default Button;
