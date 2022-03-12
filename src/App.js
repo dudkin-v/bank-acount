@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
-import {NavBar} from "./navigation";
+import { NavBar } from "./navigation";
 
 import routes from "./utils/routes";
 
@@ -22,7 +22,7 @@ const App = () => {
   console.log("App");
   return (
     <Container>
-        <NavBar />
+      <NavBar />
       <Routes>
         <Route exact path={routes.SIGN_IN} element={<SingIn />} />
         <Route exact path={routes.SIGN_UP} element={<SingUp />} />
