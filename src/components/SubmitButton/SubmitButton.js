@@ -11,24 +11,26 @@ const Button = styled.button`
   border-radius: 3px;
   cursor: pointer;
   outline: none;
-  
-  :hover, :active, :focus {
+
+  :hover,
+  :active,
+  :focus {
     box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
     background: rgb(162, 88, 107);
-    background: linear-gradient(149deg,
-    rgba(162, 88, 107, 1) 0%,
-    rgba(40, 47, 91, 1) 50%,
-    rgba(162, 88, 107, 1) 100%);
+    background: linear-gradient(
+      149deg,
+      rgba(162, 88, 107, 1) 0%,
+      rgba(40, 47, 91, 1) 50%,
+      rgba(162, 88, 107, 1) 100%
+    );
   }
 `;
 
-const SubmitButton = ({text, type}) => (
-  <Button type={type}>{text}</Button>
-);
+const SubmitButton = ({ text, type }) => <Button type={type}>{text}</Button>;
 
 SubmitButton.propTypes = {
-    text: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default SubmitButton;

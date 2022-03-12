@@ -1,6 +1,9 @@
+import { Route, Routes } from "react-router-dom";
+
 import styled from "styled-components";
 
-import {SingIn} from "./pages/SingIn";
+import { SingIn } from "./pages/SingIn";
+import { SingUp } from "./pages/SingUp";
 
 const Container = styled.div`
   display: flex;
@@ -13,10 +16,13 @@ const Container = styled.div`
 `;
 
 const App = () => {
-  console.log("App")
+  console.log("App");
   return (
     <Container>
-      <SingIn />
+      <Routes>
+        <Route exact path="/sing-in" element={<SingIn />} />
+        <Route exact path="/sing-up" element={<SingUp />} />
+      </Routes>
     </Container>
   );
 };

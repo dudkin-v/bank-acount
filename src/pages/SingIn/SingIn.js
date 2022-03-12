@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useFormik } from "formik";
 
+import { Link } from "react-router-dom";
 import { InputField } from "../../components/InputField";
 import { SubmitButton } from "../../components/SubmitButton";
 
@@ -49,9 +50,19 @@ const FormBlock = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    
+
     .form-button {
       max-width: 200px;
+    }
+  }
+
+  a {
+    margin-top: 20px;
+    font-size: 16px;
+    color: blue;
+
+    :hover {
+      color: rgb(162, 88, 107);
     }
   }
 `;
@@ -64,7 +75,7 @@ const formInitialValues = {
 const SingIn = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
-    onSubmit: values => console.log(values)
+    onSubmit: (values) => console.log(values),
   });
 
   return (
@@ -87,20 +98,18 @@ const SingIn = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
           />
-            <InputField
-              type="text"
-              label="Password"
-              name="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
+          <InputField
+            type="text"
+            label="Password"
+            name="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
           <div className="form-button">
             <SubmitButton type="submit" text="Sing in" />
           </div>
         </form>
-        <div className="login-in-block">
-          <p>Or create account</p>
-        </div>
+        <Link to="/sing-up">Or create account.</Link>
       </FormBlock>
     </LoginBlock>
   );

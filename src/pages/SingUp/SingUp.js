@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useFormik } from "formik";
 
+import { Link } from "react-router-dom";
 import { InputField } from "../../components/InputField";
 import { SubmitButton } from "../../components/SubmitButton";
 
@@ -79,6 +80,20 @@ const FormBlock = styled.div`
       max-width: 200px;
     }
   }
+
+  .sing-in-block {
+    display: flex;
+    a {
+      margin-top: 20px;
+      padding: 0 8px;
+      font-size: 16px;
+      color: blue;
+
+      :hover {
+        color: rgb(162, 88, 107);
+      }
+    }
+  }
 `;
 
 const formInitialValues = {
@@ -92,7 +107,7 @@ const formInitialValues = {
 const SingIn = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
-    onSubmit: values => console.log(values)
+    onSubmit: (values) => console.log(values),
   });
 
   return (
@@ -158,8 +173,9 @@ const SingIn = () => {
             <SubmitButton type="submit" text="Submit" />
           </div>
         </form>
-        <div className="login-in-block">
+        <div className="sing-in-block">
           <p>Already have an account?</p>
+          <Link to="/sing-in">Sing in.</Link>
         </div>
       </FormBlock>
     </LoginBlock>
