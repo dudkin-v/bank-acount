@@ -1,9 +1,8 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFormik } from "formik";
 
-import { InputField } from "../InputField";
-import { SubmitButton } from "../SubmitButton";
+import { InputField } from "../../components/InputField";
+import { SubmitButton } from "../../components/SubmitButton";
 
 const LoginBlock = styled.section`
   display: flex;
@@ -90,10 +89,10 @@ const formInitialValues = {
   confirmPassword: "",
 };
 
-const LoginForm = ({ onSubmitForm }) => {
+const SingIn = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
-    onSubmit: onSubmitForm,
+    onSubmit: values => console.log(values)
   });
 
   return (
@@ -167,8 +166,4 @@ const LoginForm = ({ onSubmitForm }) => {
   );
 };
 
-LoginForm.propTypes = {
-  onSubmitForm: PropTypes.func.isRequired,
-};
-
-export default LoginForm;
+export default SingIn;

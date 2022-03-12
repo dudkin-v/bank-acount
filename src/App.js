@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import {LoginForm} from "./components/LoginForm";
+import {SingIn} from "./pages/SingIn";
 
 const Container = styled.div`
   display: flex;
@@ -13,15 +13,12 @@ const Container = styled.div`
 `;
 
 const App = () => {
-    const handleSubmit = (values) => {
-        console.log(values)
-    };
-
-    return (
-        <Container>
-            <LoginForm onSubmitForm={handleSubmit}/>
-        </Container>
-    )
-}
+  console.log("App")
+  return (
+    <Container>
+      <SingIn />
+    </Container>
+  );
+};
 
 export default App;
