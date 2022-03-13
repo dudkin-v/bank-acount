@@ -33,6 +33,7 @@ const Container = styled.div`
         border-radius: 3px;
         div {
           color: ${colors.rhino};
+            cursor: pointer;
         }
         .css-9gakcf-option,
         .css-1n7v3ny-option {
