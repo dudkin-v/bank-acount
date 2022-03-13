@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 
 import styled from "styled-components";
+import routes from "./utils/routes";
+import colors from "./utils/colors";
 
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
 import { NavBar } from "./navigation";
-
-import routes from "./utils/routes";
 import { Overview } from "./pages/Overview";
 import { Cards } from "./pages/Cards";
 import { Payments } from "./pages/Payments";
@@ -21,12 +21,20 @@ const Container = styled.div`
   min-width: 100vw;
   min-height: 100vh;
 `;
-
 const Main = styled.main`
   display: flex;
   padding: 40px 20px;
   width: 100vw;
   height: 100vh;
+  .page {
+    padding: 0 40px;
+    width: 100%;
+    .page-heading {
+      font-size: 20px;
+      padding: 40px 0 20px;
+      color: ${colors.rhino};
+    }
+  }
 `;
 
 const PublicRoutes = () => (

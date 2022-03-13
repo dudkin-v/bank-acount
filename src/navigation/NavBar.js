@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { FaHome, FaWallet, FaChartArea } from "react-icons/fa";
 import { BiTransfer } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
@@ -12,6 +14,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-width: 225px;
   padding: 0 20px;
   border-right: 2px solid rgba(128, 128, 128, 0.2);
 
@@ -57,53 +60,57 @@ const Nav = styled.nav`
   }
 `;
 
-const NavBar = () => (
-  <Nav>
-    <Link to={routes.OVERVIEW} className="nav-heading">
-      Banking App
-    </Link>
-    <div className="nav-lists-block">
-      <ul className="nav-list">
-        <li>
-          <NavLink to={routes.OVERVIEW} activeClassName="active">
-            <FaHome />
-            Overview
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={routes.CARDS} activeClassName="active">
-            <FaWallet />
-            Cards
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={routes.PAYMENTS}>
-            <BiTransfer />
-            Payments
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={routes.MY_STAT} activeClassName="active">
-            <FaChartArea />
-            My stat
-          </NavLink>
-        </li>
-      </ul>
-      <ul className="nav-list">
-        <li>
-          <NavLink to={routes.ACCOUNT} activeClassName="active">
-            <MdAccountCircle />
-            Account
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={routes.SETTINGS} activeClassName="active">
-            <AiFillSetting />
-            Settings
-          </NavLink>
-        </li>
-      </ul>
-    </div>
-  </Nav>
-);
+const NavBar = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Nav>
+      <Link to={routes.OVERVIEW} className="nav-heading">
+        Banking App
+      </Link>
+      <div className="nav-lists-block">
+        <ul className="nav-list">
+          <li>
+            <NavLink to={routes.OVERVIEW} activeClassName="active">
+              <FaHome />
+              {t("nav.links.overview")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={routes.CARDS} activeClassName="active">
+              <FaWallet />
+              {t("nav.links.cards")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={routes.PAYMENTS}>
+              <BiTransfer />
+              {t("nav.links.payments")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={routes.MY_STAT} activeClassName="active">
+              <FaChartArea />
+              {t("nav.links.my-stat")}
+            </NavLink>
+          </li>
+        </ul>
+        <ul className="nav-list">
+          <li>
+            <NavLink to={routes.ACCOUNT} activeClassName="active">
+              <MdAccountCircle />
+              {t("nav.links.account")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={routes.SETTINGS} activeClassName="active">
+              <AiFillSetting />
+              {t("nav.links.settings")}
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </Nav>
+  );
+};
 export default NavBar;

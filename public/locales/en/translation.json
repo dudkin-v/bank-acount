@@ -1,0 +1,16 @@
+{
+  "language": {
+    "value": "english",
+    "name": "Language"
+  },
+  "nav": {
+    "links": {
+      "overview": "Overview",
+      "cards": "Cards",
+      "payments": "Payments",
+      "my-stat": "My stat",
+      "account": "Account",
+      "settings": "Settings"
+    }
+  }
+}

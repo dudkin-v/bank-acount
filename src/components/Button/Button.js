@@ -14,8 +14,7 @@ const Btn = styled.button`
   outline: none;
 
   :hover,
-  :active,
-  :focus {
+  :active {
     box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
     background: ${colors.coralTree};
     background: linear-gradient(
