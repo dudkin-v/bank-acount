@@ -3,6 +3,33 @@
     "value": "english",
     "name": "Language"
   },
+  "authorizationPage": {
+    "title": "Welcome to Bank App",
+    "description": "This is an Internet banking system that provides remote access to your accounts and makes it possible to carry out transactions via the Internet at any time from any computer or portable device."
+  },
+  "loginPage": {
+    "description": {
+      "singUp": "Already have an account?"
+    },
+    "links": {
+      "singUp": "Or create account.",
+      "singIn": "Sing in."
+    },
+    "privacyPolicy": "Yes, I understand and agree to Bank Apps Terms of Service, including the User Agreement and Privacy Policy."
+  },
+  "inputs": {
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    }
+  },
+  "buttons": {
+    "singIn": "Sing in",
+    "singUp": "Create account"
+  },
   "nav": {
     "links": {
       "overview": "Overview",

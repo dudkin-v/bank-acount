@@ -59,8 +59,7 @@ const PrivateRoutes = () => (
 );
 
 const App = () => {
-  console.log("App");
-  const token = true;
+  const token = false;
   return <Container>{token ? <PrivateRoutes /> : <PublicRoutes />}</Container>;
 };
 

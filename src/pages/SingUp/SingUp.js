@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -16,6 +17,8 @@ const formInitialValues = {
 };
 
 const SingIn = () => {
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: formInitialValues,
     onSubmit: (values) => console.log(values),
@@ -27,14 +30,14 @@ const SingIn = () => {
         <div className="input-section">
           <InputField
             type="text"
-            label="First Name"
+            label={t("inputs.labels.firstName")}
             name="firstName"
             onChange={formik.handleChange}
             value={formik.values.firstName}
           />
           <InputField
             type="text"
-            label="Last Name"
+            label={t("inputs.labels.lastName")}
             name="lastName"
             onChange={formik.handleChange}
             value={formik.values.lastName}
@@ -42,7 +45,7 @@ const SingIn = () => {
         </div>
         <InputField
           type="text"
-          label="Email"
+          label={t("inputs.labels.email")}
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
@@ -50,14 +53,14 @@ const SingIn = () => {
         <div className="input-section">
           <InputField
             type="text"
-            label="Password"
+            label={t("inputs.labels.password")}
             name="password"
             onChange={formik.handleChange}
             value={formik.values.password}
           />
           <InputField
             type="text"
-            label="Confirm password"
+            label={t("inputs.labels.confirmPassword")}
             name="confirmPassword"
             onChange={formik.handleChange}
             value={formik.values.confirmPassword}
@@ -65,18 +68,15 @@ const SingIn = () => {
         </div>
         <div className="privacy-policy">
           <input type="checkbox" name="privacy-policy" id="privacy-policy" />
-          <p>
-            Yes, I understand and agree to Bank Apps Terms of Service, including
-            the User Agreement and Privacy Policy.
-          </p>
+          <p>{t("loginPage.privacyPolicy")}</p>
         </div>
         <div className="form-button">
-          <Button type="submit" text="Submit" />
+          <Button type="submit" text={t("buttons.singUp")} />
         </div>
       </form>
       <div className="redirect-block">
-        <p>Already have an account?</p>
-        <Link to={routes.SIGN_IN}>Sing in.</Link>
+        <p>{t("loginPage.description.singUp")}</p>
+        <Link to={routes.SIGN_IN}>{t("loginPage.links.singIn")}</Link>
       </div>
     </AuthorizationPage>
   );

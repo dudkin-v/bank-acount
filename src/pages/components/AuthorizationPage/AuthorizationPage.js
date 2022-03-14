@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import colors from "../../../utils/colors";
+import { LanguagePicker } from "../../Settings/components/LanguagePicker";
 
 const AuthorizationBlock = styled.section`
   display: flex;
@@ -29,12 +31,27 @@ const LogoBlock = styled.div`
   }
 `;
 const FormBlock = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px 80px;
   background-color: ${colors.ebb};
   width: 55%;
+
+  .switch-lang {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    .settings-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .settings-name {
+        display: none;
+      }
+    }
+  }
   h2 {
     font-size: 30px;
   }
@@ -91,22 +108,25 @@ const FormBlock = styled.div`
   }
 `;
 
-const AuthorizationPage = ({ children }) => (
-  <AuthorizationBlock>
-    <LogoBlock>
-      <h1>Your Bank Account</h1>
-    </LogoBlock>
-    <FormBlock>
-      <h2>Welcome to Bank App</h2>
-      <p className="app-description">
-        This is an Internet banking system that provides remote access to your
-        accounts and makes it possible to carry out transactions via the
-        Internet at any time from any computer or portable device.
-      </p>
-      {children}
-    </FormBlock>
-  </AuthorizationBlock>
-);
+const AuthorizationPage = ({ children }) => {
+  const { t } = useTranslation();
+
+  return (
+    <AuthorizationBlock>
+      <LogoBlock>
+        <h1>Your Bank Account</h1>
+      </LogoBlock>
+      <FormBlock>
+        <div className="switch-lang">
+          <LanguagePicker />
+        </div>
+        <h2>{t("authorizationPage.title")}</h2>
+        <p className="app-description">{t("authorizationPage.description")}</p>
+        {children}
+      </FormBlock>
+    </AuthorizationBlock>
+  );
+};
 
 AuthorizationPage.propTypes = {
   children: PropTypes.node.isRequired,

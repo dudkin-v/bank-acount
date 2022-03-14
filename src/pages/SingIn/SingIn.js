@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -13,6 +14,8 @@ const formInitialValues = {
 };
 
 const SingIn = () => {
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: formInitialValues,
     onSubmit: (values) => console.log(values),
@@ -23,24 +26,24 @@ const SingIn = () => {
       <form onSubmit={formik.handleSubmit}>
         <InputField
           type="text"
-          label="Email"
+          label={t("inputs.labels.email")}
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
         />
         <InputField
           type="text"
-          label="Password"
+          label={t("inputs.labels.password")}
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
         />
         <div className="form-button">
-          <Button type="submit" text="Sing in" />
+          <Button type="submit" text={t("buttons.singIn")} />
         </div>
       </form>
       <div className="redirect-block">
-        <Link to={routes.SIGN_UP}>Or create account.</Link>
+        <Link to={routes.SIGN_UP}>{t("loginPage.links.singUp")}</Link>
       </div>
     </AuthorizationPage>
   );
