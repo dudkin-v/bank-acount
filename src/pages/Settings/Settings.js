@@ -6,13 +6,10 @@ import colors from "../../utils/colors";
 const SettingPage = styled.section`
   display: flex;
   flex-direction: column;
-  ul {
+  .settings-items {
     display: flex;
     flex-direction: column;
     width: 300px;
-    li {
-      display: flex;
-      align-items: center;
       .settings-item {
         display: flex;
         align-items: center;
@@ -48,11 +45,11 @@ const Settings = () => {
     <div className="page">
       <h2 className="page-heading">{t("nav.links.settings")}</h2>
       <SettingPage>
-        <ul>
-          <li>
+        <div className="settings-items">
+          <div className="settings-item">
             <LanguagePicker />
-          </li>
-        </ul>
+          </div>
+        </div>
       </SettingPage>
     </div>
   );

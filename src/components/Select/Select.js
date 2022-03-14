@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Select from "react-select";
+import ReactSelect from "react-select";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
@@ -45,9 +45,9 @@ const Container = styled.div`
     }
   }`;
 
-const SelectBlock = ({ options, onChange, placeholder }) => (
+const Select = ({ options, onChange, placeholder }) => (
   <Container>
-    <Select
+    <ReactSelect
       options={options}
       onChange={onChange}
       className="select"
@@ -56,7 +56,7 @@ const SelectBlock = ({ options, onChange, placeholder }) => (
   </Container>
 );
 
-SelectBlock.propTypes = {
+Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -67,4 +67,4 @@ SelectBlock.propTypes = {
   placeholder: PropTypes.string.isRequired,
 };
 
-export default SelectBlock;
+export default Select;

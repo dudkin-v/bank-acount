@@ -1,6 +1,6 @@
 import { MdLanguage } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-import { SelectBlock } from "../../../../components/SelectBlock";
+import { Select } from "../../../../components/Select";
 
 const languages = [
   { value: "ru", label: "русский" },
@@ -21,7 +21,7 @@ const LanguagePicker = () => {
         <p>{t("language.name")}</p>
       </div>
       <div className="settings-value">
-        <SelectBlock
+        <Select
           options={languages}
           onChange={onChangeLanguage}
           placeholder={t("language.value")}
