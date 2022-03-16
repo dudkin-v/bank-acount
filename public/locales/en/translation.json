@@ -24,6 +24,27 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password"
+    },
+    "errors": {
+      "firstName": {
+        "required": "Field is required",
+        "minLength": "Please enter 2 or more characters",
+        "maxLength": "Please enter no more than 20 characters"
+      },
+      "lastName": {
+        "required": "Field is required",
+        "minLength": "Please enter 2 or more characters",
+        "maxLength": "Please enter no more than 20 characters"
+      },
+      "email":{
+        "required": "Field is required",
+        "isEmail": "Email is not correct"
+      },
+      "password": {
+        "required": "Field is required",
+        "minLength": "Please enter 5 or more characters",
+        "confirmPassword": "Passwords do not match"
+      }
     }
   },
   "buttons": {

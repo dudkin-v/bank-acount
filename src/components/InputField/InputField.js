@@ -10,6 +10,13 @@ const Label = styled.label`
   flex-direction: column;
   color: ${colors.rhino};
   cursor: pointer;
+  
+  .error-message {
+    position: absolute;
+    bottom: 3px;
+    font-size: 12px;
+    color: ${colors.coralTree};
+  }
 
   .secure-btn {
     position: absolute;
@@ -39,7 +46,7 @@ const Input = styled.input`
   }
 `;
 
-const InputField = ({ name, label, onChange, value, secure }) => {
+const InputField = ({ name, label, onChange, value, secure, errorMessage, onBlur, touched }) => {
   const [isSecure, setIsSecure] = useState(secure);
 
   const onSecure = () => {
@@ -54,6 +61,7 @@ const InputField = ({ name, label, onChange, value, secure }) => {
 
   return (
     <Label htmlFor={name}>
+      {touched && errorMessage && <p className="error-message">{errorMessage}</p>}
       {label}
       {secure && (
         <button type="button" onClick={onSecure} className="secure-btn">
@@ -66,6 +74,7 @@ const InputField = ({ name, label, onChange, value, secure }) => {
         name={name}
         type={isSecure ? "password" : "text"}
         onChange={onChange}
+        onBlur={onBlur}
         value={value}
       />
     </Label>
@@ -78,10 +87,16 @@ InputField.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   secure: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  touched: PropTypes.bool,
+  onBlur: PropTypes.func,
 };
 
 InputField.defaultProps = {
   secure: false,
+  errorMessage: undefined,
+  touched: false,
+  onBlur: () => {},
 };
 
 export default InputField;

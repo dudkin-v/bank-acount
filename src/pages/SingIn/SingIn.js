@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import { AuthorizationPage } from "../components/AuthorizationPage";
 
 import routes from "../../utils/routes";
+import { signInValidationSchema } from "../../utils/validation";
 
 const formInitialValues = {
   email: "",
@@ -18,6 +19,7 @@ const SingIn = () => {
 
   const formik = useFormik({
     initialValues: formInitialValues,
+    validationSchema: signInValidationSchema,
     onSubmit: (values) => console.log(values),
   });
 
@@ -28,16 +30,27 @@ const SingIn = () => {
           label={t("inputs.labels.email")}
           name="email"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.email}
+          touched={formik.touched.email}
+          errorMessage={t(formik.errors.email)}
         />
         <InputField
           label={t("inputs.labels.password")}
           name="password"
+          secure
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
+          touched={formik.touched.password}
+          errorMessage={t(formik.errors.password)}
         />
         <div className="form-button">
-          <Button type="submit" text={t("buttons.signIn")} />
+          <Button
+            type="submit"
+            text={t("buttons.signIn")}
+            disabled={!formik.isValid}
+          />
         </div>
       </form>
       <div className="redirect-block">
