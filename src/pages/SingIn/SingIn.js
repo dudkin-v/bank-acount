@@ -25,25 +25,23 @@ const SingIn = () => {
     <AuthorizationPage>
       <form onSubmit={formik.handleSubmit}>
         <InputField
-          type="text"
           label={t("inputs.labels.email")}
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
         />
         <InputField
-          type="text"
           label={t("inputs.labels.password")}
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
         />
         <div className="form-button">
-          <Button type="submit" text={t("buttons.singIn")} />
+          <Button type="submit" text={t("buttons.signIn")} />
         </div>
       </form>
       <div className="redirect-block">
-        <Link to={routes.SIGN_UP}>{t("loginPage.links.singUp")}</Link>
+        <Link to={routes.SIGN_UP}>{t("loginPage.links.signUp")}</Link>
       </div>
     </AuthorizationPage>
   );

@@ -9,11 +9,11 @@
   },
   "loginPage": {
     "description": {
-      "singUp": "Already have an account?"
+      "signUp": "Already have an account?"
     },
     "links": {
-      "singUp": "Or create account.",
-      "singIn": "Sing in."
+      "signUp": "Or create account.",
+      "signIn": "Sign in."
     },
     "privacyPolicy": "Yes, I understand and agree to Bank Apps Terms of Service, including the User Agreement and Privacy Policy."
   },
@@ -27,8 +27,8 @@
     }
   },
   "buttons": {
-    "singIn": "Sing in",
-    "singUp": "Create account"
+    "signIn": "Sign in",
+    "signUp": "Create account"
   },
   "nav": {
     "links": {

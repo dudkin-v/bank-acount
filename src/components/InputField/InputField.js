@@ -1,16 +1,34 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useState } from "react";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import colors from "../../utils/colors";
 
 const Label = styled.label`
+  position: relative;
   display: flex;
   flex-direction: column;
   color: ${colors.rhino};
   cursor: pointer;
+
+  .secure-btn {
+    position: absolute;
+    top: 43%;
+    right: 3%;
+    width: 20px;
+    height: 20px;
+    background: inherit;
+    display: flex;
+    cursor: pointer;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
 `;
 const Input = styled.input`
   font-size: 16px;
-  padding: 8px 14px;
+  padding: ${(props) => (props.secure ? "8px 35px 8px 14px" : "8px 14px")};
   margin: 5px 0 20px;
   border: 1px solid ${colors.rhino};
   border-radius: 3px;
@@ -21,25 +39,49 @@ const Input = styled.input`
   }
 `;
 
-const InputField = ({ name, label, type, onChange, value }) => (
-  <Label htmlFor={name}>
-    {label}
-    <Input
-      id={name}
-      name={name}
-      type={type}
-      onChange={onChange}
-      value={value}
-    />
-  </Label>
-);
+const InputField = ({ name, label, onChange, value, secure }) => {
+  const [isSecure, setIsSecure] = useState(secure);
+
+  const onSecure = () => {
+    setIsSecure((prevIsSecure) => !prevIsSecure);
+  };
+
+  const secureIcon = isSecure ? (
+    <MdOutlineVisibility />
+  ) : (
+    <MdOutlineVisibilityOff />
+  );
+
+  return (
+    <Label htmlFor={name}>
+      {label}
+      {secure && (
+        <button type="button" onClick={onSecure} className="secure-btn">
+          {secureIcon}
+        </button>
+      )}
+      <Input
+        secure={secure}
+        id={name}
+        name={name}
+        type={isSecure ? "password" : "text"}
+        onChange={onChange}
+        value={value}
+      />
+    </Label>
+  );
+};
 
 InputField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  secure: PropTypes.bool,
+};
+
+InputField.defaultProps = {
+  secure: false,
 };
 
 export default InputField;

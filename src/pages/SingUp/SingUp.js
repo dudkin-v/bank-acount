@@ -29,14 +29,12 @@ const SingIn = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="input-section">
           <InputField
-            type="text"
             label={t("inputs.labels.firstName")}
             name="firstName"
             onChange={formik.handleChange}
             value={formik.values.firstName}
           />
           <InputField
-            type="text"
             label={t("inputs.labels.lastName")}
             name="lastName"
             onChange={formik.handleChange}
@@ -44,7 +42,6 @@ const SingIn = () => {
           />
         </div>
         <InputField
-          type="text"
           label={t("inputs.labels.email")}
           name="email"
           onChange={formik.handleChange}
@@ -52,18 +49,18 @@ const SingIn = () => {
         />
         <div className="input-section">
           <InputField
-            type="text"
             label={t("inputs.labels.password")}
             name="password"
             onChange={formik.handleChange}
             value={formik.values.password}
+            secure
           />
           <InputField
-            type="text"
             label={t("inputs.labels.confirmPassword")}
             name="confirmPassword"
             onChange={formik.handleChange}
             value={formik.values.confirmPassword}
+            secure
           />
         </div>
         <div className="privacy-policy">
@@ -71,12 +68,12 @@ const SingIn = () => {
           <p>{t("loginPage.privacyPolicy")}</p>
         </div>
         <div className="form-button">
-          <Button type="submit" text={t("buttons.singUp")} />
+          <Button type="submit" text={t("buttons.signUp")} />
         </div>
       </form>
       <div className="redirect-block">
-        <p>{t("loginPage.description.singUp")}</p>
-        <Link to={routes.SIGN_IN}>{t("loginPage.links.singIn")}</Link>
+        <p>{t("loginPage.description.signUp")}</p>
+        <Link to={routes.SIGN_IN}>{t("loginPage.links.signIn")}</Link>
       </div>
     </AuthorizationPage>
   );
