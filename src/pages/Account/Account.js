@@ -53,7 +53,7 @@ const Account = () => {
             onClick={onLogOut}
           >
             <IoMdLogOut />
-            <p>Log-out</p>
+            <p>{t("buttons.logOut")}</p>
           </div>
         </div>
       </AccountPage>

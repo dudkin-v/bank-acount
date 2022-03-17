@@ -7,12 +7,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./i18n";
+import { history } from "./navigation/history";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Suspense fallback={<div>{null}</div>}>
-        <BrowserRouter>
+        <BrowserRouter history={history}>
           <App />
         </BrowserRouter>
       </Suspense>
