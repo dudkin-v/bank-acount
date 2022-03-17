@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as action from "./actions";
 
 const instance = axios.create({
   baseURL: "https://test-bank-system.herokuapp.com",
@@ -9,34 +10,20 @@ export const setToken = (token) => {
 };
 
 export const logOut = () => (dispatch) => {
-  dispatch({
-    type: "LOG_OUT",
-  });
+  dispatch(action.logOut());
   localStorage.removeItem("token");
 };
 
 export const onSignIn = (values) => async (dispatch) => {
   try {
-    dispatch({
-      type: "SET_TOKEN_LOADING",
-      payload: true,
-    });
+    dispatch(action.setTokenLoading(true));
     const response = await instance.post("/auth/sign-in", values);
-    dispatch({
-      type: "SET_TOKEN",
-      payload: response.data.token,
-    });
+    dispatch(action.setToken(response.data.token));
     localStorage.setItem("token", response.data.token);
-  } catch (e) {
-    dispatch({
-      type: "SET_TOKEN_ERROR",
-      payload: e.message,
-    });
+  } catch (error) {
+    dispatch(action.setTokenError(error));
   } finally {
-    dispatch({
-      type: "SET_TOKEN_LOADING",
-      payload: false,
-    });
+    dispatch(action.setTokenLoading(false));
   }
 };
 
