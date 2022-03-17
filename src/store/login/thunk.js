@@ -8,6 +8,13 @@ export const setToken = (token) => {
   instance.defaults.headers.authorization = `Bearer ${token}`;
 };
 
+export const logOut = () => (dispatch) => {
+  dispatch({
+    type: "LOG_OUT",
+  });
+  localStorage.removeItem("token");
+};
+
 export const onSignIn = (values) => async (dispatch) => {
   try {
     dispatch({

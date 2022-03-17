@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
         case "SET_TOKEN":
             return {...state, token: action.payload};
         case "LOG_OUT":
-            return {...state, token: action.payload};
+            return {...state, token: null};
         default:
             return state;
     }

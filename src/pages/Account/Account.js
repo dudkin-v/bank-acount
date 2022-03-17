@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { IoMdLogOut } from "react-icons/io";
+import { logOut } from "../../store/login/thunk";
 import colors from "../../utils/colors";
 
 const AccountPage = styled.div`
@@ -36,10 +37,7 @@ const Account = () => {
   const { t } = useTranslation();
 
   const onLogOut = () => {
-    dispatch({
-      type: "LOG_OUT",
-      payload: localStorage.removeItem("token"),
-    });
+    dispatch(logOut());
   };
 
   return (
