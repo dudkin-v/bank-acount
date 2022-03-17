@@ -25,12 +25,12 @@ const SingIn = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const onCreateUser = (values) => dispatch(onSignUP(values));
+  const onSignUp = (values) => dispatch(onSignUP(values));
 
   const formik = useFormik({
     initialValues: formInitialValues,
     validationSchema: signUpValidationSchema,
-    onSubmit: (values) => onCreateUser(values),
+    onSubmit: (values) => onSignUp(values),
   });
 
   return (

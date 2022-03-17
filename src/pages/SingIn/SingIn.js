@@ -2,6 +2,9 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
+import { useDispatch } from "react-redux";
+import { onSignIn } from "../../store/login/thunk";
+
 import { InputField } from "../../components/InputField";
 import { Button } from "../../components/Button";
 import { AuthorizationPage } from "../components/AuthorizationPage";
@@ -15,12 +18,15 @@ const formInitialValues = {
 };
 
 const SingIn = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const onLogIn = (values) => dispatch(onSignIn(values));
 
   const formik = useFormik({
     initialValues: formInitialValues,
     validationSchema: signInValidationSchema,
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => onLogIn(values),
   });
 
   return (
