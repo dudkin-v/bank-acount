@@ -1,6 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-
 import styled from "styled-components";
+import { Route, Routes } from "react-router-dom";
+import {useEffect} from "react";
+import { useSelector } from "react-redux";
+import {setToken} from "./store/login/thunk";
+
 import routes from "./utils/routes";
 import colors from "./utils/colors";
 
@@ -59,8 +62,15 @@ const PrivateRoutes = () => (
 );
 
 const App = () => {
-  const token = false;
-  return <Container>{token ? <PrivateRoutes /> : <PublicRoutes />}</Container>;
+  const token = useSelector((rootStore) => rootStore.login.token);
+
+  useEffect(() => {
+      setToken(token);
+  },[token]);
+
+  return (
+    <Container>{token ? <PrivateRoutes /> : <PublicRoutes />}</Container>
+  );
 };
 
 export default App;

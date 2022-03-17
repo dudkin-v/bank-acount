@@ -19,6 +19,7 @@ const SettingPage = styled.section`
           display: flex;
           svg {
             font-size: 20px;
+            color: ${colors.rhino};
           }
           p {
             font-size: 16px;

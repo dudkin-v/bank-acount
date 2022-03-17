@@ -1,11 +1,64 @@
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { IoMdLogOut } from "react-icons/io";
+import colors from "../../utils/colors";
+
+const AccountPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  .account-items {
+    display: flex;
+    flex-direction: column;
+    .account-item {
+      display: flex;
+      align-items: center;
+      width: 120px;
+      cursor: pointer;
+      &:hover p {
+        font-weight: bold;
+      }
+      svg {
+        font-size: 20px;
+        color: ${colors.rhino};
+      }
+      p {
+        font-size: 16px;
+        padding: 0 10px;
+        color: ${colors.rhino};
+      }
+    }
+  }
+`;
 
 const Account = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const onLogOut = () => {
+    dispatch({
+      type: "LOG_OUT",
+      payload: localStorage.removeItem("token"),
+    });
+  };
 
   return (
     <div className="page">
       <h2 className="page-heading">{t("nav.links.account")}</h2>
+      <AccountPage>
+        <div className="account-items">
+          <div
+            className="account-item"
+            role="button"
+            tabIndex={0}
+            aria-pressed="false"
+            onClick={onLogOut}
+          >
+            <IoMdLogOut />
+            <p>Log-out</p>
+          </div>
+        </div>
+      </AccountPage>
     </div>
   );
 };

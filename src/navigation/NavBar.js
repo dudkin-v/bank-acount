@@ -71,13 +71,13 @@ const NavBar = () => {
       <div className="nav-lists-block">
         <ul className="nav-list">
           <li>
-            <NavLink to={routes.OVERVIEW} activeClassName="active">
+            <NavLink to={routes.OVERVIEW} activeclassname="active">
               <FaHome />
               {t("nav.links.overview")}
             </NavLink>
           </li>
           <li>
-            <NavLink to={routes.CARDS} activeClassName="active">
+            <NavLink to={routes.CARDS} activeclassname="active">
               <FaWallet />
               {t("nav.links.cards")}
             </NavLink>
@@ -89,7 +89,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={routes.MY_STAT} activeClassName="active">
+            <NavLink to={routes.MY_STAT} activeclassname="active">
               <FaChartArea />
               {t("nav.links.my-stat")}
             </NavLink>
@@ -97,13 +97,13 @@ const NavBar = () => {
         </ul>
         <ul className="nav-list">
           <li>
-            <NavLink to={routes.ACCOUNT} activeClassName="active">
+            <NavLink to={routes.ACCOUNT} activeclassname="active">
               <MdAccountCircle />
               {t("nav.links.account")}
             </NavLink>
           </li>
           <li>
-            <NavLink to={routes.SETTINGS} activeClassName="active">
+            <NavLink to={routes.SETTINGS} activeclassname="active">
               <AiFillSetting />
               {t("nav.links.settings")}
             </NavLink>
