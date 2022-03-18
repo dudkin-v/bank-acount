@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Spinner } from "../Spinner";
 import colors from "../../utils/colors";
 
 const Btn = styled.button`
   width: 100%;
   height: 100%;
+  min-height: 37.5px;
   padding: 8px 20px;
   color: white;
   font-size: 16px;
@@ -15,7 +17,7 @@ const Btn = styled.button`
 
   :disabled {
     background-color: ${colors.gray};
-    cursor: not-allowed;
+    cursor: ${(props) => (props.isLoading ? "wait" : "not-allowed")};
   }
 
   :hover:enabled,
@@ -31,9 +33,14 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ text, type, onClick, disabled }) => (
-  <Btn type={type} onClick={onClick} disabled={disabled}>
-    {text}
+const Button = ({ text, type, onClick, disabled, isLoading }) => (
+  <Btn
+    type={type}
+    onClick={onClick}
+    disabled={disabled || isLoading}
+    isLoading={isLoading}
+  >
+    {isLoading ? <Spinner /> : text}
   </Btn>
 );
 
@@ -42,12 +49,14 @@ Button.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 
 Button.defaultProps = {
   type: "button",
   onClick: () => {},
   disabled: false,
+  isLoading: false,
 };
 
 export default Button;

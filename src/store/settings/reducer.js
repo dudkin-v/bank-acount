@@ -1,21 +1,19 @@
 import * as types from "./types";
 
 const initialState = {
-  token: null,
+  language: "en",
   loading: false,
   error: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SET_TOKEN_LOADING:
+    case types.SET_LANGUAGE_LOADING:
       return { ...state, loading: action.payload };
-    case types.SET_TOKEN_ERROR:
+    case types.SET_LANGUAGE_ERROR:
       return { ...state, error: action.payload };
-    case types.SET_TOKEN:
-      return { ...state, token: action.payload };
-    case types.LOG_OUT:
-      return { ...state, token: null };
+    case types.SET_LANGUAGE:
+      return { ...state, language: action.payload };
     default:
       return state;
   }

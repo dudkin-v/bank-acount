@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { LanguagePicker } from "./components/LanguagePicker";
 import colors from "../../utils/colors";
+import { Spinner } from "./components/Spinner";
 
 const SettingPage = styled.section`
   display: flex;
@@ -40,10 +42,12 @@ const SettingPage = styled.section`
 `;
 
 const Settings = () => {
+  const isLoading = useSelector((rootStore) => rootStore.settings.loading);
   const { t } = useTranslation();
 
   return (
     <div className="page">
+      {isLoading && <Spinner />}
       <h2 className="page-heading">{t("nav.links.settings")}</h2>
       <SettingPage>
         <div className="settings-items">
