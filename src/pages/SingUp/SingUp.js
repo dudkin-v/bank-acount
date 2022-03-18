@@ -30,7 +30,7 @@ const SingIn = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
     validationSchema: signUpValidationSchema,
-    onSubmit: (values) => onSignUp(values),
+    onSubmit: onSignUp,
   });
 
   return (
