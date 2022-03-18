@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onSignUP } from "../../store/login/thunk";
 
 import { InputField } from "../../components/InputField";
@@ -23,6 +23,7 @@ const formInitialValues = {
 
 const SingIn = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector((rootStore) => rootStore.login.loading);
   const { t } = useTranslation();
 
   const onSignUp = (values) => dispatch(onSignUP(values));
@@ -102,6 +103,7 @@ const SingIn = () => {
             type="submit"
             text={t("buttons.signUp")}
             disabled={!formik.isValid}
+            isLoading={isLoading}
           />
         </div>
       </form>

@@ -74,11 +74,6 @@ const InputField = ({
         <p className="error-message">{errorMessage}</p>
       )}
       {label}
-      {secure && (
-        <button type="button" onClick={onSecure} className="secure-btn">
-          {secureIcon}
-        </button>
-      )}
       <Input
         secure={secure}
         id={name}
@@ -88,6 +83,11 @@ const InputField = ({
         onBlur={onBlur}
         value={value}
       />
+      {secure && (
+        <button type="button" onClick={onSecure} className="secure-btn">
+          {secureIcon}
+        </button>
+      )}
     </Label>
   );
 };
