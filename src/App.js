@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { setToken } from "./store/login/thunk";
+import { setToken } from "./services/network";
 
 import routes from "./utils/routes";
 import colors from "./utils/colors";

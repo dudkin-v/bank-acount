@@ -16,5 +16,5 @@ export const setTokenError = (error) => ({
 });
 
 export const logOut = () => ({
-    type: types.LOG_OUT,
+  type: types.LOG_OUT,
 });

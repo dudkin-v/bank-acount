@@ -19,14 +19,14 @@ export const signUpValidationSchema = Yup.object().shape({
     [Yup.ref("password"), null],
     "inputs.errors.password.confirmPassword"
   ),
-  policy: Yup.boolean().oneOf([true])
+  policy: Yup.boolean().oneOf([true]),
 });
 
 export const signInValidationSchema = Yup.object().shape({
   email: Yup.string()
-      .email("inputs.errors.email.isEmail")
-      .required("inputs.errors.email.required"),
+    .email("inputs.errors.email.isEmail")
+    .required("inputs.errors.email.required"),
   password: Yup.string()
-      .min(5, "inputs.errors.password.minLength")
-      .required("inputs.errors.password.required"),
+    .min(5, "inputs.errors.password.minLength")
+    .required("inputs.errors.password.required"),
 });

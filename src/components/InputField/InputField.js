@@ -10,7 +10,7 @@ const Label = styled.label`
   flex-direction: column;
   color: ${colors.rhino};
   cursor: pointer;
-  
+
   .error-message {
     position: absolute;
     bottom: 3px;
@@ -46,7 +46,16 @@ const Input = styled.input`
   }
 `;
 
-const InputField = ({ name, label, onChange, value, secure, errorMessage, onBlur, touched }) => {
+const InputField = ({
+  name,
+  label,
+  onChange,
+  value,
+  secure,
+  errorMessage,
+  onBlur,
+  touched,
+}) => {
   const [isSecure, setIsSecure] = useState(secure);
 
   const onSecure = () => {
@@ -61,7 +70,9 @@ const InputField = ({ name, label, onChange, value, secure, errorMessage, onBlur
 
   return (
     <Label htmlFor={name}>
-      {touched && errorMessage && <p className="error-message">{errorMessage}</p>}
+      {touched && errorMessage && (
+        <p className="error-message">{errorMessage}</p>
+      )}
       {label}
       {secure && (
         <button type="button" onClick={onSecure} className="secure-btn">

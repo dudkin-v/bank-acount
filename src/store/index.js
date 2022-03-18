@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import login from "./login/reducer";
 
 const rootReducer = combineReducers({
-    login,
+  login,
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));

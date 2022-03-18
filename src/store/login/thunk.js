@@ -1,13 +1,5 @@
-import axios from "axios";
 import * as action from "./actions";
-
-const instance = axios.create({
-  baseURL: "https://test-bank-system.herokuapp.com",
-});
-
-export const setToken = (token) => {
-  instance.defaults.headers.authorization = `Bearer ${token}`;
-};
+import { instance, endpoint } from "../../services/network";
 
 export const logOut = () => (dispatch) => {
   dispatch(action.logOut());
@@ -17,7 +9,7 @@ export const logOut = () => (dispatch) => {
 export const onSignIn = (values) => async (dispatch) => {
   try {
     dispatch(action.setTokenLoading(true));
-    const response = await instance.post("/auth/sign-in", values);
+    const response = await instance.post(endpoint.SIGN_IN, values);
     dispatch(action.setToken(response.data.token));
     localStorage.setItem("token", response.data.token);
   } catch (error) {
@@ -29,25 +21,13 @@ export const onSignIn = (values) => async (dispatch) => {
 
 export const onSignUP = (values) => async (dispatch) => {
   try {
-    dispatch({
-      type: "SET_TOKEN_LOADING",
-      payload: true,
-    });
-    const response = await instance.post("/auth/sign-up", values);
-    dispatch({
-      type: "SET_TOKEN",
-      payload: response.data.token,
-    });
+    dispatch(action.setTokenLoading(true));
+    const response = await instance.post(endpoint.SIGN_UP, values);
+    dispatch(action.setToken(response.data.token));
     localStorage.setItem("token", response.data.token);
-  } catch (e) {
-    dispatch({
-      type: "SET_TOKEN_ERROR",
-      payload: e.message,
-    });
+  } catch (error) {
+    dispatch(action.setTokenError(error));
   } finally {
-    dispatch({
-      type: "SET_TOKEN_LOADING",
-      payload: false,
-    });
+    dispatch(action.setTokenLoading(false));
   }
 };
