@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setToken } from "./services/network";
 
 import routes from "./utils/routes";
@@ -16,6 +17,7 @@ import { Payments } from "./pages/Payments";
 import { MyStat } from "./pages/MyStat";
 import { Account } from "./pages/Account";
 import { Settings } from "./pages/Settings";
+import { getLanguage } from "./store/settings/thunk";
 
 const Container = styled.div`
   display: flex;
@@ -70,11 +72,24 @@ const PrivateRoutes = () => (
 );
 
 const App = () => {
+  const dispatch = useDispatch();
   const token = useSelector((rootStore) => rootStore.login.token);
+  const language = useSelector((rootStore) => rootStore.settings.language);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     setToken(token);
   }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getLanguage());
+    }
+  }, []);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   return <Container>{token ? <PrivateRoutes /> : <PublicRoutes />}</Container>;
 };

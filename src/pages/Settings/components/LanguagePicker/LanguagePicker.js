@@ -1,6 +1,9 @@
+import { useSelector, useDispatch } from "react-redux";
 import { MdLanguage } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { Select } from "../../../../components/Select";
+import { onUpdateLanguage } from "../../../../store/settings/thunk";
+import { setLanguage } from "../../../../store/settings/actions";
 
 const languages = [
   { value: "ru", label: "русский" },
@@ -8,10 +11,16 @@ const languages = [
 ];
 
 const LanguagePicker = () => {
-  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
+  const token = useSelector((rootStore) => rootStore.login.token);
+  const { t } = useTranslation();
 
   const onChangeLanguage = ({ value }) => {
-    i18n.changeLanguage(value);
+    if (token) {
+      dispatch(onUpdateLanguage(value));
+    } else {
+      dispatch(setLanguage(value));
+    }
   };
 
   return (
