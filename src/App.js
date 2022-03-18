@@ -1,6 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-
 import styled from "styled-components";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { setToken } from "./services/network";
+
 import routes from "./utils/routes";
 import colors from "./utils/colors";
 
@@ -39,6 +42,10 @@ const Main = styled.main`
 
 const PublicRoutes = () => (
   <Routes>
+    <Route
+      path="*"
+      element={<Navigate replace to={routes.SIGN_IN} from="*" />}
+    />
     <Route exact path={routes.SIGN_IN} element={<SingIn />} />
     <Route exact path={routes.SIGN_UP} element={<SingUp />} />
   </Routes>
@@ -48,6 +55,10 @@ const PrivateRoutes = () => (
   <Main>
     <NavBar />
     <Routes>
+      <Route
+        path="*"
+        element={<Navigate replace to={routes.OVERVIEW} from="*" />}
+      />
       <Route exact path={routes.OVERVIEW} element={<Overview />} />
       <Route exact path={routes.CARDS} element={<Cards />} />
       <Route exact path={routes.PAYMENTS} element={<Payments />} />
@@ -59,7 +70,12 @@ const PrivateRoutes = () => (
 );
 
 const App = () => {
-  const token = false;
+  const token = useSelector((rootStore) => rootStore.login.token);
+
+  useEffect(() => {
+    setToken(token);
+  }, [token]);
+
   return <Container>{token ? <PrivateRoutes /> : <PublicRoutes />}</Container>;
 };
 

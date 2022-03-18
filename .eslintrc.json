@@ -26,5 +26,15 @@
     "jsx-a11y/click-events-have-key-events": "off",
     "import/prefer-default-export": "off",
     "jsx-a11y/control-has-associated-label": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "./src/store/**/*.js"
+      ],
+      "rules": {
+        "default-param-last" : "off"
+      }
+    }
+  ]
 }

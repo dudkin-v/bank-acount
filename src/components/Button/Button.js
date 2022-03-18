@@ -13,8 +13,13 @@ const Btn = styled.button`
   cursor: pointer;
   outline: none;
 
-  :hover,
-  :active {
+  :disabled {
+    background-color: ${colors.gray};
+    cursor: not-allowed;
+  }
+
+  :hover:enabled,
+  :active:enabled {
     box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
     background: ${colors.coralTree};
     background: linear-gradient(
@@ -26,8 +31,8 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ text, type, onClick }) => (
-  <Btn type={type} onClick={onClick}>
+const Button = ({ text, type, onClick, disabled }) => (
+  <Btn type={type} onClick={onClick} disabled={disabled}>
     {text}
   </Btn>
 );
@@ -36,11 +41,13 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.string,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
   type: "button",
   onClick: () => {},
+  disabled: false,
 };
 
 export default Button;

@@ -1,18 +1,23 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./i18n";
+import { history } from "./navigation/history";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<div>{null}</div>}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Suspense>
+    <Provider store={store}>
+      <Suspense fallback={<div>{null}</div>}>
+        <BrowserRouter history={history}>
+          <App />
+        </BrowserRouter>
+      </Suspense>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
