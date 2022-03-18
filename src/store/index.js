@@ -4,10 +4,12 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import login from "./login/reducer";
 import settings from "./settings/reducer";
+import cards from "./cards/reducer";
 
 const rootReducer = combineReducers({
   login,
   settings,
+  cards,
 });
 
 const persistConfig = {
