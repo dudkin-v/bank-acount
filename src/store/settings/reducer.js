@@ -2,6 +2,8 @@ import * as types from "./types";
 
 const initialState = {
   language: "en",
+  loading: false,
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {

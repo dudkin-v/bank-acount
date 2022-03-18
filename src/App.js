@@ -31,6 +31,7 @@ const Main = styled.main`
   width: 100vw;
   height: 100vh;
   .page {
+    position: relative;
     padding: 0 40px;
     width: 100%;
     .page-heading {
