@@ -1,7 +1,7 @@
 import * as types from "./types";
 
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: null,
   loading: false,
   error: null,
 };

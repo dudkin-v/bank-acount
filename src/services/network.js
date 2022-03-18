@@ -1,4 +1,5 @@
 import axios from "axios";
+import { store } from "../store";
 
 export const endpoint = {
   SIGN_IN: "/auth/sign-in",
@@ -13,6 +14,12 @@ export const instance = axios.create({
   baseURL: "https://test-bank-system.herokuapp.com",
 });
 
-export const setToken = (token) => {
-  instance.defaults.headers.authorization = `Bearer ${token}`;
-};
+instance.interceptors.response.use((response) => response.data);
+
+instance.interceptors.request.use((config) => ({
+  ...config,
+  headers: {
+    ...config.headers,
+    authorization: `Bearer ${store.getState().login.token}`,
+  },
+}));

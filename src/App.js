@@ -3,7 +3,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { setToken } from "./services/network";
 
 import routes from "./utils/routes";
 import colors from "./utils/colors";
@@ -53,39 +52,36 @@ const PublicRoutes = () => (
   </Routes>
 );
 
-const PrivateRoutes = () => (
-  <Main>
-    <NavBar />
-    <Routes>
-      <Route
-        path="*"
-        element={<Navigate replace to={routes.OVERVIEW} from="*" />}
-      />
-      <Route exact path={routes.OVERVIEW} element={<Overview />} />
-      <Route exact path={routes.CARDS} element={<Cards />} />
-      <Route exact path={routes.PAYMENTS} element={<Payments />} />
-      <Route exact path={routes.MY_STAT} element={<MyStat />} />
-      <Route exact path={routes.ACCOUNT} element={<Account />} />
-      <Route exact path={routes.SETTINGS} element={<Settings />} />
-    </Routes>
-  </Main>
-);
+const PrivateRoutes = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLanguage());
+  }, []);
+
+  return (
+    <Main>
+      <NavBar />
+      <Routes>
+        <Route
+          path="*"
+          element={<Navigate replace to={routes.OVERVIEW} from="*" />}
+        />
+        <Route exact path={routes.OVERVIEW} element={<Overview />} />
+        <Route exact path={routes.CARDS} element={<Cards />} />
+        <Route exact path={routes.PAYMENTS} element={<Payments />} />
+        <Route exact path={routes.MY_STAT} element={<MyStat />} />
+        <Route exact path={routes.ACCOUNT} element={<Account />} />
+        <Route exact path={routes.SETTINGS} element={<Settings />} />
+      </Routes>
+    </Main>
+  );
+};
 
 const App = () => {
-  const dispatch = useDispatch();
   const token = useSelector((rootStore) => rootStore.login.token);
   const language = useSelector((rootStore) => rootStore.settings.language);
   const { i18n } = useTranslation();
-
-  useEffect(() => {
-    setToken(token);
-  }, [token]);
-
-  useEffect(() => {
-    if (token) {
-      dispatch(getLanguage());
-    }
-  }, []);
 
   useEffect(() => {
     i18n.changeLanguage(language);

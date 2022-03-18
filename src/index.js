@@ -2,7 +2,8 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -12,11 +13,13 @@ import { history } from "./navigation/history";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback={<div>{null}</div>}>
-        <BrowserRouter history={history}>
-          <App />
-        </BrowserRouter>
-      </Suspense>
+      <PersistGate loading={null} persistor={persistor}>
+        <Suspense fallback={<div>{null}</div>}>
+          <BrowserRouter history={history}>
+            <App />
+          </BrowserRouter>
+        </Suspense>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
