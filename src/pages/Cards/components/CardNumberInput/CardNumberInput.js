@@ -19,7 +19,7 @@ const Container = styled.div`
   }
 `;
 
-const CardNumberInput = ({ setCardNumber }) => {
+const CardNumberInput = ({ setCardNumber, onResetFields }) => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
@@ -50,8 +50,24 @@ const CardNumberInput = ({ setCardNumber }) => {
     };
 
   useEffect(() => {
+    if (input1.length === 0) {
+      inputRef1.current.focus();
+    }
+  }, [input1]);
+
+  useEffect(() => {
     setCardNumber(input1 + input2 + input3 + input4);
   }, [input1, input2, input3, input4]);
+
+  useEffect(() => {
+    if (onResetFields) {
+      setInput1("");
+      setInput2("");
+      setInput3("");
+      setInput4("");
+      inputRef1.current.focus();
+    }
+  }, [onResetFields]);
 
   return (
     <Container>
@@ -93,6 +109,7 @@ const CardNumberInput = ({ setCardNumber }) => {
 
 CardNumberInput.propTypes = {
   setCardNumber: PropTypes.func.isRequired,
+  onResetFields: PropTypes.bool.isRequired,
 };
 
 export default CardNumberInput;

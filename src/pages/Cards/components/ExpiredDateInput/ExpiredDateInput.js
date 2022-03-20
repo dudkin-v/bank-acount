@@ -34,7 +34,7 @@ const Container = styled.div`
   }
 `;
 
-const ExpiredDateInput = ({ setExpireMonth, setExpireYear }) => {
+const ExpiredDateInput = ({ setExpireMonth, setExpireYear, onResetFields }) => {
   const [monthInputValue, setMonthInputValue] = useState("");
   const [yearInputValue, setYearInputValue] = useState("");
 
@@ -65,6 +65,13 @@ const ExpiredDateInput = ({ setExpireMonth, setExpireYear }) => {
     setExpireYear(yearInputValue);
   }, [monthInputValue, yearInputValue]);
 
+  useEffect(() => {
+    if (onResetFields) {
+      setMonthInputValue("");
+      setYearInputValue("");
+    }
+  }, [onResetFields]);
+
   return (
     <Container>
       <p>VALID THRU</p>
@@ -92,6 +99,7 @@ const ExpiredDateInput = ({ setExpireMonth, setExpireYear }) => {
 ExpiredDateInput.propTypes = {
   setExpireMonth: PropTypes.func.isRequired,
   setExpireYear: PropTypes.func.isRequired,
+  onResetFields: PropTypes.bool.isRequired,
 };
 
 export default ExpiredDateInput;
