@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import { SiVisa } from "react-icons/si";
@@ -5,9 +6,123 @@ import { FaCcMastercard } from "react-icons/fa";
 
 import PayPassSVG from "./PayPassSVG";
 import { getCardType, cardTypes } from "../../../../utils/card";
+import colors from "../../../../utils/colors";
+
+const Container = styled.div`
+  border-radius: 20px;
+  width: 370px;
+  min-height: 220px;
+  margin: 0 20px 20px 0;
+  background: ${colors.coralTree};
+  background: linear-gradient(
+    149deg,
+    rgba(162, 88, 107, 1) 0%,
+    rgba(40, 47, 91, 1) 50%,
+    rgba(162, 88, 107, 1) 100%
+  );
+  .card {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    form {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      div {
+        width: 100%;
+      }
+      .bank-name {
+        display: flex;
+        justify-content: flex-start;
+        h2 {
+          color: ${colors.ebb};
+          padding: 0 10px;
+        }
+      }
+      .card-data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .curd-number {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          padding: 0 20px;
+          p {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            padding: 5px;
+            border: none;
+            outline: none;
+            width: 55px;
+            background: none;
+          }
+        }
+        .expire-date {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          .expire-date-description {
+            display: flex;
+            flex-wrap: wrap;
+            width: 20px;
+            color: ${colors.ebb};
+            font-size: 6px;
+            font-weight: bold;
+            line-height: 7px;
+          }
+          .expire-date-value {
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            padding: 5px;
+            border: none;
+            outline: none;
+            width: 30px;
+            background: none;
+          }
+          span {
+            font-size: 16px;
+            font-weight: bold;
+            color: ${colors.ebb};
+          }
+        }
+        svg {
+          width: 50px;
+          height: auto;
+          color: ${colors.ebb};
+          position: absolute;
+          bottom: 5px;
+          right: 10px;
+        }
+        .pay-pass-mark {
+          width: 45px;
+          height: auto;
+          color: ${colors.ebb};
+          position: absolute;
+          bottom: 100px;
+          right: 10px;
+        }
+        h2 {
+          color: ${colors.ebb};
+          padding: 0 10px;
+          font-size: 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+`;
 
 const Card = ({ number, expireDate }) => (
-  <div className="card-container">
+  <Container className="card-container">
     <div className="card">
       <form>
         <div className="bank-name">
@@ -33,7 +148,7 @@ const Card = ({ number, expireDate }) => (
         </div>
       </form>
     </div>
-  </div>
+  </Container>
 );
 
 Card.propTypes = {

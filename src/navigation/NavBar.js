@@ -65,7 +65,7 @@ const NavBar = () => {
 
   return (
     <Nav>
-      <Link to={routes.OVERVIEW} className="nav-heading">
+      <Link to={routes.CARDS} className="nav-heading">
         Banking App
       </Link>
       <div className="nav-lists-block">

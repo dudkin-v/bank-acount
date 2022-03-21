@@ -10,26 +10,20 @@ const Btn = styled.button`
   padding: 8px 20px;
   color: white;
   font-size: 16px;
-  background-color: ${colors.rhino};
-  border-radius: 3px;
+  background-color: ${colors.turquoise};
+  border-radius: 5px;
   cursor: pointer;
   outline: none;
-
+  transition: 0.3s;
   :disabled {
     background-color: ${colors.gray};
     cursor: ${(props) => (props.isLoading ? "wait" : "not-allowed")};
   }
-
   :hover:enabled,
   :active:enabled {
     box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
-    background: ${colors.coralTree};
-    background: linear-gradient(
-      149deg,
-      rgba(162, 88, 107, 1) 0%,
-      rgba(40, 47, 91, 1) 50%,
-      rgba(162, 88, 107, 1) 100%
-    );
+    background: ${colors.toryBlue};
+    transition: 0.3s;
   }
 `;
 
