@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { SiVisa } from "react-icons/si";
 import { FaCcMastercard } from "react-icons/fa";
@@ -14,6 +15,8 @@ import { getCardType, cardTypes } from "../../../../utils/card";
 
 const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
   const isLoading = useSelector((rootStore) => rootStore.cards.loading);
+  const { t } = useTranslation();
+
   const [cardNumber, setCardNumber] = useState("");
   const [cardType, setCardType] = useState("");
   const [expiredMonth, setExpiredMonth] = useState("");
@@ -87,7 +90,7 @@ const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
           <Button
             type="submit"
             onClick={onSubmit}
-            text="Create card"
+            text={t("buttons.createCard")}
             disabled={error}
             isLoading={isLoading}
           />

@@ -50,7 +50,9 @@
   "buttons": {
     "signIn": "Sign in",
     "signUp": "Create account",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "addNewCard": "Add new card",
+    "createCard": "Create card"
   },
   "nav": {
     "links": {

@@ -206,7 +206,7 @@ const Cards = () => {
       </div>
       <Button
         className="add-new-card-btn"
-        text="Add new card"
+        text={t("buttons.addNewCard")}
         onClick={() => setOpenCardCreator((prevState) => !prevState)}
       />
     </Container>
