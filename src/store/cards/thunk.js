@@ -1,6 +1,5 @@
 import * as action from "./actions";
 import { instance, endpoint } from "../../services/network";
-import { setCardsError, setCardsLoading } from "./actions";
 
 export const getCards = () => async (dispatch) => {
   try {
@@ -20,8 +19,8 @@ export const addCard = (cardData) => async (dispatch) => {
     await instance.post(endpoint.CARD, cardData);
     dispatch(getCards());
   } catch (error) {
-    dispatch(setCardsError(error));
+    dispatch(action.setCardsError(error));
   } finally {
-    dispatch(setCardsLoading(false));
+    dispatch(action.setCardsLoading(false));
   }
 };

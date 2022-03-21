@@ -3,6 +3,7 @@ import { store } from "../store";
 import { logOut } from "../store/login/actions";
 
 export const endpoint = {
+  USER: "/user",
   SIGN_IN: "/auth/sign-in",
   SIGN_UP: "/auth/sign-up",
   CARD: "/card",

@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../../components/Button";
 import { CardCreator } from "./components/CardCreator";
 import { Card } from "./components/Card";
+import { Spinner } from "../../components/Spinner";
+
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
 
@@ -17,7 +19,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: ${(props) => !props.cards && "center"};
-    width: 100%;
+    width: 370px;
     height: 80%;
     overflow-x: scroll;
     .no-cards-description {
@@ -37,6 +39,7 @@ const Container = styled.div`
 const Cards = () => {
   const dispatch = useDispatch();
   const cards = useSelector((rootStore) => rootStore.cards.cards);
+  const loading = useSelector((rootStore) => rootStore.cards.loading);
   const { t } = useTranslation();
 
   const [isOpenCardCreator, setOpenCardCreator] = useState(false);
@@ -52,7 +55,10 @@ const Cards = () => {
     <Container className="page" cards={cards.length}>
       <h2 className="page-heading">{t("nav.links.cards")}</h2>
       <div className="cards-container">
-        {!cards.length ? (
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {loading ? (
+          <Spinner />
+        ) : !cards.length ? (
           <p className="no-cards-description">{t("cards.noCards")}</p>
         ) : (
           cards.map((card) => (

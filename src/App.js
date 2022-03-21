@@ -15,7 +15,7 @@ import { Payments } from "./pages/Payments";
 import { MyStat } from "./pages/MyStat";
 import { Account } from "./pages/Account";
 import { Settings } from "./pages/Settings";
-import { getLanguage } from "./store/settings/thunk";
+import { getAppData } from "./store/application/thunk";
 
 const Container = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const PrivateRoutes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getLanguage());
+    dispatch(getAppData());
   }, []);
 
   return (
