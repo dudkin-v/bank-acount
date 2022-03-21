@@ -56,7 +56,6 @@
   },
   "nav": {
     "links": {
-      "overview": "Overview",
       "cards": "Cards",
       "payments": "Payments",
       "my-stat": "My stat",

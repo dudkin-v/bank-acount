@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { FaHome, FaWallet, FaChartArea } from "react-icons/fa";
+import { FaWallet, FaChartArea } from "react-icons/fa";
 import { BiTransfer } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { MdAccountCircle } from "react-icons/md";
@@ -70,12 +70,6 @@ const NavBar = () => {
       </Link>
       <div className="nav-lists-block">
         <ul className="nav-list">
-          <li>
-            <NavLink to={routes.OVERVIEW} activeclassname="active">
-              <FaHome />
-              {t("nav.links.overview")}
-            </NavLink>
-          </li>
           <li>
             <NavLink to={routes.CARDS} activeclassname="active">
               <FaWallet />
