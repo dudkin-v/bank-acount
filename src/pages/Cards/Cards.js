@@ -150,27 +150,6 @@ const Container = styled.div`
   }
 `;
 
-const demoCards = [
-  {
-    number: "4234567890098765",
-    type: "visa",
-    balance: 1000,
-    expireDate: {
-      month: "03",
-      year: "23",
-    },
-  },
-  {
-    number: "5722567890098010",
-    type: "mastercard",
-    balance: 1000,
-    expireDate: {
-      month: "10",
-      year: "26",
-    },
-  },
-];
-
 const Cards = () => {
   const dispatch = useDispatch();
   const cards = useSelector((rootStore) => rootStore.cards.cards);
@@ -183,18 +162,16 @@ const Cards = () => {
 
   useEffect(onGetCards, []);
 
-  console.log("cards", cards);
-
   return (
     <Container className="page">
       <h2 className="page-heading">{t("nav.links.cards")}</h2>
       <div className="cards-container">
-        {demoCards.length &&
-          demoCards.map((card) => (
+        {cards.length &&
+          cards.map((card) => (
             <Card
-              expireDate={card.expireDate}
+              expireDate={card.expiredDate}
               number={card.number}
-              key={card.number}
+              key={card.id}
             />
           ))}
         {openCardCreator && (
