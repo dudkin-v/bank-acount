@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import { CardCreator } from "./components/CardCreator";
 import { Card } from "./components/Card";
 import { addCard, getCards } from "../../store/cards/thunk";
+import colors from "../../utils/colors";
 
 const Container = styled.div`
   display: flex;
@@ -15,9 +16,17 @@ const Container = styled.div`
   .cards-container {
     display: flex;
     flex-direction: column;
+    justify-content: ${(props) => !props.cards && "center"};
     width: 100%;
     height: 80%;
     overflow-x: scroll;
+    .no-cards-description {
+      width: 250px;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+      color: ${colors.gray};
+    }
   }
   .add-new-card-btn {
     width: 200px;
@@ -30,36 +39,42 @@ const Cards = () => {
   const cards = useSelector((rootStore) => rootStore.cards.cards);
   const { t } = useTranslation();
 
-  const [openCardCreator, setOpenCardCreator] = useState(false);
+  const [isOpenCardCreator, setOpenCardCreator] = useState(false);
 
   const onGetCards = () => dispatch(getCards());
   const onCreateCard = (cardData) => dispatch(addCard(cardData));
+  const onOpenCardCreator = () =>
+    setOpenCardCreator((prevIsOpen) => !prevIsOpen);
 
   useEffect(onGetCards, []);
 
   return (
-    <Container className="page">
+    <Container className="page" cards={cards.length}>
       <h2 className="page-heading">{t("nav.links.cards")}</h2>
       <div className="cards-container">
-        {cards.length &&
+        {!cards.length ? (
+          <p className="no-cards-description">{t("cards.noCards")}</p>
+        ) : (
           cards.map((card) => (
             <Card
-              expireDate={card.expiredDate}
+              expiredDate={card.expiredDate}
               number={card.number}
+              cardType={card.cardType}
               key={card.id}
             />
-          ))}
-        {openCardCreator && (
+          ))
+        )}
+        {isOpenCardCreator && (
           <CardCreator
             onCreateCard={onCreateCard}
-            setOpenCardCreator={setOpenCardCreator}
+            handleCloseCardCreator={setOpenCardCreator}
           />
         )}
       </div>
       <Button
         className="add-new-card-btn"
         text={t("buttons.addNewCard")}
-        onClick={() => setOpenCardCreator((prevState) => !prevState)}
+        onClick={onOpenCardCreator}
       />
     </Container>
   );

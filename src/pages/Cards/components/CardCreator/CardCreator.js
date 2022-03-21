@@ -3,16 +3,14 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { SiVisa } from "react-icons/si";
-import { FaCcMastercard } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
-
+import { CardLogo } from "../CardLogo";
 import { Button } from "../../../../components/Button";
 import { ExpiredDateInput } from "../ExpiredDateInput";
 import { CardNumberInput } from "../CardNumberInput";
 
 import PayPassSVG from "./PayPassSVG";
-import { getCardType, cardTypes } from "../../../../utils/card";
+import { getCardType } from "../../../../utils/card";
 import colors from "../../../../utils/colors";
 import background from "./card-creator-background.jpg";
 
@@ -114,14 +112,13 @@ const Container = styled.div`
   }
 `;
 
-const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
+const CardCreator = ({ onCreateCard, handleCloseCardCreator }) => {
   const { t } = useTranslation();
   const [cardNumber, setCardNumber] = useState("");
   const [cardType, setCardType] = useState("");
   const [expiredMonth, setExpiredMonth] = useState("");
   const [expiredYear, setExpiredYear] = useState("");
-  const [resetFields, setResetFields] = useState(false);
-  const [error, setError] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -133,11 +130,10 @@ const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
         year: expiredYear,
       },
     });
-    setResetFields((prevResetFields) => !prevResetFields);
-    setError(true);
+    setIsDisabled(true);
   };
 
-  const onCloseCardCreator = () => setOpenCardCreator(false);
+  const onCloseCardCreator = () => handleCloseCardCreator(false);
   const onStopPropagation = (event) => event.stopPropagation();
 
   useEffect(() => {
@@ -151,17 +147,11 @@ const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
       expiredYear.length < 2 ||
       !cardType
     ) {
-      setError(true);
+      setIsDisabled(true);
     } else {
-      setError(false);
+      setIsDisabled(false);
     }
   }, [cardNumber, expiredMonth, expiredYear, cardType]);
-
-  useEffect(() => {
-    if (!cardNumber.length) {
-      setResetFields(false);
-    }
-  }, [cardNumber]);
 
   return (
     <Container
@@ -192,24 +182,19 @@ const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
             </div>
             <div className="card-data">
               <PayPassSVG className="pay-pass-mark" />
-              <CardNumberInput
-                setCardNumber={setCardNumber}
-                onResetFields={resetFields}
-              />
+              <CardNumberInput onChangeCardNumber={setCardNumber} />
               <ExpiredDateInput
-                setExpireMonth={setExpiredMonth}
-                setExpireYear={setExpiredYear}
-                onResetFields={resetFields}
+                onChangeExpiredMonth={setExpiredMonth}
+                onChangeExpiredYear={setExpiredYear}
               />
               <h2>USER NAME</h2>
-              {cardType === cardTypes.VISA && <SiVisa />}
-              {cardType === cardTypes.MASTERCARD && <FaCcMastercard />}
+              <CardLogo numberOrType={cardNumber} />
             </div>
             <Button
               type="submit"
               onClick={onSubmit}
               text={t("buttons.createCard")}
-              disabled={error}
+              disabled={isDisabled}
             />
           </form>
         </div>
@@ -220,7 +205,7 @@ const CardCreator = ({ onCreateCard, setOpenCardCreator }) => {
 
 CardCreator.propTypes = {
   onCreateCard: PropTypes.func.isRequired,
-  setOpenCardCreator: PropTypes.func.isRequired,
+  handleCloseCardCreator: PropTypes.func.isRequired,
 };
 
 export default CardCreator;

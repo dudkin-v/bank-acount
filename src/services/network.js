@@ -23,7 +23,6 @@ instance.interceptors.response.use(
       }, 3000);
     }),
   (error) => {
-    console.log(error);
     if (error.message.includes("403")) {
       store.dispatch(logOut());
     }

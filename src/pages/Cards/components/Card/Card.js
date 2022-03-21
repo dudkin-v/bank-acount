@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-
-import { SiVisa } from "react-icons/si";
-import { FaCcMastercard } from "react-icons/fa";
-
+import { CardLogo } from "../CardLogo";
 import PayPassSVG from "./PayPassSVG";
-import { getCardType, cardTypes } from "../../../../utils/card";
 import colors from "../../../../utils/colors";
 
 const Container = styled.div`
@@ -121,7 +117,7 @@ const Container = styled.div`
   }
 `;
 
-const Card = ({ number, expireDate }) => (
+const Card = ({ number, expiredDate, cardType }) => (
   <Container className="card-container">
     <div className="card">
       <form>
@@ -138,13 +134,12 @@ const Card = ({ number, expireDate }) => (
           </div>
           <div className="expire-date">
             <p className="expire-date-description">VALID THRU</p>
-            <p className="expire-date-value">{expireDate.month}</p>
+            <p className="expire-date-value">{expiredDate.month}</p>
             <span>/</span>
-            <p className="expire-date-value">{expireDate.year}</p>
+            <p className="expire-date-value">{expiredDate.year}</p>
           </div>
           <h2>USER NAME</h2>
-          {getCardType(number) === cardTypes.VISA && <SiVisa />}
-          {getCardType(number) === cardTypes.MASTERCARD && <FaCcMastercard />}
+          <CardLogo numberOrType={cardType} />
         </div>
       </form>
     </div>
@@ -153,10 +148,11 @@ const Card = ({ number, expireDate }) => (
 
 Card.propTypes = {
   number: PropTypes.string.isRequired,
-  expireDate: PropTypes.shape({
+  expiredDate: PropTypes.shape({
     month: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }).isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default Card;
