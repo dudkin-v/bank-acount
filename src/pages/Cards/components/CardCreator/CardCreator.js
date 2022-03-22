@@ -186,7 +186,7 @@ const CardCreator = ({ onCreateCard, handleCloseCardCreator, userName }) => {
                 onChangeExpiredYear={setExpiredYear}
               />
               <h2 className="user-name">{userName}</h2>
-              <CardLogo cardType={cardNumber} />
+              <CardLogo cardType={getCardType(cardNumber)} />
             </div>
             <Button
               type="submit"

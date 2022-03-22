@@ -8,6 +8,7 @@ import { Button } from "../../components/Button";
 import { CardCreator } from "./components/CardCreator";
 import { Card } from "./components/Card";
 import { Spinner } from "../../components/Spinner";
+import { Error } from "../../components/Error";
 
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
@@ -19,7 +20,7 @@ const Container = styled.div`
   .cards-container {
     display: flex;
     flex-direction: column;
-    justify-content: ${(props) => !props.cards && "center"};
+    justify-content: ${(props) => (!props.cards || props.error) && "center"};
     width: 380px;
     height: 80%;
     overflow-x: scroll;
@@ -32,10 +33,6 @@ const Container = styled.div`
     }
     .error-message {
       width: 250px;
-      font-size: 16px;
-      line-height: 30px;
-      text-align: center;
-      color: ${colors.coralTree};
     }
   }
   .button {
@@ -66,7 +63,7 @@ const Cards = () => {
   useEffect(onGetCards, []);
 
   return (
-    <Container className="page" cards={cards.length}>
+    <Container className="page" cards={cards.length} error={error}>
       <h2 className="page-heading">{t("nav.links.cards")}</h2>
       <div className="cards-container">
         <RenderingCondition error={error} isLoading={loading}>
@@ -91,7 +88,7 @@ const Cards = () => {
           </RenderingCondition.Fulfilled>
 
           <RenderingCondition.Rejected>
-            <p className="error-message">{error}</p>
+            <Error errorMessage={error} />
           </RenderingCondition.Rejected>
         </RenderingCondition>
         {isOpenCardCreator && (
