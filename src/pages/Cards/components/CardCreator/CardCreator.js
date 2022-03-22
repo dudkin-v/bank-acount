@@ -101,7 +101,7 @@ const Container = styled.div`
           bottom: 100px;
           right: 10px;
         }
-        h2 {
+        .user-name {
           color: ${colors.ebb};
           padding: 0 10px;
           font-size: 20px;
@@ -112,7 +112,7 @@ const Container = styled.div`
   }
 `;
 
-const CardCreator = ({ onCreateCard, handleCloseCardCreator }) => {
+const CardCreator = ({ onCreateCard, handleCloseCardCreator, userName }) => {
   const { t } = useTranslation();
   const [cardNumber, setCardNumber] = useState("");
   const [cardType, setCardType] = useState("");
@@ -131,6 +131,7 @@ const CardCreator = ({ onCreateCard, handleCloseCardCreator }) => {
       },
     });
     setIsDisabled(true);
+    handleCloseCardCreator(false);
   };
 
   const onCloseCardCreator = () => handleCloseCardCreator(false);
@@ -187,7 +188,7 @@ const CardCreator = ({ onCreateCard, handleCloseCardCreator }) => {
                 onChangeExpiredMonth={setExpiredMonth}
                 onChangeExpiredYear={setExpiredYear}
               />
-              <h2>USER NAME</h2>
+              <h2 className="user-name">{userName}</h2>
               <CardLogo numberOrType={cardNumber} />
             </div>
             <Button
@@ -206,6 +207,7 @@ const CardCreator = ({ onCreateCard, handleCloseCardCreator }) => {
 CardCreator.propTypes = {
   onCreateCard: PropTypes.func.isRequired,
   handleCloseCardCreator: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default CardCreator;

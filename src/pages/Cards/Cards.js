@@ -40,6 +40,7 @@ const Cards = () => {
   const dispatch = useDispatch();
   const cards = useSelector((rootStore) => rootStore.cards.cards);
   const loading = useSelector((rootStore) => rootStore.cards.loading);
+  const user = useSelector((rootStore) => rootStore.user.user);
   const { t } = useTranslation();
 
   const [isOpenCardCreator, setOpenCardCreator] = useState(false);
@@ -48,6 +49,8 @@ const Cards = () => {
   const onCreateCard = (cardData) => dispatch(addCard(cardData));
   const onOpenCardCreator = () =>
     setOpenCardCreator((prevIsOpen) => !prevIsOpen);
+
+  const userName = `${user.firstName[0]}. ${user.lastName}`;
 
   useEffect(onGetCards, []);
 
@@ -63,6 +66,7 @@ const Cards = () => {
         ) : (
           cards.map((card) => (
             <Card
+              userName={userName}
               expiredDate={card.expiredDate}
               number={card.number}
               cardType={card.cardType}
@@ -72,6 +76,7 @@ const Cards = () => {
         )}
         {isOpenCardCreator && (
           <CardCreator
+            userName={userName}
             onCreateCard={onCreateCard}
             handleCloseCardCreator={setOpenCardCreator}
           />

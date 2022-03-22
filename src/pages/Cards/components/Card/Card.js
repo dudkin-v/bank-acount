@@ -117,7 +117,7 @@ const Container = styled.div`
   }
 `;
 
-const Card = ({ number, expiredDate, cardType }) => (
+const Card = ({ number, expiredDate, cardType, userName }) => (
   <Container className="card-container">
     <div className="card">
       <form>
@@ -138,7 +138,7 @@ const Card = ({ number, expiredDate, cardType }) => (
             <span>/</span>
             <p className="expire-date-value">{expiredDate.year}</p>
           </div>
-          <h2>USER NAME</h2>
+          <h2>{userName}</h2>
           <CardLogo numberOrType={cardType} />
         </div>
       </form>
@@ -153,6 +153,7 @@ Card.propTypes = {
     year: PropTypes.string.isRequired,
   }).isRequired,
   cardType: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default Card;
