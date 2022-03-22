@@ -27,13 +27,13 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ text, type, onClick, disabled, isLoading, className }) => (
+const Button = ({ text, type, onClick, disabled, isLoading }) => (
   <Btn
     type={type}
     onClick={onClick}
     disabled={disabled || isLoading}
     isLoading={isLoading}
-    className={className}
+    className="button"
   >
     {isLoading ? <Spinner /> : text}
   </Btn>
@@ -45,7 +45,6 @@ Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -53,7 +52,6 @@ Button.defaultProps = {
   onClick: () => {},
   disabled: false,
   isLoading: false,
-  className: "button",
 };
 
 export default Button;

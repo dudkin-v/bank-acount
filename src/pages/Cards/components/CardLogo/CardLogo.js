@@ -3,18 +3,24 @@ import { SiVisa } from "react-icons/si";
 import { FaCcMastercard } from "react-icons/fa";
 import { getCardType, cardTypes } from "../../../../utils/card";
 
-const CardLogo = ({ numberOrType }) => {
-  if (getCardType(numberOrType) === cardTypes.VISA) {
+const CardLogo = ({ cardType }) => {
+  if (cardType.toLowerCase() === cardTypes.VISA) {
     return <SiVisa />;
   }
-  if (getCardType(numberOrType) === cardTypes.MASTERCARD) {
+  if (cardType.toLowerCase() === cardTypes.MASTERCARD) {
     return <FaCcMastercard />;
   }
-  return "";
+  if (getCardType(cardType) === cardTypes.VISA) {
+    return <SiVisa />;
+  }
+  if (getCardType(cardType) === cardTypes.MASTERCARD) {
+    return <FaCcMastercard />;
+  }
+  return null;
 };
 
 CardLogo.propTypes = {
-  numberOrType: PropTypes.string.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default CardLogo;

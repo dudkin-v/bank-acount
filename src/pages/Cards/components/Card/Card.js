@@ -139,7 +139,7 @@ const Card = ({ number, expiredDate, cardType, userName }) => (
             <p className="expire-date-value">{expiredDate.year}</p>
           </div>
           <h2>{userName}</h2>
-          <CardLogo numberOrType={cardType} />
+          <CardLogo cardType={cardType} />
         </div>
       </form>
     </div>

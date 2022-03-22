@@ -3,12 +3,12 @@ export const cardTypes = {
   MASTERCARD: "mastercard",
 };
 
-export const getCardType = (cardNumberOrType) => {
-  if (cardNumberOrType.startsWith("4") || cardNumberOrType === "visa") {
+export const getCardType = (cardNumber) => {
+  if (cardNumber.startsWith("4")) {
     return cardTypes.VISA;
   }
-  if (cardNumberOrType.startsWith("5") || cardNumberOrType === "mastercard") {
+  if (cardNumber.startsWith("5")) {
     return cardTypes.MASTERCARD;
   }
-  return "";
+  return null;
 };

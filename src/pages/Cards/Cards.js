@@ -30,7 +30,7 @@ const Container = styled.div`
       color: ${colors.gray};
     }
   }
-  .add-new-card-btn {
+  .button {
     width: 200px;
     height: 37.5px;
   }
@@ -84,11 +84,7 @@ const Cards = () => {
           />
         )}
       </div>
-      <Button
-        className="add-new-card-btn"
-        text={t("buttons.addNewCard")}
-        onClick={onOpenCardCreator}
-      />
+      <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
     </Container>
   );
 };
