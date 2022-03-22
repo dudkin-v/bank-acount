@@ -19,7 +19,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: ${(props) => !props.cards && "center"};
-    width: 370px;
+    width: 380px;
     height: 80%;
     overflow-x: scroll;
     .no-cards-description {
@@ -50,7 +50,9 @@ const Cards = () => {
   const onOpenCardCreator = () =>
     setOpenCardCreator((prevIsOpen) => !prevIsOpen);
 
-  const userName = `${user.firstName[0]}. ${user.lastName}`;
+  const userName = user.firstName
+    ? `${user.firstName[0]}. ${user.lastName}`
+    : "";
 
   useEffect(onGetCards, []);
 

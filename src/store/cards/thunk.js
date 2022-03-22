@@ -24,3 +24,15 @@ export const addCard = (cardData) => async (dispatch) => {
     dispatch(action.setCardsLoading(false));
   }
 };
+
+export const removeCard = (cardId) => async (dispatch) => {
+  try {
+    dispatch(action.removeCardLoading(true));
+    await instance.delete(`${endpoint.CARD}/${cardId}`);
+    dispatch(getCards());
+  } catch (error) {
+    dispatch(action.removeCardError(error));
+  } finally {
+    dispatch(action.removeCardLoading(false));
+  }
+};

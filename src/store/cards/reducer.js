@@ -4,6 +4,8 @@ const initialState = {
   cards: [],
   loading: false,
   error: null,
+  removeLoading: false,
+  removeError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +16,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, error: action.payload };
     case types.SET_CARDS:
       return { ...state, cards: action.payload };
+    case types.REMOVE_CARD_LOADING:
+      return { ...state, removeLoading: action.payload };
+    case types.REMOVE_CARD_ERROR:
+      return { ...state, removeError: action.payload };
     default:
       return state;
   }
