@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { IoMdCloseCircle } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import { CardLogo } from "../CardLogo";
 import { Button } from "../../../../components/Button";
 import { ExpiredDateInput } from "../ExpiredDateInput";
@@ -12,7 +12,6 @@ import { CardNumberInput } from "../CardNumberInput";
 import PayPassSVG from "./PayPassSVG";
 import { getCardType } from "../../../../utils/card";
 import colors from "../../../../utils/colors";
-import background from "./card-creator-background.jpg";
 
 const Container = styled.div`
   position: fixed;
@@ -25,9 +24,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${background});
+  backdrop-filter: blur(4px);
   .close-btn {
     position: absolute;
     top: 50px;
@@ -162,7 +159,7 @@ const CardCreator = ({ onCreateCard, handleCloseCardCreator, userName }) => {
       tabIndex={0}
       onClick={onCloseCardCreator}
     >
-      <IoMdCloseCircle
+      <IoClose
         className="close-btn"
         role="button"
         aria-pressed="false"

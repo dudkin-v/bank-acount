@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { RenderingCondition } from "../../components/RenderingCondition";
 import { Button } from "../../components/Button";
 import { CardCreator } from "./components/CardCreator";
 import { Card } from "./components/Card";
@@ -29,6 +30,13 @@ const Container = styled.div`
       text-align: center;
       color: ${colors.gray};
     }
+    .error-message {
+      width: 250px;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+      color: ${colors.coralTree};
+    }
   }
   .button {
     width: 200px;
@@ -40,6 +48,7 @@ const Cards = () => {
   const dispatch = useDispatch();
   const cards = useSelector((rootStore) => rootStore.cards.cards);
   const loading = useSelector((rootStore) => rootStore.cards.loading);
+  const error = useSelector((rootStore) => rootStore.cards.error);
   const user = useSelector((rootStore) => rootStore.user.user);
   const { t } = useTranslation();
 
@@ -60,22 +69,31 @@ const Cards = () => {
     <Container className="page" cards={cards.length}>
       <h2 className="page-heading">{t("nav.links.cards")}</h2>
       <div className="cards-container">
-        {/* eslint-disable-next-line no-nested-ternary */}
-        {loading ? (
-          <Spinner />
-        ) : !cards.length ? (
-          <p className="no-cards-description">{t("cards.noCards")}</p>
-        ) : (
-          cards.map((card) => (
-            <Card
-              userName={userName}
-              expiredDate={card.expiredDate}
-              number={card.number}
-              cardType={card.cardType}
-              key={card.id}
-            />
-          ))
-        )}
+        <RenderingCondition error={error} isLoading={loading}>
+          <RenderingCondition.Pending>
+            <Spinner />
+          </RenderingCondition.Pending>
+
+          <RenderingCondition.Fulfilled>
+            {cards.length ? (
+              cards.map((card) => (
+                <Card
+                  userName={userName}
+                  expiredDate={card.expiredDate}
+                  number={card.number}
+                  cardType={card.cardType}
+                  key={card.id}
+                />
+              ))
+            ) : (
+              <p className="no-cards-description">{t("cards.noCards")}</p>
+            )}
+          </RenderingCondition.Fulfilled>
+
+          <RenderingCondition.Rejected>
+            <p className="error-message">{error}</p>
+          </RenderingCondition.Rejected>
+        </RenderingCondition>
         {isOpenCardCreator && (
           <CardCreator
             userName={userName}

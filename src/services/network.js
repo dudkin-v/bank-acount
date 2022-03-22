@@ -27,7 +27,7 @@ instance.interceptors.response.use(
     if (error.message.includes("403")) {
       store.dispatch(logOut());
     }
-    return error;
+    throw error;
   }
 );
 
