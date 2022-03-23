@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import { useTranslation } from "react-i18next";
-import { Manual } from "./Manual";
 import { Recipient } from "./Recipient";
+import { Manual } from "./Manual";
 
 const Container = styled.div`
   display: flex;

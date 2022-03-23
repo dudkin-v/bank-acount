@@ -36,7 +36,7 @@ const Container = styled.div`
     background-color: white;
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 15px;
       object-fit: cover;
       vertical-align: middle;
@@ -48,18 +48,23 @@ const Container = styled.div`
   }
 `;
 
-const Recipient = ({ firstName, lastName, avatarImageUrl }) => (
-  <Container>
-    <div className="avatar-block">
-      {avatarImageUrl ? (
-        <img src={avatarImageUrl} alt="" />
-      ) : (
-        <p>{`${firstName[0]}${lastName[0]}`}</p>
-      )}
-    </div>
-    <p className="recipient-name">{`${firstName} ${lastName[0]}.`}</p>
-  </Container>
-);
+const Recipient = ({ firstName, lastName, avatarImageUrl }) => {
+  const userName =
+    firstName.length > 6 ? `${firstName.substring(0, 4)}...` : firstName;
+
+  return (
+    <Container>
+      <div className="avatar-block">
+        {avatarImageUrl ? (
+          <img src={avatarImageUrl} alt="" />
+        ) : (
+          <p>{`${firstName[0]}${lastName[0]}`}</p>
+        )}
+      </div>
+      <p className="recipient-name">{`${userName} ${lastName[0]}.`}</p>
+    </Container>
+  );
+};
 
 Recipient.propTypes = {
   firstName: PropTypes.string.isRequired,
