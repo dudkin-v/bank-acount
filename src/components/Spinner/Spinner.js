@@ -7,6 +7,8 @@ const style = `
   justify-content: center;
 `;
 
-const Spinner = () => <BeatLoader size={15} color={colors.rhino} css={style} />;
+const Spinner = () => (
+  <BeatLoader size={15} color={colors.turquoise} css={style} />
+);
 
 export default Spinner;

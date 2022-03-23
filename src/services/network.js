@@ -1,7 +1,9 @@
 import axios from "axios";
 import { store } from "../store";
+import { logOut } from "../store/login/actions";
 
 export const endpoint = {
+  USER: "/user",
   SIGN_IN: "/auth/sign-in",
   SIGN_UP: "/auth/sign-up",
   CARD: "/card",
@@ -20,7 +22,13 @@ instance.interceptors.response.use(
       setTimeout(() => {
         res(response.data);
       }, 3000);
-    })
+    }),
+  (error) => {
+    if (error.message.includes("403")) {
+      store.dispatch(logOut());
+    }
+    throw error;
+  }
 );
 
 instance.interceptors.request.use((config) => ({

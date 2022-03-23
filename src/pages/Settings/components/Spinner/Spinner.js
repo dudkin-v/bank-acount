@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const Spinner = () => (
   <Container>
-    <BeatLoader size={20} margin={5} color={colors.rhino} />
+    <BeatLoader size={20} margin={5} color={colors.turquoise} />
   </Container>
 );
 

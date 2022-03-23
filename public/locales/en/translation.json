@@ -17,6 +17,9 @@
     },
     "privacyPolicy": "Yes, I understand and agree to Bank Apps Terms of Service, including the User Agreement and Privacy Policy."
   },
+  "cards": {
+    "noCards": "You don't have cards, press button «Add card» to add."
+  },
   "inputs": {
     "labels": {
       "firstName": "First Name",
@@ -50,11 +53,12 @@
   "buttons": {
     "signIn": "Sign in",
     "signUp": "Create account",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "addNewCard": "Add new card",
+    "createCard": "Create card"
   },
   "nav": {
     "links": {
-      "overview": "Overview",
       "cards": "Cards",
       "payments": "Payments",
       "my-stat": "My stat",

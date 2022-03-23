@@ -10,13 +10,12 @@ import colors from "./utils/colors";
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
 import { NavBar } from "./navigation";
-import { Overview } from "./pages/Overview";
 import { Cards } from "./pages/Cards";
 import { Payments } from "./pages/Payments";
 import { MyStat } from "./pages/MyStat";
 import { Account } from "./pages/Account";
 import { Settings } from "./pages/Settings";
-import { getLanguage } from "./store/settings/thunk";
+import { getAppData } from "./store/application/thunk";
 
 const Container = styled.div`
   display: flex;
@@ -57,7 +56,7 @@ const PrivateRoutes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getLanguage());
+    dispatch(getAppData());
   }, []);
 
   return (
@@ -66,9 +65,8 @@ const PrivateRoutes = () => {
       <Routes>
         <Route
           path="*"
-          element={<Navigate replace to={routes.OVERVIEW} from="*" />}
+          element={<Navigate replace to={routes.CARDS} from="*" />}
         />
-        <Route exact path={routes.OVERVIEW} element={<Overview />} />
         <Route exact path={routes.CARDS} element={<Cards />} />
         <Route exact path={routes.PAYMENTS} element={<Payments />} />
         <Route exact path={routes.MY_STAT} element={<MyStat />} />
