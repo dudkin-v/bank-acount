@@ -24,6 +24,14 @@
     "title": "Quick transaction",
     "manualTransaction": "Manual"
   },
+  "transaction": {
+    "from": "From card",
+    "to": "To card",
+    "placeholder": "Choose a card",
+    "inputPlaceholder": "Enter card number",
+    "price": "Amount",
+    "pricePlaceholder": "Enter amount"
+  },
   "inputs": {
     "labels": {
       "firstName": "First Name",
@@ -59,7 +67,8 @@
     "signUp": "Create account",
     "logOut": "Log out",
     "addNewCard": "Add new card",
-    "createCard": "Create card"
+    "createCard": "Create card",
+    "send": "Send"
   },
   "nav": {
     "links": {

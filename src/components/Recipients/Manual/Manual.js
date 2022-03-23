@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { GiCardExchange } from "react-icons/gi";
 import colors from "../../../utils/colors";
@@ -41,17 +42,26 @@ const Container = styled.div`
   }
 `;
 
-const Manual = () => {
+const Manual = ({ onClick }) => {
   const { t } = useTranslation();
 
   return (
-    <Container>
+    <Container
+      role="button"
+      aria-pressed={false}
+      tabIndex={0}
+      onClick={onClick}
+    >
       <div>
         <GiCardExchange />
       </div>
       <p>{t("recipients.manualTransaction")}</p>
     </Container>
   );
+};
+
+Manual.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Manual;

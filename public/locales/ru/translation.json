@@ -24,6 +24,14 @@
     "title": "Быстрый перевод",
     "manualTransaction": "Перевод"
   },
+  "transaction": {
+    "from": "С карты",
+    "to": "На карту",
+    "placeholder": "Выберите карту",
+    "inputPlaceholder": "Введите номер карты",
+    "price": "Сумма",
+    "pricePlaceholder": "Введите сумму"
+  },
   "inputs": {
     "labels": {
       "firstName": "Имя",
@@ -59,7 +67,8 @@
     "signUp": "Создать аккаунт",
     "logOut": "Выйти",
     "addNewCard": "Добавить карту",
-    "createCard": "Создать карту"
+    "createCard": "Создать карту",
+    "send": "Перевести"
   },
   "nav": {
     "links": {

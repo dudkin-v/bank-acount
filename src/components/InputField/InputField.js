@@ -55,6 +55,9 @@ const InputField = ({
   errorMessage,
   onBlur,
   touched,
+  placeholder,
+  maxLength,
+  type,
 }) => {
   const [isSecure, setIsSecure] = useState(secure);
 
@@ -75,13 +78,16 @@ const InputField = ({
       )}
       {label}
       <Input
+        className="input"
         secure={secure}
         id={name}
         name={name}
-        type={isSecure ? "password" : "text"}
+        type={type || (isSecure ? "password" : "text")}
         onChange={onChange}
         onBlur={onBlur}
         value={value}
+        placeholder={placeholder}
+        maxLength={maxLength}
       />
       {secure && (
         <button type="button" onClick={onSecure} className="secure-btn">
@@ -95,12 +101,15 @@ const InputField = ({
 InputField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   secure: PropTypes.bool,
   errorMessage: PropTypes.string,
   touched: PropTypes.bool,
   onBlur: PropTypes.func,
+  placeholder: PropTypes.string,
+  maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  type: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -108,6 +117,10 @@ InputField.defaultProps = {
   errorMessage: undefined,
   touched: false,
   onBlur: () => {},
+  placeholder: undefined,
+  maxLength: undefined,
+  type: undefined,
+  value: undefined,
 };
 
 export default InputField;
