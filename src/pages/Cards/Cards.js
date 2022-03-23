@@ -50,8 +50,7 @@ const Container = styled.div`
     flex-direction: column;
     background-color: white;
     border-radius: 35px;
-    width: 100%;
-    margin-left: 30px;
+    width: 60%;
     padding: 0 40px;
   }
 `;
