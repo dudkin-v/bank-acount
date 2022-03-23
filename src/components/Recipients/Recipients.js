@@ -28,10 +28,9 @@ const Recipients = () => {
         <Manual />
         {recipients.map((recipient) => (
           <Recipient
-            lastName={recipient.lastName}
-            firstName={recipient.firstName}
-            avatarImageUrl={recipient.imageUrl}
-            key={recipient.id}
+            lastName={recipient.info.lastName}
+            firstName={recipient.info.firstName}
+            key={recipient.info.id}
           />
         ))}
       </div>

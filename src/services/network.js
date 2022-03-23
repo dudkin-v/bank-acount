@@ -10,6 +10,7 @@ export const endpoint = {
   TRANSACTION: "/transaction",
   TRANSACTIONS_HISTORY: "/transaction/history",
   SETTINGS: "/settings",
+  MEMBERS: "/members",
 };
 
 export const instance = axios.create({
