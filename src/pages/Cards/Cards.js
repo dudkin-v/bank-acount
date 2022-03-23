@@ -9,35 +9,50 @@ import { CardCreator } from "./components/CardCreator";
 import { Card } from "./components/Card";
 import { Spinner } from "../../components/Spinner";
 import { Error } from "../../components/Error";
+import { Recipients } from "../../components/Recipients";
 
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   .cards-container {
+    min-width: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: ${(props) => (!props.cards || props.error) && "center"};
-    width: 380px;
-    height: 80%;
-    overflow-x: scroll;
-    .no-cards-description {
-      width: 250px;
-      font-size: 16px;
-      line-height: 30px;
-      text-align: center;
-      color: ${colors.gray};
-    }
-    .error-message {
-      width: 250px;
+    .cards {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      overflow-x: scroll;
+      .button {
+        width: 200px;
+        height: 37.5px;
+        justify-self: flex-end;
+      }
+      .no-cards-description {
+        width: 250px;
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+        color: ${colors.gray};
+      }
+      .error-message {
+        width: 250px;
+      }
     }
   }
-  .button {
-    width: 200px;
-    height: 37.5px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 35px;
+    width: 100%;
+    margin-left: 30px;
+    padding: 0 40px;
   }
 `;
 
@@ -63,43 +78,48 @@ const Cards = () => {
   useEffect(onGetCards, []);
 
   return (
-    <Container className="page" cards={cards.length} error={error}>
-      <h2 className="page-heading">{t("nav.links.cards")}</h2>
+    <Container className="page">
       <div className="cards-container">
-        <RenderingCondition error={error} isLoading={loading}>
-          <RenderingCondition.Pending>
-            <Spinner />
-          </RenderingCondition.Pending>
+        <h2 className="page-heading">{t("nav.links.cards")}</h2>
+        <div className="cards">
+          <RenderingCondition error={error} isLoading={loading}>
+            <RenderingCondition.Pending>
+              <Spinner />
+            </RenderingCondition.Pending>
 
-          <RenderingCondition.Fulfilled>
-            {cards.length ? (
-              cards.map((card) => (
-                <Card
-                  userName={userName}
-                  expiredDate={card.expiredDate}
-                  number={card.number}
-                  cardType={card.cardType}
-                  key={card.id}
-                />
-              ))
-            ) : (
-              <p className="no-cards-description">{t("cards.noCards")}</p>
-            )}
-          </RenderingCondition.Fulfilled>
+            <RenderingCondition.Fulfilled>
+              {cards.length ? (
+                cards.map((card) => (
+                  <Card
+                    userName={userName}
+                    expiredDate={card.expiredDate}
+                    number={card.number}
+                    cardType={card.cardType}
+                    key={card.id}
+                  />
+                ))
+              ) : (
+                <p className="no-cards-description">{t("cards.noCards")}</p>
+              )}
+            </RenderingCondition.Fulfilled>
 
-          <RenderingCondition.Rejected>
-            <Error errorMessage={error} />
-          </RenderingCondition.Rejected>
-        </RenderingCondition>
-        {isOpenCardCreator && (
-          <CardCreator
-            userName={userName}
-            onCreateCard={onCreateCard}
-            handleCloseCardCreator={setOpenCardCreator}
-          />
-        )}
+            <RenderingCondition.Rejected>
+              <Error errorMessage={error} />
+            </RenderingCondition.Rejected>
+          </RenderingCondition>
+          {isOpenCardCreator && (
+            <CardCreator
+              userName={userName}
+              onCreateCard={onCreateCard}
+              handleCloseCardCreator={setOpenCardCreator}
+            />
+          )}
+          <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
+        </div>
       </div>
-      <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
+      <div className="content">
+        <Recipients />
+      </div>
     </Container>
   );
 };

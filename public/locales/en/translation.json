@@ -20,6 +20,9 @@
   "cards": {
     "noCards": "You don't have cards, press button «Add card» to add."
   },
+  "recipients": {
+    "title": "Quick transaction"
+  },
   "inputs": {
     "labels": {
       "firstName": "First Name",
