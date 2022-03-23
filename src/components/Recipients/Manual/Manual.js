@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import { GiCardExchange } from "react-icons/gi";
 import colors from "../../../utils/colors";
 
@@ -40,13 +41,17 @@ const Container = styled.div`
   }
 `;
 
-const Manual = () => (
-  <Container>
-    <div>
-      <GiCardExchange />
-    </div>
-    <p>Manual</p>
-  </Container>
-);
+const Manual = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Container>
+      <div>
+        <GiCardExchange />
+      </div>
+      <p>{t("recipients.manualTransaction")}</p>
+    </Container>
+  );
+};
 
 export default Manual;

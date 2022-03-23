@@ -21,7 +21,8 @@
     "noCards": "You don't have cards, press button «Add card» to add."
   },
   "recipients": {
-    "title": "Quick transaction"
+    "title": "Quick transaction",
+    "manualTransaction": "Manual"
   },
   "inputs": {
     "labels": {
@@ -42,7 +43,7 @@
         "minLength": "Please enter 2 or more characters",
         "maxLength": "Please enter no more than 20 characters"
       },
-      "email":{
+      "email": {
         "required": "Field is required",
         "isEmail": "Email is not correct"
       },
