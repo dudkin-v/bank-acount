@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { Select } from "../Select";
 import { InputField } from "../InputField";
-
-import { splitCardNumber } from "../../utils/card";
-import colors from "../../utils/colors";
 import { Button } from "../Button";
 
+import { onSendTransaction } from "../../store/transactions/thunk";
+import { splitCardNumber } from "../../utils/card";
+import colors from "../../utils/colors";
+
 const Container = styled.div`
-  width: 100%;
+  width: 70%;
   padding: 20px 0;
   .input {
     color: ${colors.rhino};
@@ -49,13 +50,19 @@ const Container = styled.div`
   }
 `;
 
-const Transaction = ({ isManual, handleCloseTransaction }) => {
+const Transaction = ({ isManual }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const myCards = useSelector((rootStore) => rootStore.cards.cards);
+  const loading = useSelector(
+    (rootStore) => rootStore.transactions.transactionLoading
+  );
 
+  const [isDisabledSendBtn, setDisabledSendBtn] = useState(true);
   const [senderCard, setSenderCard] = useState("");
   const [recipientCard, setRecipientCard] = useState("");
   const [price, setPrice] = useState("");
+  const [transactionData, setTransactionData] = useState({});
 
   const options = myCards.map((card) => ({
     value: card.number,
@@ -67,6 +74,24 @@ const Transaction = ({ isManual, handleCloseTransaction }) => {
     ),
   }));
 
+  useEffect(() => {
+    setTransactionData({
+      senderCard,
+      recipientCard: recipientCard.replace(/\s/g, ""),
+      price: +price,
+    });
+  }, [senderCard, recipientCard, price]);
+
+  useEffect(() => {
+    if (transactionData.recipientCard && transactionData.senderCard) {
+      if (transactionData.recipientCard.length < 16) {
+        setDisabledSendBtn(true);
+      } else {
+        setDisabledSendBtn(false);
+      }
+    }
+  }, [transactionData]);
+
   const handleChangeSenderCard = ({ value }) => setSenderCard(value);
   const handleChangeRecipientCard = ({ value }) => setRecipientCard(value);
   const manualHandleChangeRecipientCard = ({ target: { value } }) => {
@@ -74,9 +99,8 @@ const Transaction = ({ isManual, handleCloseTransaction }) => {
   };
   const handleChangePrice = ({ target: { value } }) => setPrice(value);
 
-  const onSendTransaction = () => {
-    console.log({ senderCard, recipientCard, price: +price });
-    handleCloseTransaction(false);
+  const handleSendTransaction = () => {
+    dispatch(onSendTransaction(transactionData));
   };
 
   return (
@@ -120,7 +144,12 @@ const Transaction = ({ isManual, handleCloseTransaction }) => {
           placeholder={t("transaction.pricePlaceholder")}
           type="tel"
         />
-        <Button text={t("buttons.send")} onClick={onSendTransaction} />
+        <Button
+          text={t("buttons.send")}
+          onClick={handleSendTransaction}
+          isLoading={loading}
+          disabled={isDisabledSendBtn}
+        />
       </div>
     </Container>
   );
@@ -128,7 +157,6 @@ const Transaction = ({ isManual, handleCloseTransaction }) => {
 
 Transaction.propTypes = {
   isManual: PropTypes.bool.isRequired,
-  handleCloseTransaction: PropTypes.func.isRequired,
 };
 
 export default Transaction;

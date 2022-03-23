@@ -27,7 +27,7 @@ const Recipients = () => {
   const [isManual, setManual] = useState(false);
 
   const onNewTransaction = () => {
-    setManual(!isManual);
+    setManual(true);
     setOpenTransaction(!isOpenTransaction);
   };
 
@@ -44,12 +44,7 @@ const Recipients = () => {
           />
         ))}
       </div>
-      {isOpenTransaction && (
-        <Transaction
-          isManual={isManual}
-          handleCloseTransaction={setOpenTransaction}
-        />
-      )}
+      {isOpenTransaction && <Transaction isManual={isManual} />}
     </Container>
   );
 };
