@@ -20,6 +20,10 @@
   "cards": {
     "noCards": "У Вас нет карт, нажмите кнопку «Добавить карту» чтобы добавить."
   },
+  "recipients": {
+    "title": "Быстрый перевод",
+    "manualTransaction": "Перевод"
+  },
   "inputs": {
     "labels": {
       "firstName": "Имя",

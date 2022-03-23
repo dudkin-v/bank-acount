@@ -7,12 +7,16 @@ import login from "./login/reducer";
 import settings from "./settings/reducer";
 import cards from "./cards/reducer";
 import user from "./user/reducer";
+import transactions from "./transactions/reducer";
+import recipients from "./recipients/reducer";
 
 const rootReducer = combineReducers({
   login,
   settings,
   cards,
   user,
+  transactions,
+  recipients,
 });
 
 const persistConfig = {
