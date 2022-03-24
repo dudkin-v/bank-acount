@@ -22,7 +22,7 @@ instance.interceptors.response.use(
     new Promise((res) => {
       setTimeout(() => {
         res(response.data);
-      }, 3000);
+      }, 1000);
     }),
   (error) => {
     if (error.message.includes("403")) {

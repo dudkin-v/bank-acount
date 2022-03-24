@@ -6,4 +6,6 @@ export default {
   MY_STAT: "/my-stat",
   ACCOUNT: "/account",
   SETTINGS: "/settings",
+  TRANSACTION: "/cards/transaction/:id",
+  NEW_TRANSACTION: "/cards/transaction/",
 };

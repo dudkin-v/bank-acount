@@ -30,3 +30,6 @@ export const signInValidationSchema = Yup.object().shape({
     .min(5, "inputs.errors.password.minLength")
     .required("inputs.errors.password.required"),
 });
+
+// const onlyNumberRegExp =
+//   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;

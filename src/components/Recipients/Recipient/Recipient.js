@@ -48,20 +48,27 @@ const Container = styled.div`
   }
 `;
 
-const Recipient = ({ firstName, lastName, avatarImageUrl }) => {
+const Recipient = ({ firstName, lastName, avatarImageUrl, onClick }) => {
   const userName =
     firstName.length > 6 ? `${firstName.substring(0, 4)}...` : firstName;
 
   return (
-    <Container>
+    <Container
+      role="button"
+      aria-pressed={false}
+      tabIndex={0}
+      onClick={onClick}
+    >
       <div className="avatar-block">
         {avatarImageUrl ? (
           <img src={avatarImageUrl} alt="" />
         ) : (
-          <p>{`${firstName[0]}${lastName[0]}`}</p>
+          <p>{`${firstName[0]}${lastName[0]}`.toUpperCase()}</p>
         )}
       </div>
-      <p className="recipient-name">{`${userName} ${lastName[0]}.`}</p>
+      <p className="recipient-name">{`${
+        userName[0].toUpperCase() + userName.substring(1)
+      } ${lastName[0].toUpperCase()}.`}</p>
     </Container>
   );
 };
@@ -70,6 +77,7 @@ Recipient.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   avatarImageUrl: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 Recipient.defaultProps = {

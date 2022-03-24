@@ -16,6 +16,7 @@ const Container = styled.div`
       }
       svg {
         color: ${colors.rhino};
+        cursor: pointer;
       }
       .css-1s2u09g-control {
         background: none;
@@ -62,9 +63,13 @@ Select.propTypes = {
       value: PropTypes.string.isRequired,
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     }).isRequired
-  ).isRequired,
+  ),
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+};
+
+Select.defaultProps = {
+  options: undefined,
 };
 
 export default Select;
