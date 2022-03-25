@@ -22,7 +22,7 @@ const Container = styled.div`
 
   .recipient-name {
     font-size: 12px;
-    color: black;
+    color: ${colors.outerSpace};
     padding-top: 10px;
   }
   .avatar-block {
@@ -32,8 +32,8 @@ const Container = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: ${colors.cardBackground};
-    border: 1px solid black;
+    background-color: ${colors.warning};
+    border: 1px solid ${colors.outerSpace};
     img {
       width: 100%;
       height: 100%;

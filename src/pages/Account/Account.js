@@ -22,12 +22,12 @@ const AccountPage = styled.div`
       }
       svg {
         font-size: 20px;
-        color: black;
+        color: ${colors.outerSpace};
       }
       p {
         font-size: 16px;
         padding: 0 10px;
-        color: black;
+        color: ${colors.outerSpace};
       }
     }
   }

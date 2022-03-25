@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import routes from "./utils/routes";
-
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
 import { NavBar } from "./navigation";
@@ -15,6 +13,9 @@ import { MyStat } from "./pages/MyStat";
 import { Account } from "./pages/Account";
 import { Settings } from "./pages/Settings";
 import { getAppData } from "./store/application/thunk";
+
+import routes from "./utils/routes";
+import colors from "./utils/colors";
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const Main = styled.main`
     .page-heading {
       font-size: 20px;
       padding: 40px 0 20px;
-      color: black;
+      color: ${colors.outerSpace};
     }
   }
 `;

@@ -23,7 +23,7 @@ const Container = styled.div`
   }
   p {
     font-size: 12px;
-    color: black;
+    color: ${colors.outerSpace};
     padding-top: 10px;
   }
   div {
@@ -33,10 +33,10 @@ const Container = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid ${colors.outerSpace};
     svg {
       font-size: 30px;
-      color: black;
+      color: ${colors.outerSpace};
     }
   }
 `;

@@ -43,12 +43,6 @@ const Input = styled.input`
   border-radius: 5px;
   outline: none;
   box-shadow: 0 1px 3px 0 ${colors.royalBlue};
-  transition: 0.4s;
-
-  &:focus {
-    transition: 0.4s;
-    transform: scale(102%);
-  }
 `;
 
 const InputField = ({

@@ -19,7 +19,7 @@ const Nav = styled.nav`
   border-right: 2px solid rgba(128, 128, 128, 0.3);
 
   .nav-heading {
-    color: black;
+    color: ${colors.outerSpace};
     font-size: 30px;
     padding: 5px 10px;
     font-weight: bold;
@@ -44,13 +44,13 @@ const Nav = styled.nav`
         display: flex;
         align-items: center;
         font-size: 16px;
-        color: black;
+        color: ${colors.outerSpace};
         :hover {
           font-weight: bold;
           color: ${colors.royalBlue};
         }
         svg {
-          color: black;
+          color: ${colors.outerSpace};
           font-size: 20px;
           margin-right: 10px;
         }

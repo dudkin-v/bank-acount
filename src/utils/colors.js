@@ -1,4 +1,5 @@
 export default {
+  outerSpace: "#263238",
   gray: "#808080",
   ebb: "#fff",
   royalBlue: "#5e43e6",
