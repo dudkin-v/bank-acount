@@ -8,7 +8,7 @@ const style = `
 `;
 
 const Spinner = () => (
-  <BeatLoader size={15} color={colors.turquoise} css={style} />
+  <BeatLoader size={15} color={colors.royalBlue} css={style} />
 );
 
 export default Spinner;

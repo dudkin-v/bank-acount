@@ -18,15 +18,16 @@ const AccountPage = styled.div`
       cursor: pointer;
       &:hover p {
         font-weight: bold;
+        color: ${colors.royalBlue};
       }
       svg {
         font-size: 20px;
-        color: ${colors.rhino};
+        color: black;
       }
       p {
         font-size: 16px;
         padding: 0 10px;
-        color: ${colors.rhino};
+        color: black;
       }
     }
   }

@@ -9,24 +9,23 @@ import { InputField } from "../../InputField";
 import { Button } from "../../Button";
 import { onSendTransaction } from "../../../store/transactions/thunk";
 import colors from "../../../utils/colors";
-import { splitCardNumber } from "../../../utils/card";
+import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 
 const Container = styled.div`
-  .input {
-    color: ${colors.rhino};
-    max-height: 38px;
-    margin-bottom: 15px;
-    padding-left: 8px;
-  }
-  .from,
-  .to {
-    p {
-      font-size: 16px;
-      color: ${colors.rhino};
-    }
+  .iwueWg .select .css-1s2u09g-control {
+    border: none;
   }
   .select {
-    background-color: #dadada;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+    .css-1s2u09g-control,
+    .css-4ljt47-MenuList {
+      border: none;
+    }
+    .css-4ljt47-MenuList {
+      box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+    }
     margin-top: 5px;
     margin-bottom: 15px;
     .select-label {
@@ -38,8 +37,22 @@ const Container = styled.div`
       }
       .balance:before {
         content: "||";
-        color: #dadada;
+        color: ${colors.ebb};
       }
+    }
+  }
+  .input {
+    color: ${colors.royalBlue};
+    max-height: 38px;
+    margin-bottom: 15px;
+    padding-left: 8px;
+    transform: none;
+  }
+  .from,
+  .to {
+    p {
+      font-size: 16px;
+      color: ${colors.royalBlue};
     }
   }
   .price-block {
@@ -66,7 +79,6 @@ const initialData = {
 const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const myCards = useSelector((rootStore) => rootStore.cards.cards);
   const recipients = useSelector(
     (rootStore) => rootStore.recipients.recipients
   );
@@ -99,15 +111,6 @@ const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
     dispatch(onSendTransaction(transactionData, onCloseTransaction));
   };
 
-  const options = myCards.map((card) => ({
-    value: card.number,
-    label: (
-      <div className="select-label">
-        <div>{splitCardNumber(card.number)}</div>
-        <div className="balance">{`${card.balance}.00 UAH`}</div>
-      </div>
-    ),
-  }));
   const recipient = recipients.find((user) => user.info.id === recipientId);
   const recipientCards = recipient.cards.map((card) => ({
     value: card.number,
@@ -118,11 +121,7 @@ const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
     <Container className="transaction">
       <div className="from">
         <p>{t("transaction.from")}</p>
-        <Select
-          placeholder={t("transaction.placeholder")}
-          onChange={handleChangeSenderCard}
-          options={options}
-        />
+        <MyCardsSelect handleChange={handleChangeSenderCard} />
       </div>
       <div className="to">
         <p>{t("transaction.to")}</p>

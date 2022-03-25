@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import routes from "./utils/routes";
-import colors from "./utils/colors";
 
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
@@ -20,7 +19,7 @@ import { getAppData } from "./store/application/thunk";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #e8e3e3;
+  background-color: white;
   min-width: 100vw;
   min-height: 100vh;
 `;
@@ -36,7 +35,7 @@ const Main = styled.main`
     .page-heading {
       font-size: 20px;
       padding: 40px 0 20px;
-      color: ${colors.rhino};
+      color: black;
     }
   }
 `;

@@ -4,43 +4,26 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Select } from "../../Select";
 import { InputField } from "../../InputField";
 import { Button } from "../../Button";
 
 import { onSendTransaction } from "../../../store/transactions/thunk";
 import colors from "../../../utils/colors";
-import { splitCardNumber } from "../../../utils/card";
+import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 
 const Container = styled.div`
   .input {
-    color: ${colors.rhino};
+    color: ${colors.royalBlue};
     max-height: 38px;
     margin-bottom: 15px;
     padding-left: 8px;
+    transform: none;
   }
   .from,
   .to {
     p {
       font-size: 16px;
-      color: ${colors.rhino};
-    }
-  }
-  .select {
-    background-color: #dadada;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    .select-label {
-      display: flex;
-      justify-content: space-between;
-      div {
-        display: flex;
-        align-items: center;
-      }
-      .balance:before {
-        content: "||";
-        color: #dadada;
-      }
+      color: ${colors.royalBlue};
     }
   }
   .price-block {
@@ -67,7 +50,6 @@ const initialData = {
 const ManualTransaction = ({ onCloseTransaction }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const myCards = useSelector((rootStore) => rootStore.cards.cards);
   const loading = useSelector(
     (rootStore) => rootStore.transactions.transactionLoading
   );
@@ -89,7 +71,7 @@ const ManualTransaction = ({ onCloseTransaction }) => {
   const handleChangePrice = ({ target: { value } }) => {
     setTransactionData((prevTransactionData) => ({
       ...prevTransactionData,
-      price: +value,
+      price: value,
     }));
   };
 
@@ -97,25 +79,11 @@ const ManualTransaction = ({ onCloseTransaction }) => {
     dispatch(onSendTransaction(transactionData, onCloseTransaction));
   };
 
-  const options = myCards.map((card) => ({
-    value: card.number,
-    label: (
-      <div className="select-label">
-        <div>{splitCardNumber(card.number)}</div>
-        <div className="balance">{`${card.balance}.00 UAH`}</div>
-      </div>
-    ),
-  }));
-
   return (
     <Container className="transaction">
       <div className="from">
         <p>{t("transaction.from")}</p>
-        <Select
-          placeholder={t("transaction.placeholder")}
-          onChange={handleChangeSenderCard}
-          options={options}
-        />
+        <MyCardsSelect handleChange={handleChangeSenderCard} />
       </div>
       <div className="to">
         <InputField

@@ -21,12 +21,12 @@ const SettingPage = styled.section`
           display: flex;
           svg {
             font-size: 20px;
-            color: ${colors.rhino};
+            color: black;
           }
           p {
             font-size: 16px;
             padding: 0 10px;
-            color: ${colors.rhino};
+            color: black;
           }
         }
         .settings-value {

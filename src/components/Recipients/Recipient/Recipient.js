@@ -7,43 +7,44 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: ${colors.ebb};
-  padding: 20px;
+  transition: 0.4s;
+  cursor: pointer;
   margin-right: 15px;
-  border-radius: 20px;
-  max-width: 90px;
-  min-width: 90px;
-  height: 120px;
   &:hover {
-    border: 1px solid ${colors.turquoise};
-    cursor: pointer;
-    .recipient-name {
-      color: ${colors.rhino};
+    transition: 0.4s;
+    p {
+      color: ${colors.royalBlue};
+    }
+    .avatar-block {
+      border: 1px solid ${colors.royalBlue};
     }
   }
+
   .recipient-name {
     font-size: 12px;
-    color: ${colors.gray};
+    color: black;
     padding-top: 10px;
   }
   .avatar-block {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    background-color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: ${colors.cardBackground};
+    border: 1px solid black;
     img {
       width: 100%;
       height: 100%;
-      border-radius: 15px;
+      border-radius: 50%;
       object-fit: cover;
       vertical-align: middle;
     }
     p {
       font-size: 18px;
-      color: ${colors.rhino};
+      color: ${colors.ebb};
+      text-transform: uppercase;
     }
   }
 `;
@@ -63,7 +64,7 @@ const Recipient = ({ firstName, lastName, avatarImageUrl, onClick }) => {
         {avatarImageUrl ? (
           <img src={avatarImageUrl} alt="" />
         ) : (
-          <p>{`${firstName[0]}${lastName[0]}`.toUpperCase()}</p>
+          <p>{`${firstName[0]}${lastName[0]}`}</p>
         )}
       </div>
       <p className="recipient-name">{`${

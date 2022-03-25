@@ -8,14 +8,15 @@ const Label = styled.label`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: ${colors.rhino};
+  color: ${colors.royalBlue};
   cursor: pointer;
 
   .error-message {
     position: absolute;
-    bottom: 3px;
+    top: 3px;
+    right: 0;
     font-size: 12px;
-    color: ${colors.coralTree};
+    color: ${colors.error};
   }
 
   .secure-btn {
@@ -27,9 +28,11 @@ const Label = styled.label`
     background: inherit;
     display: flex;
     cursor: pointer;
+
     svg {
       width: 100%;
       height: 100%;
+      color: ${colors.gray};
     }
   }
 `;
@@ -37,12 +40,14 @@ const Input = styled.input`
   font-size: 16px;
   padding: ${(props) => (props.secure ? "8px 35px 8px 14px" : "8px 14px")};
   margin: 5px 0 20px;
-  border: 1px solid ${colors.rhino};
-  border-radius: 3px;
-  background-color: #dadada;
-  :focus {
-    outline: none;
-    border: 1px solid blue;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+  transition: 0.4s;
+
+  &:focus {
+    transition: 0.4s;
+    transform: scale(102%);
   }
 `;
 

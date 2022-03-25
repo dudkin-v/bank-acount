@@ -25,13 +25,8 @@ const Container = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      height: 90%;
       overflow-x: scroll;
-      .button {
-        width: 200px;
-        height: 37.5px;
-        justify-self: flex-end;
-      }
       .no-cards-description {
         width: 250px;
         font-size: 16px;
@@ -43,13 +38,19 @@ const Container = styled.div`
         width: 250px;
       }
     }
+    .button {
+      margin-top: 20px;
+      width: 200px;
+      height: 37.5px;
+      justify-self: flex-end;
+    }
   }
 
   .content {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border-radius: 35px;
+    box-shadow: -2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
     width: 60%;
     padding: 0 40px;
   }
@@ -113,8 +114,8 @@ const Cards = () => {
               handleCloseCardCreator={setOpenCardCreator}
             />
           )}
-          <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
         </div>
+        <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
       </div>
       <div className="content">
         <Recipients />

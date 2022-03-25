@@ -6,7 +6,7 @@ const ErrorMessage = styled.p`
   font-size: 16px;
   line-height: 30px;
   text-align: center;
-  color: ${colors.coralTree};
+  color: ${colors.error};
 `;
 
 const Error = ({ errorMessage }) => (

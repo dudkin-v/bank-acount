@@ -8,7 +8,6 @@ const AuthorizationBlock = styled.section`
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: #fff;
 `;
 const LogoBlock = styled.div`
   display: flex;
@@ -16,12 +15,12 @@ const LogoBlock = styled.div`
   justify-content: center;
   padding: 40px;
   width: 45%;
-  background: ${colors.coralTree};
+  background: ${colors.royalBlue};
   background: linear-gradient(
-    149deg,
-    rgba(162, 88, 107, 1) 0%,
-    rgba(40, 47, 91, 1) 50%,
-    rgba(162, 88, 107, 1) 100%
+    146deg,
+    rgba(94, 67, 230, 1) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(94, 67, 230, 1) 100%
   );
 
   h1 {
@@ -36,7 +35,7 @@ const FormBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 40px 80px;
-  background-color: ${colors.ebb};
+  background-color: white;
   width: 55%;
 
   .switch-lang {
@@ -79,7 +78,7 @@ const FormBlock = styled.div`
       margin-bottom: 20px;
       p {
         font-size: 12px;
-        color: gray;
+        color: ${colors.gray};
         padding: 0 10px;
       }
     }
@@ -100,10 +99,6 @@ const FormBlock = styled.div`
       padding: 0 8px;
       font-size: 16px;
       color: blue;
-
-      :hover {
-        color: ${colors.coralTree};
-      }
     }
   }
 `;
