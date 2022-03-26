@@ -61,6 +61,14 @@
         "required": "Field is required",
         "minLength": "Please enter 5 or more characters",
         "confirmPassword": "Passwords do not match"
+      },
+      "price": {
+        "required": "Field is required",
+        "invalid": "Invalid value"
+      },
+      "card" : {
+        "required": "Field is required",
+        "invalid": "Invalid card number"
       }
     }
   },

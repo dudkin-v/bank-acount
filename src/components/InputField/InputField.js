@@ -55,7 +55,6 @@ const InputField = ({
   onBlur,
   touched,
   placeholder,
-  maxLength,
   type,
 }) => {
   const [isSecure, setIsSecure] = useState(secure);
@@ -86,7 +85,6 @@ const InputField = ({
         onBlur={onBlur}
         value={value}
         placeholder={placeholder}
-        maxLength={maxLength}
       />
       {secure && (
         <button type="button" onClick={onSecure} className="secure-btn">
@@ -107,7 +105,6 @@ InputField.propTypes = {
   touched: PropTypes.bool,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
-  maxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.string,
 };
 
@@ -117,7 +114,6 @@ InputField.defaultProps = {
   touched: false,
   onBlur: () => {},
   placeholder: undefined,
-  maxLength: undefined,
   type: undefined,
   value: undefined,
 };

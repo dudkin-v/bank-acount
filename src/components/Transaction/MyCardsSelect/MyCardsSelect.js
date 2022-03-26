@@ -39,7 +39,7 @@ const Container = styled.div`
   }
 `;
 
-const MyCardsSelect = ({ handleChange }) => {
+const MyCardsSelect = ({ handleChange, errorMessage }) => {
   const { t } = useTranslation();
   const myCards = useSelector((rootStore) => rootStore.cards.cards);
 
@@ -59,12 +59,18 @@ const MyCardsSelect = ({ handleChange }) => {
         placeholder={t("transaction.placeholder")}
         onChange={handleChange}
         options={selectOptions}
+        errorMessage={errorMessage}
       />
     </Container>
   );
 };
 MyCardsSelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+MyCardsSelect.defaultProps = {
+  errorMessage: undefined,
 };
 
 export default MyCardsSelect;

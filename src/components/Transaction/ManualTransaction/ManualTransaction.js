@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
 
 import { InputField } from "../../InputField";
 import { Button } from "../../Button";
+import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 
 import { onSendTransaction } from "../../../store/transactions/thunk";
 import colors from "../../../utils/colors";
-import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
+import { transactionValidationSchema } from "../../../utils/validation";
+import CardNumberField from "../CardNumberField/CardNumberField";
 
-const Container = styled.div`
+const Container = styled.form`
   .input {
     color: ${colors.royalBlue};
     max-height: 38px;
@@ -21,7 +24,7 @@ const Container = styled.div`
   }
   .from,
   .to {
-    p {
+    .label {
       font-size: 16px;
       color: ${colors.royalBlue};
     }
@@ -43,9 +46,10 @@ const Container = styled.div`
       height: 37.5px;
       margin-top: 10px;
     }
-    .button:last-child {
-      background-color: ${colors.warning};
-      color: white;
+    .button:first-child {
+      background-color: white;
+      color: ${colors.royalBlue};
+      border: 2px solid ${colors.royalBlue};
     }
   }
 `;
@@ -63,60 +67,59 @@ const ManualTransaction = ({ onCloseTransaction }) => {
     (rootStore) => rootStore.transactions.transactionLoading
   );
 
-  const [transactionData, setTransactionData] = useState(initialData);
+  const formik = useFormik({
+    initialValues: initialData,
+    validationSchema: transactionValidationSchema,
+    validateOnChange: false,
+    onSubmit: (values) => {
+      dispatch(onSendTransaction(values, onCloseTransaction));
+    },
+  });
+
   const [transactionComment, setTransactionComment] = useState("");
 
-  const handleChangeSenderCard = ({ value }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      senderCard: value,
-    }));
-  };
-  const handleChangeRecipientCard = ({ target: { value } }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      recipientCard: value,
-    }));
-  };
-  const handleChangePrice = ({ target: { value } }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      price: value,
-    }));
-  };
+  useEffect(() => {
+    if (formik.values.price) {
+      formik.setFieldValue("price", +formik.values.price);
+    }
+  }, [formik.values.price]);
+
   const handleChangeComment = ({ target: { value } }) => {
     setTransactionComment(value);
   };
-
-  const onSubmitTransaction = () => {
-    dispatch(onSendTransaction(transactionData, onCloseTransaction));
+  const handleChangeSenderCard = ({ value }) => {
+    formik.setFieldValue("senderCard", value);
+  };
+  const handleChangeRecipientCard = (value) => {
+    formik.setFieldValue("recipientCard", value);
   };
 
   return (
-    <Container className="transaction">
+    <Container className="transaction" onSubmit={formik.handleSubmit}>
       <div className="from">
-        <p>{t("transaction.from")}</p>
-        <MyCardsSelect handleChange={handleChangeSenderCard} />
+        <p className="label">{t("transaction.from")}</p>
+        <MyCardsSelect
+          handleChange={handleChangeSenderCard}
+          errorMessage={t(formik.errors.senderCard)}
+        />
       </div>
       <div className="to">
-        <InputField
-          label={t("transaction.to")}
-          onChange={handleChangeRecipientCard}
-          value={transactionData.recipientCard}
-          name="cardNumber"
-          placeholder={t("transaction.inputPlaceholder")}
-          maxLength={19}
-          type="tel"
+        <CardNumberField
+          handleChange={handleChangeRecipientCard}
+          errorMessage={t(formik.errors.recipientCard)}
         />
       </div>
       <div className="price-block">
         <InputField
+          type="number"
           label={t("transaction.price")}
-          onChange={handleChangePrice}
-          value={transactionData.price}
           name="price"
           placeholder={t("transaction.pricePlaceholder")}
-          type="tel"
+          value={formik.values.price}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          touched={formik.touched.price}
+          errorMessage={t(formik.errors.price)}
         />
         <InputField
           label={t("transaction.comment")}
@@ -128,12 +131,13 @@ const ManualTransaction = ({ onCloseTransaction }) => {
         />
       </div>
       <div className="button-block">
-        <Button
-          text={t("buttons.send")}
-          onClick={onSubmitTransaction}
-          isLoading={loading}
-        />
         <Button text={t("buttons.cancel")} onClick={onCloseTransaction} />
+        <Button
+          type="submit"
+          text={t("buttons.send")}
+          isLoading={loading}
+          disabled={!formik.isValid}
+        />
       </div>
     </Container>
   );

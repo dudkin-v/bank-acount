@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
 
+import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 import { Select } from "../../Select";
 import { InputField } from "../../InputField";
 import { Button } from "../../Button";
-import { onSendTransaction } from "../../../store/transactions/thunk";
-import colors from "../../../utils/colors";
-import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 
-const Container = styled.div`
+import colors from "../../../utils/colors";
+import { transactionValidationSchema } from "../../../utils/validation";
+import { onSendTransaction } from "../../../store/transactions/thunk";
+import { splitCardNumber } from "../../../utils/card";
+
+const Container = styled.form`
   .iwueWg .select .css-1s2u09g-control {
     border: none;
   }
@@ -50,7 +54,7 @@ const Container = styled.div`
   }
   .from,
   .to {
-    p {
+    .label {
       font-size: 16px;
       color: ${colors.royalBlue};
     }
@@ -72,9 +76,10 @@ const Container = styled.div`
       height: 37.5px;
       margin-top: 10px;
     }
-    .button:last-child {
-      background-color: ${colors.warning};
-      color: white;
+    .button:first-child {
+      background-color: white;
+      color: ${colors.royalBlue};
+      border: 2px solid ${colors.royalBlue};
     }
   }
 `;
@@ -95,80 +100,87 @@ const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
     (rootStore) => rootStore.transactions.transactionLoading
   );
 
-  const [transactionData, setTransactionData] = useState(initialData);
+  const formik = useFormik({
+    initialValues: initialData,
+    validationSchema: transactionValidationSchema,
+    validateOnChange: false,
+    onSubmit: (values) => {
+      dispatch(onSendTransaction(values, onCloseTransaction));
+    },
+  });
+
   const [transactionComment, setTransactionComment] = useState("");
 
-  const handleChangeSenderCard = ({ value }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      senderCard: value,
-    }));
-  };
-  const handleChangeRecipientCard = ({ value }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      recipientCard: value,
-    }));
-  };
-  const handleChangePrice = ({ target: { value } }) => {
-    setTransactionData((prevTransactionData) => ({
-      ...prevTransactionData,
-      price: +value,
-    }));
-  };
+  useEffect(() => {
+    if (formik.values.price) {
+      formik.setFieldValue("price", +formik.values.price);
+    }
+  }, [formik.values.price]);
+
   const handleChangeComment = ({ target: { value } }) => {
     setTransactionComment(value);
   };
-
-  const onSubmitTransaction = () => {
-    dispatch(onSendTransaction(transactionData, onCloseTransaction));
+  const handleChangeSenderCard = ({ value }) => {
+    formik.setFieldValue("senderCard", value);
+  };
+  const handleChangeRecipientCard = ({ value }) => {
+    formik.setFieldValue("recipientCard", value);
   };
 
-  const recipient = recipients.find((user) => user.info.id === recipientId);
-  const recipientCards = recipient.cards.map((card) => ({
-    value: card.number,
-    label: card.number,
-  }));
+  const recipientCards = recipients
+    .find((user) => user.info.id === recipientId)
+    .cards.map((card) => ({
+      value: card.number,
+      label: splitCardNumber(card.number),
+    }));
 
   return (
-    <Container className="transaction">
+    <Container className="transaction" onSubmit={formik.handleSubmit}>
       <div className="from">
-        <p>{t("transaction.from")}</p>
-        <MyCardsSelect handleChange={handleChangeSenderCard} />
+        <p className="label">{t("transaction.from")}</p>
+        <MyCardsSelect
+          handleChange={handleChangeSenderCard}
+          errorMessage={t(formik.errors.senderCard)}
+        />
       </div>
       <div className="to">
-        <p>{t("transaction.to")}</p>
+        <p className="label">{t("transaction.to")}</p>
         <Select
           placeholder={t("transaction.placeholder")}
           onChange={handleChangeRecipientCard}
           options={recipientCards}
+          errorMessage={t(formik.errors.recipientCard)}
         />
       </div>
       <div className="price-block">
         <InputField
-          label={t("transaction.price")}
-          onChange={handleChangePrice}
-          value={transactionData.price}
+          type="number"
           name="price"
+          label={t("transaction.price")}
           placeholder={t("transaction.pricePlaceholder")}
-          type="tel"
+          value={formik.values.price}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          touched={formik.touched.price}
+          errorMessage={t(formik.errors.price)}
         />
         <InputField
-          label={t("transaction.comment")}
-          onChange={handleChangeComment}
-          value={transactionComment}
-          name="comment"
-          placeholder={t("transaction.commentPlaceholder")}
           type="text"
+          name="comment"
+          label={t("transaction.comment")}
+          placeholder={t("transaction.commentPlaceholder")}
+          value={transactionComment}
+          onChange={handleChangeComment}
         />
       </div>
       <div className="button-block">
-        <Button
-          text={t("buttons.send")}
-          onClick={onSubmitTransaction}
-          isLoading={loading}
-        />
         <Button text={t("buttons.cancel")} onClick={onCloseTransaction} />
+        <Button
+          type="submit"
+          text={t("buttons.send")}
+          isLoading={loading}
+          disabled={!formik.isValid}
+        />
       </div>
     </Container>
   );

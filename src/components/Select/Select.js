@@ -4,6 +4,14 @@ import ReactSelect from "react-select";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
+  position: relative;
+  .error-message {
+    position: absolute;
+    top: -23px;
+    right: 0;
+    font-size: 12px;
+    color: ${colors.error};
+  }
     .select {
       min-width: 150px;
       input {
@@ -46,8 +54,9 @@ const Container = styled.div`
     }
   }`;
 
-const Select = ({ options, onChange, placeholder }) => (
+const Select = ({ options, onChange, placeholder, errorMessage }) => (
   <Container>
+    {errorMessage && <p className="error-message">{errorMessage}</p>}
     <ReactSelect
       options={options}
       onChange={onChange}
@@ -66,10 +75,12 @@ Select.propTypes = {
   ),
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 Select.defaultProps = {
   options: undefined,
+  errorMessage: undefined,
 };
 
 export default Select;
