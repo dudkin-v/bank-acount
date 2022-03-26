@@ -18,7 +18,7 @@ const Container = styled.div`
       color: ${colors.royalBlue};
     }
     div {
-      border: 1px solid ${colors.royalBlue};
+      border: 2px solid ${colors.royalBlue};
     }
   }
   p {
@@ -33,7 +33,7 @@ const Container = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid ${colors.outerSpace};
+    border: 2px solid ${colors.outerSpace};
     svg {
       font-size: 30px;
       color: ${colors.outerSpace};

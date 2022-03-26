@@ -30,7 +30,9 @@
     "placeholder": "Choose a card",
     "inputPlaceholder": "Enter card number",
     "price": "Amount",
-    "pricePlaceholder": "Enter amount"
+    "pricePlaceholder": "Enter amount",
+    "commentPlaceholder": "Enter your comment",
+    "comment": "Comment"
   },
   "inputs": {
     "labels": {
@@ -68,7 +70,8 @@
     "logOut": "Log out",
     "addNewCard": "Add new card",
     "createCard": "Create card",
-    "send": "Send"
+    "send": "Send",
+    "cancel": "Cancel"
   },
   "nav": {
     "links": {

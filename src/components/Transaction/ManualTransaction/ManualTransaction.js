@@ -31,12 +31,21 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     label {
-      width: 40%;
+      width: 45%;
     }
+  }
+  .button-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .button {
-      width: 200px;
+      width: 45%;
       height: 37.5px;
       margin-top: 10px;
+    }
+    .button:last-child {
+      background-color: ${colors.warning};
+      color: white;
     }
   }
 `;
@@ -55,6 +64,7 @@ const ManualTransaction = ({ onCloseTransaction }) => {
   );
 
   const [transactionData, setTransactionData] = useState(initialData);
+  const [transactionComment, setTransactionComment] = useState("");
 
   const handleChangeSenderCard = ({ value }) => {
     setTransactionData((prevTransactionData) => ({
@@ -73,6 +83,9 @@ const ManualTransaction = ({ onCloseTransaction }) => {
       ...prevTransactionData,
       price: value,
     }));
+  };
+  const handleChangeComment = ({ target: { value } }) => {
+    setTransactionComment(value);
   };
 
   const onSubmitTransaction = () => {
@@ -105,11 +118,22 @@ const ManualTransaction = ({ onCloseTransaction }) => {
           placeholder={t("transaction.pricePlaceholder")}
           type="tel"
         />
+        <InputField
+          label={t("transaction.comment")}
+          onChange={handleChangeComment}
+          value={transactionComment}
+          name="comment"
+          placeholder={t("transaction.commentPlaceholder")}
+          type="text"
+        />
+      </div>
+      <div className="button-block">
         <Button
           text={t("buttons.send")}
           onClick={onSubmitTransaction}
           isLoading={loading}
         />
+        <Button text={t("buttons.cancel")} onClick={onCloseTransaction} />
       </div>
     </Container>
   );

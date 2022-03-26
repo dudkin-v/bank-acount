@@ -30,7 +30,9 @@
     "placeholder": "Выберите карту",
     "inputPlaceholder": "Введите номер карты",
     "price": "Сумма",
-    "pricePlaceholder": "Введите сумму"
+    "pricePlaceholder": "Введите сумму",
+    "commentPlaceholder": "Введите коментарий",
+    "comment": "Комментарий"
   },
   "inputs": {
     "labels": {
@@ -68,7 +70,8 @@
     "logOut": "Выйти",
     "addNewCard": "Добавить карту",
     "createCard": "Создать карту",
-    "send": "Перевести"
+    "send": "Перевести",
+    "cancel": "Отмена"
   },
   "nav": {
     "links": {

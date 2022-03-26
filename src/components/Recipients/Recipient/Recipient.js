@@ -16,7 +16,7 @@ const Container = styled.div`
       color: ${colors.royalBlue};
     }
     .avatar-block {
-      border: 1px solid ${colors.royalBlue};
+      border: 2px solid ${colors.royalBlue};
     }
   }
 
@@ -33,7 +33,7 @@ const Container = styled.div`
     height: 60px;
     border-radius: 50%;
     background-color: ${colors.warning};
-    border: 1px solid ${colors.outerSpace};
+    border: 2px solid ${colors.outerSpace};
     img {
       width: 100%;
       height: 100%;

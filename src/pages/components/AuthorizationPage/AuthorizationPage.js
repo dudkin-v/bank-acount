@@ -53,7 +53,7 @@ const FormBlock = styled.div`
   }
   h2 {
     font-size: 30px;
-    color: ${colors.outerSpace};;
+    color: ${colors.outerSpace};
   }
   .app-description {
     font-size: 16px;
