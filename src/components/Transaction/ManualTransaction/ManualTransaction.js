@@ -9,6 +9,7 @@ import { InputField } from "../../InputField";
 import { Button } from "../../Button";
 import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 
+import { resetTransactionError } from "../../../store/transactions/actions";
 import { onSendTransaction } from "../../../store/transactions/thunk";
 import colors from "../../../utils/colors";
 import { transactionValidationSchema } from "../../../utils/validation";
@@ -81,6 +82,10 @@ const ManualTransaction = ({ onCloseTransaction }) => {
       formik.setFieldValue("price", +formik.values.price);
     }
   }, [formik.values.price]);
+
+  useEffect(() => {
+    dispatch(resetTransactionError());
+  }, [formik.values.recipientCard]);
 
   const handleChangeComment = ({ target: { value } }) => {
     setTransactionComment(value);

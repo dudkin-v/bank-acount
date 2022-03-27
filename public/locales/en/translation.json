@@ -32,7 +32,12 @@
     "price": "Amount",
     "pricePlaceholder": "Enter amount",
     "commentPlaceholder": "Enter your comment",
-    "comment": "Comment"
+    "comment": "Comment",
+    "errors": {
+      "404": "The recipient's card was entered incorrectly or the card does not exist.",
+      "402": "Not enough money on the card.",
+      "internet": "Problems with your internet connection."
+    }
   },
   "inputs": {
     "labels": {
@@ -66,7 +71,7 @@
         "required": "Field is required",
         "invalid": "Invalid value"
       },
-      "card" : {
+      "card": {
         "required": "Field is required",
         "invalid": "Invalid card number"
       }

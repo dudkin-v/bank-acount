@@ -10,6 +10,11 @@ export const setTransactionError = (error) => ({
   payload: error.message,
 });
 
+export const resetTransactionError = () => ({
+  type: types.SET_TRANSACTION_ERROR,
+  payload: null,
+});
+
 export const setHistory = (history) => ({
   type: types.SET_HISTORY,
   payload: history,
