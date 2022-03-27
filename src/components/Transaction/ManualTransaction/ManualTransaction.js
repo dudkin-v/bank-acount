@@ -12,7 +12,6 @@ import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 import { onSendTransaction } from "../../../store/transactions/thunk";
 import colors from "../../../utils/colors";
 import { transactionValidationSchema } from "../../../utils/validation";
-import CardNumberField from "../CardNumberField/CardNumberField";
 
 const Container = styled.form`
   .input {
@@ -70,7 +69,6 @@ const ManualTransaction = ({ onCloseTransaction }) => {
   const formik = useFormik({
     initialValues: initialData,
     validationSchema: transactionValidationSchema,
-    validateOnChange: false,
     onSubmit: (values) => {
       dispatch(onSendTransaction(values, onCloseTransaction));
     },
@@ -90,9 +88,6 @@ const ManualTransaction = ({ onCloseTransaction }) => {
   const handleChangeSenderCard = ({ value }) => {
     formik.setFieldValue("senderCard", value);
   };
-  const handleChangeRecipientCard = (value) => {
-    formik.setFieldValue("recipientCard", value);
-  };
 
   return (
     <Container className="transaction" onSubmit={formik.handleSubmit}>
@@ -104,8 +99,15 @@ const ManualTransaction = ({ onCloseTransaction }) => {
         />
       </div>
       <div className="to">
-        <CardNumberField
-          handleChange={handleChangeRecipientCard}
+        <InputField
+          type="number"
+          label={t("transaction.to")}
+          name="recipientCard"
+          placeholder={t("transaction.inputPlaceholder")}
+          value={formik.values.recipientCard}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          touched={formik.touched.recipientCard}
           errorMessage={t(formik.errors.recipientCard)}
         />
       </div>

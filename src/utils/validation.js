@@ -34,12 +34,8 @@ export const signInValidationSchema = Yup.object().shape({
 export const transactionValidationSchema = Yup.object().shape({
   senderCard: Yup.string().required("inputs.errors.card.required"),
   recipientCard: Yup.string()
-    .required("inputs.errors.card.required")
     .length(16, "inputs.errors.card.invalid")
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$\s/,
-      "inputs.errors.card.invalid"
-    ),
+    .required("inputs.errors.card.required"),
   price: Yup.number()
     .required("inputs.errors.price.required")
     .min(1, "inputs.errors.price.invalid")
