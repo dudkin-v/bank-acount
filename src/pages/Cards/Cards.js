@@ -27,15 +27,13 @@ const Container = styled.div`
       justify-content: space-between;
       height: 90%;
       overflow-x: scroll;
+      max-width: 400px;
       .no-cards-description {
         width: 250px;
         font-size: 16px;
         line-height: 30px;
         text-align: center;
         color: ${colors.gray};
-      }
-      .error-message {
-        width: 250px;
       }
     }
     .button {
@@ -52,6 +50,7 @@ const Container = styled.div`
     box-shadow: -2px 2px 5px 1px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
     width: 60%;
+    height: 100%;
     padding: 0 40px;
   }
 `;
@@ -76,6 +75,11 @@ const Cards = () => {
     : "";
 
   useEffect(onGetCards, []);
+
+  const errorMessage =
+    error && error.includes("Network")
+      ? t("transaction.errors.internet")
+      : error;
 
   return (
     <Container className="page">
@@ -104,7 +108,7 @@ const Cards = () => {
             </RenderingCondition.Fulfilled>
 
             <RenderingCondition.Rejected>
-              <Error errorMessage={error} />
+              <Error errorMessage={errorMessage} />
             </RenderingCondition.Rejected>
           </RenderingCondition>
           {isOpenCardCreator && (

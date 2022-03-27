@@ -12,10 +12,9 @@ import { resetTransactionError } from "../../store/transactions/actions";
 import routes from "../../utils/routes";
 
 const Container = styled.div`
-  position: relative;
   padding: 20px 0;
   .error-message:last-child {
-    margin-top: 20px;
+    margin-top: 40px;
   }
 `;
 

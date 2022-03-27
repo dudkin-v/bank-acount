@@ -35,7 +35,7 @@
     "comment": "Comment",
     "errors": {
       "404": "The recipient's card was entered incorrectly or the card does not exist.",
-      "402": "Not enough money on the card.",
+      "402": "Not enough money on the card. Try choosing a different card.",
       "internet": "Problems with your internet connection."
     }
   },
