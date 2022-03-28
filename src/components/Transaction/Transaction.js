@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,25 +25,24 @@ const Transaction = () => {
   );
   const navigate = useNavigate();
   const params = useParams();
-  const [errorMessage, setErrorMessage] = useState();
 
   const onCloseTransaction = () => {
     navigate(routes.CARDS, { replace: true });
     dispatch(resetTransactionError());
   };
 
-  useEffect(() => {
-    if (error) {
-      if (error.includes("404")) {
-        setErrorMessage(t("transaction.errors.404"));
+  const getErrorMessage = (e) => {
+    if (e) {
+      if (e.includes("404")) {
+        return t("transaction.errors.404");
       }
-      if (error.includes("402")) {
-        setErrorMessage(t("transaction.errors.402"));
-      } else {
-        setErrorMessage(error);
+      if (e.includes("402")) {
+        return t("transaction.errors.402");
       }
+      return e;
     }
-  }, [error]);
+    return null;
+  };
 
   return (
     <Container>
@@ -57,7 +55,7 @@ const Transaction = () => {
             recipientId={params.id}
           />
         ))}
-      {params.id && error && <Error errorMessage={errorMessage} />}
+      {params.id && error && <Error errorMessage={getErrorMessage(error)} />}
     </Container>
   );
 };
