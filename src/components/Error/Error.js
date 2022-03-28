@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import colors from "../../utils/colors";
-import errorImage from "./error-image.png";
 
 const ErrorMessage = styled.div`
   display: flex;
@@ -10,12 +9,7 @@ const ErrorMessage = styled.div`
   padding: 15px 30px;
   background-color: rgba(252, 46, 32, 0.05);
   border-radius: 15px;
-  border: 2px solid ${colors.error};
-  img {
-    width: 40px;
-    height: auto;
-    margin-right: 20px;
-  }
+  border: 1px solid ${colors.error};
   p {
     font-size: 16px;
     line-height: 30px;
@@ -26,7 +20,6 @@ const ErrorMessage = styled.div`
 
 const Error = ({ errorMessage }) => (
   <ErrorMessage className="error-message">
-    <img src={errorImage} alt="error" />
     <p>{errorMessage}</p>
   </ErrorMessage>
 );
@@ -36,7 +29,7 @@ Error.propTypes = {
 };
 
 Error.defaultProps = {
-  errorMessage: null,
+  errorMessage: undefined,
 };
 
 export default Error;
