@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { LanguagePicker } from "./components/LanguagePicker";
-import colors from "../../utils/colors";
 import { Spinner } from "./components/Spinner";
+import colors from "../../utils/colors";
 
 const SettingPage = styled.section`
   display: flex;
@@ -21,12 +21,12 @@ const SettingPage = styled.section`
           display: flex;
           svg {
             font-size: 20px;
-            color: ${colors.rhino};
+            color: ${colors.outerSpace};
           }
           p {
             font-size: 16px;
             padding: 0 10px;
-            color: ${colors.rhino};
+            color: ${colors.outerSpace};
           }
         }
         .settings-value {

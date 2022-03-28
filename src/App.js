@@ -4,9 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import routes from "./utils/routes";
-import colors from "./utils/colors";
-
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
 import { NavBar } from "./navigation";
@@ -17,10 +14,13 @@ import { Account } from "./pages/Account";
 import { Settings } from "./pages/Settings";
 import { getAppData } from "./store/application/thunk";
 
+import routes from "./utils/routes";
+import colors from "./utils/colors";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #e8e3e3;
+  background-color: ${colors.ebb};
   min-width: 100vw;
   min-height: 100vh;
 `;
@@ -36,7 +36,7 @@ const Main = styled.main`
     .page-heading {
       font-size: 20px;
       padding: 40px 0 20px;
-      color: ${colors.rhino};
+      color: ${colors.outerSpace};
     }
   }
 `;
@@ -67,7 +67,8 @@ const PrivateRoutes = () => {
           path="*"
           element={<Navigate replace to={routes.CARDS} from="*" />}
         />
-        <Route exact path={routes.CARDS} element={<Cards />} />
+        <Route path={routes.CARDS} element={<Cards />} />
+        <Route path={routes.TRANSACTION} element={<Cards />} />
         <Route exact path={routes.PAYMENTS} element={<Payments />} />
         <Route exact path={routes.MY_STAT} element={<MyStat />} />
         <Route exact path={routes.ACCOUNT} element={<Account />} />

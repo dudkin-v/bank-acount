@@ -1,8 +1,14 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import { Recipient } from "./Recipient";
 import { Manual } from "./Manual";
+import { Transaction } from "../Transaction";
+
+import { resetTransactionError } from "../../store/transactions/actions";
+import routes from "../../utils/routes";
 
 const Container = styled.div`
   display: flex;
@@ -16,24 +22,33 @@ const Container = styled.div`
 `;
 
 const Recipients = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const recipients = useSelector(
     (rootStore) => rootStore.recipients.recipients
   );
+
+  const onNewTransaction = (id) => () => {
+    navigate(`${routes.NEW_TRANSACTION}${id}`);
+    dispatch(resetTransactionError());
+  };
 
   return (
     <Container className="recipients-container">
       <h2 className="page-heading">{t("recipients.title")}</h2>
       <div className="recipients">
-        <Manual />
+        <Manual onClick={onNewTransaction("manual")} />
         {recipients.map((recipient) => (
           <Recipient
             lastName={recipient.info.lastName}
             firstName={recipient.info.firstName}
             key={recipient.info.id}
+            onClick={onNewTransaction(recipient.info.id)}
           />
         ))}
       </div>
+      <Transaction />
     </Container>
   );
 };

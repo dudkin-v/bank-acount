@@ -7,53 +7,59 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: ${colors.ebb};
-  padding: 20px;
+  transition: 0.4s;
+  cursor: pointer;
   margin-right: 15px;
-  border-radius: 20px;
-  max-width: 90px;
-  min-width: 90px;
-  height: 120px;
   &:hover {
-    border: 1px solid ${colors.turquoise};
-    cursor: pointer;
-    .recipient-name {
-      color: ${colors.rhino};
+    transition: 0.4s;
+    p {
+      color: ${colors.royalBlue};
+    }
+    .avatar-block {
+      border: 2px solid ${colors.royalBlue};
     }
   }
+
   .recipient-name {
     font-size: 12px;
-    color: ${colors.gray};
+    color: ${colors.outerSpace};
     padding-top: 10px;
   }
   .avatar-block {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    background-color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: ${colors.warning};
+    border: 2px solid ${colors.outerSpace};
     img {
       width: 100%;
       height: 100%;
-      border-radius: 15px;
+      border-radius: 50%;
       object-fit: cover;
       vertical-align: middle;
     }
     p {
       font-size: 18px;
-      color: ${colors.rhino};
+      color: ${colors.ebb};
+      text-transform: uppercase;
     }
   }
 `;
 
-const Recipient = ({ firstName, lastName, avatarImageUrl }) => {
+const Recipient = ({ firstName, lastName, avatarImageUrl, onClick }) => {
   const userName =
     firstName.length > 6 ? `${firstName.substring(0, 4)}...` : firstName;
 
   return (
-    <Container>
+    <Container
+      role="button"
+      aria-pressed={false}
+      tabIndex={0}
+      onClick={onClick}
+    >
       <div className="avatar-block">
         {avatarImageUrl ? (
           <img src={avatarImageUrl} alt="" />
@@ -61,7 +67,9 @@ const Recipient = ({ firstName, lastName, avatarImageUrl }) => {
           <p>{`${firstName[0]}${lastName[0]}`}</p>
         )}
       </div>
-      <p className="recipient-name">{`${userName} ${lastName[0]}.`}</p>
+      <p className="recipient-name">{`${
+        userName[0].toUpperCase() + userName.substring(1)
+      } ${lastName[0].toUpperCase()}.`}</p>
     </Container>
   );
 };
@@ -70,6 +78,7 @@ Recipient.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   avatarImageUrl: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 Recipient.defaultProps = {

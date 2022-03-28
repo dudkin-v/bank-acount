@@ -4,6 +4,14 @@ import ReactSelect from "react-select";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
+  position: relative;
+  .error-message {
+    position: absolute;
+    top: -23px;
+    right: 0;
+    font-size: 12px;
+    color: ${colors.error};
+  }
     .select {
       min-width: 150px;
       input {
@@ -11,33 +19,34 @@ const Container = styled.div`
       }
       .css-1hb7zxy-IndicatorsContainer {
         span {
-          background-color: ${colors.rhino};
+          background-color: ${colors.royalBlue};
         }
       }
       svg {
-        color: ${colors.rhino};
+        color: ${colors.royalBlue};
+        cursor: pointer;
       }
       .css-1s2u09g-control {
         background: none;
-        border: 1px solid ${colors.rhino};
-        border-radius: 3px;
+        border: 1px solid ${colors.royalBlue};
+        border-radius: 5px;
       }
       .css-qc6sy-singleValue {
-        color: ${colors.rhino};
+        color: ${colors.royalBlue};
       }
       .css-4ljt47-MenuList {
         display: flex;
         flex-direction: column;
-        background-color: rgba(128, 128, 128, 0.3);
-        border: 1px solid ${colors.rhino};
-        border-radius: 3px;
+        background-color: white;
+        border: 1px solid ${colors.royalBlue};
+        border-radius: 5px;
+        outline: none;
         div {
-          color: ${colors.rhino};
+          color: ${colors.royalBlue};
             cursor: pointer;
         }
         .css-9gakcf-option,
         .css-1n7v3ny-option {
-          color: ${colors.rhino};
           font-weight: bold;
           background: none;
         }
@@ -45,8 +54,9 @@ const Container = styled.div`
     }
   }`;
 
-const Select = ({ options, onChange, placeholder }) => (
+const Select = ({ options, onChange, placeholder, errorMessage }) => (
   <Container>
+    {errorMessage && <p className="error-message">{errorMessage}</p>}
     <ReactSelect
       options={options}
       onChange={onChange}
@@ -60,11 +70,17 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     }).isRequired
-  ).isRequired,
+  ),
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+Select.defaultProps = {
+  options: undefined,
+  errorMessage: undefined,
 };
 
 export default Select;

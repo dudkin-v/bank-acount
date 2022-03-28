@@ -9,13 +9,8 @@ const Container = styled.div`
   width: 370px;
   min-height: 220px;
   margin: 0 20px 20px 0;
-  background: ${colors.coralTree};
-  background: linear-gradient(
-    149deg,
-    rgba(162, 88, 107, 1) 0%,
-    rgba(40, 47, 91, 1) 50%,
-    rgba(162, 88, 107, 1) 100%
-  );
+  ${colors.cardBackground};
+
   .card {
     width: 100%;
     height: 100%;

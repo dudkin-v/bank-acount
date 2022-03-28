@@ -12,6 +12,7 @@ import { CardNumberInput } from "../CardNumberInput";
 import PayPassSVG from "./PayPassSVG";
 import { getCardType } from "../../../../utils/card";
 import colors from "../../../../utils/colors";
+import shadows from "../../../../utils/shadows";
 
 const Container = styled.div`
   position: fixed;
@@ -31,7 +32,7 @@ const Container = styled.div`
     right: 50px;
     width: 25px;
     height: 25px;
-    color: ${colors.coralTree};
+    color: ${colors.error};
     cursor: pointer;
     outline: none;
   }
@@ -39,14 +40,9 @@ const Container = styled.div`
     border-radius: 20px;
     width: 370px;
     min-height: 220px;
-    box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
-    background: ${colors.coralTree};
-    background: linear-gradient(
-      149deg,
-      rgba(162, 88, 107, 1) 0%,
-      rgba(40, 47, 91, 1) 50%,
-      rgba(162, 88, 107, 1) 100%
-    );
+    box-shadow: ${shadows.royalBlue};
+    ${colors.cardBackground};
+
     .card {
       width: 100%;
       height: 100%;
@@ -61,7 +57,7 @@ const Container = styled.div`
         height: 100%;
         button {
           position: absolute;
-          bottom: -60px;
+          bottom: -70px;
           right: -10px;
           width: 200px;
           height: 37.5px;

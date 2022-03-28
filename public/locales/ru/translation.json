@@ -24,6 +24,21 @@
     "title": "Быстрый перевод",
     "manualTransaction": "Перевод"
   },
+  "transaction": {
+    "from": "С карты",
+    "to": "На карту",
+    "placeholder": "Выберите карту",
+    "inputPlaceholder": "Введите номер карты",
+    "price": "Сумма",
+    "pricePlaceholder": "Введите сумму",
+    "commentPlaceholder": "Введите коментарий",
+    "comment": "Комментарий",
+    "errors": {
+      "404": "Карта получателя введена некорректно или карты не существует.",
+      "402": "Недостаточно средств на счету. Попробуйте выбрать другую карту.",
+      "internet": "Проблемы с вашим интернет соединением."
+    }
+  },
   "inputs": {
     "labels": {
       "firstName": "Имя",
@@ -51,6 +66,14 @@
         "required": "Обязательное поле",
         "minLength": "Введите 5 и более символов",
         "confirmPassword": "Пароли не совпадают"
+      },
+      "price": {
+        "required": "Обязательное поле",
+        "invalid": "Значение не корректно"
+      },
+      "card" : {
+        "required": "Обязательное поле",
+        "invalid": "Не верный номер"
       }
     }
   },
@@ -59,7 +82,9 @@
     "signUp": "Создать аккаунт",
     "logOut": "Выйти",
     "addNewCard": "Добавить карту",
-    "createCard": "Создать карту"
+    "createCard": "Создать карту",
+    "send": "Перевести",
+    "cancel": "Отмена"
   },
   "nav": {
     "links": {
@@ -69,5 +94,8 @@
       "account": "Акаунт",
       "settings": "Настройки"
     }
+  },
+  "errors": {
+    "internet": "Problems with your internet connection."
   }
 }

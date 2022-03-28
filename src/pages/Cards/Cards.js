@@ -13,6 +13,7 @@ import { Recipients } from "../../components/Recipients";
 
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
+import shadows from "../../utils/shadows";
 
 const Container = styled.div`
   display: flex;
@@ -25,32 +26,39 @@ const Container = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      height: 90%;
       overflow-x: scroll;
-      .button {
-        width: 200px;
-        height: 37.5px;
-        justify-self: flex-end;
+      max-width: 400px;
+      .error-message {
+        max-width: 370px;
       }
       .no-cards-description {
-        width: 250px;
+        max-width: 370px;
         font-size: 16px;
         line-height: 30px;
         text-align: center;
         color: ${colors.gray};
+        background-color: rgba(128, 128, 128, 0.05);
+        padding: 15px 30px;
+        border-radius: 15px;
+        border: 1px solid ${colors.gray};
       }
-      .error-message {
-        width: 250px;
-      }
+    }
+    .button {
+      margin-top: 20px;
+      width: 200px;
+      height: 37.5px;
+      justify-self: flex-end;
     }
   }
 
   .content {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border-radius: 35px;
+    box-shadow: ${shadows.gray};
+    border-radius: 30px;
     width: 60%;
+    height: 100%;
     padding: 0 40px;
   }
 `;
@@ -113,8 +121,8 @@ const Cards = () => {
               handleCloseCardCreator={setOpenCardCreator}
             />
           )}
-          <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
         </div>
+        <Button text={t("buttons.addNewCard")} onClick={onOpenCardCreator} />
       </div>
       <div className="content">
         <Recipients />

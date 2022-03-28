@@ -30,3 +30,14 @@ export const signInValidationSchema = Yup.object().shape({
     .min(5, "inputs.errors.password.minLength")
     .required("inputs.errors.password.required"),
 });
+
+export const transactionValidationSchema = Yup.object().shape({
+  senderCard: Yup.string().required("inputs.errors.card.required"),
+  recipientCard: Yup.string()
+    .length(16, "inputs.errors.card.invalid")
+    .required("inputs.errors.card.required"),
+  price: Yup.number()
+    .required("inputs.errors.price.required")
+    .min(1, "inputs.errors.price.invalid")
+    .typeError("inputs.errors.price.invalid"),
+});

@@ -14,15 +14,17 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-width: 225px;
+  min-width: 245px;
   padding: 0 20px;
-  border-right: 2px solid rgba(128, 128, 128, 0.2);
+  border-right: 2px solid rgba(128, 128, 128, 0.3);
 
   .nav-heading {
-    color: ${colors.rhino};
+    color: ${colors.outerSpace};
     font-size: 30px;
+    padding: 5px 10px;
     font-weight: bold;
     margin-bottom: 30px;
+    border-radius: 15px;
   }
 
   .nav-lists-block {
@@ -42,19 +44,21 @@ const Nav = styled.nav`
         display: flex;
         align-items: center;
         font-size: 16px;
-        color: ${colors.rhino};
+        color: ${colors.outerSpace};
         :hover {
           font-weight: bold;
+          color: ${colors.royalBlue};
         }
         svg {
-          color: ${colors.rhino};
+          color: ${colors.outerSpace};
           font-size: 20px;
           margin-right: 10px;
         }
       }
       .active {
         font-weight: bold;
-        }
+        color: ${colors.royalBlue};
+      }
       }
     }
   }

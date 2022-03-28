@@ -3,19 +3,21 @@ import styled from "styled-components";
 import { useState } from "react";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import colors from "../../utils/colors";
+import shadows from "../../utils/shadows";
 
 const Label = styled.label`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: ${colors.rhino};
+  color: ${colors.royalBlue};
   cursor: pointer;
 
   .error-message {
     position: absolute;
-    bottom: 3px;
+    top: 3px;
+    right: 0;
     font-size: 12px;
-    color: ${colors.coralTree};
+    color: ${colors.error};
   }
 
   .secure-btn {
@@ -27,9 +29,11 @@ const Label = styled.label`
     background: inherit;
     display: flex;
     cursor: pointer;
+
     svg {
       width: 100%;
       height: 100%;
+      color: ${colors.gray};
     }
   }
 `;
@@ -37,13 +41,9 @@ const Input = styled.input`
   font-size: 16px;
   padding: ${(props) => (props.secure ? "8px 35px 8px 14px" : "8px 14px")};
   margin: 5px 0 20px;
-  border: 1px solid ${colors.rhino};
-  border-radius: 3px;
-  background-color: #dadada;
-  :focus {
-    outline: none;
-    border: 1px solid blue;
-  }
+  border-radius: 5px;
+  outline: none;
+  box-shadow: ${shadows.royalBlue};
 `;
 
 const InputField = ({
@@ -55,6 +55,8 @@ const InputField = ({
   errorMessage,
   onBlur,
   touched,
+  placeholder,
+  type,
 }) => {
   const [isSecure, setIsSecure] = useState(secure);
 
@@ -75,13 +77,15 @@ const InputField = ({
       )}
       {label}
       <Input
+        className="input"
         secure={secure}
         id={name}
         name={name}
-        type={isSecure ? "password" : "text"}
+        type={type || (isSecure ? "password" : "text")}
         onChange={onChange}
         onBlur={onBlur}
         value={value}
+        placeholder={placeholder}
       />
       {secure && (
         <button type="button" onClick={onSecure} className="secure-btn">
@@ -95,12 +99,14 @@ const InputField = ({
 InputField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   secure: PropTypes.bool,
   errorMessage: PropTypes.string,
   touched: PropTypes.bool,
   onBlur: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -108,6 +114,9 @@ InputField.defaultProps = {
   errorMessage: undefined,
   touched: false,
   onBlur: () => {},
+  placeholder: undefined,
+  type: undefined,
+  value: undefined,
 };
 
 export default InputField;

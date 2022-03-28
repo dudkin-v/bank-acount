@@ -24,6 +24,20 @@
     "title": "Quick transaction",
     "manualTransaction": "Manual"
   },
+  "transaction": {
+    "from": "From card",
+    "to": "To card",
+    "placeholder": "Choose a card",
+    "inputPlaceholder": "Enter card number",
+    "price": "Amount",
+    "pricePlaceholder": "Enter amount",
+    "commentPlaceholder": "Enter your comment",
+    "comment": "Comment",
+    "errors": {
+      "404": "The recipient's card was entered incorrectly or the card does not exist.",
+      "402": "Not enough money on the card. Try choosing a different card."
+    }
+  },
   "inputs": {
     "labels": {
       "firstName": "First Name",
@@ -51,6 +65,14 @@
         "required": "Field is required",
         "minLength": "Please enter 5 or more characters",
         "confirmPassword": "Passwords do not match"
+      },
+      "price": {
+        "required": "Field is required",
+        "invalid": "Invalid value"
+      },
+      "card": {
+        "required": "Field is required",
+        "invalid": "Invalid card number"
       }
     }
   },
@@ -59,7 +81,9 @@
     "signUp": "Create account",
     "logOut": "Log out",
     "addNewCard": "Add new card",
-    "createCard": "Create card"
+    "createCard": "Create card",
+    "send": "Send",
+    "cancel": "Cancel"
   },
   "nav": {
     "links": {
@@ -69,5 +93,8 @@
       "account": "Account",
       "settings": "Settings"
     }
+  },
+  "errors": {
+    "internet": "Problems with your internet connection."
   }
 }

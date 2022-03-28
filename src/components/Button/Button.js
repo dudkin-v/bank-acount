@@ -8,22 +8,24 @@ const Btn = styled.button`
   height: 100%;
   min-height: 37.5px;
   padding: 8px 20px;
-  color: white;
+  color: ${colors.ebb};
   font-size: 16px;
-  background-color: ${colors.turquoise};
+  background-color: ${colors.royalBlue};
   border-radius: 5px;
   cursor: pointer;
   outline: none;
-  transition: 0.3s;
+  transition: 0.4s;
+
   :disabled {
     background-color: ${colors.gray};
     cursor: ${(props) => (props.isLoading ? "wait" : "not-allowed")};
   }
+
   :hover:enabled,
   :active:enabled {
-    box-shadow: 0 5px 15px 6px rgba(14, 60, 183, 0.2);
-    background: ${colors.toryBlue};
-    transition: 0.3s;
+    background: ${colors.persianBlue};
+    transition: 0.4s;
+    transform: scale(98%);
   }
 `;
 

@@ -12,3 +12,12 @@ export const getCardType = (cardNumber) => {
   }
   return null;
 };
+
+export const splitCardNumber = (cardNumber) =>
+  cardNumber
+    .split("")
+    .reduce(
+      (acc, cur, index) =>
+        `${acc}${index % 4 === 0 && index ? ` ${cur}` : cur}`,
+      ""
+    );
