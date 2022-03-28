@@ -4,16 +4,24 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
+import find from "lodash/fp/find";
+import map from "lodash/fp/map";
+import defaultTo from "lodash/fp/defaultTo";
+import pipe from "lodash/fp/pipe";
+import get from "lodash/fp/get";
 
 import MyCardsSelect from "../MyCardsSelect/MyCardsSelect";
 import { Select } from "../../Select";
 import { InputField } from "../../InputField";
 import { Button } from "../../Button";
 
-import colors from "../../../utils/colors";
-import { transactionValidationSchema } from "../../../utils/validation";
 import { onSendTransaction } from "../../../store/transactions/thunk";
+import { resetTransactionError } from "../../../store/transactions/actions";
 import { splitCardNumber } from "../../../utils/card";
+
+import { transactionValidationSchema } from "../../../utils/validation";
+import colors from "../../../utils/colors";
+import shadows from "../../../utils/shadows";
 
 const Container = styled.form`
   .iwueWg .select .css-1s2u09g-control {
@@ -22,13 +30,13 @@ const Container = styled.form`
   .select {
     border: none;
     border-radius: 5px;
-    box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+    box-shadow: ${shadows.royalBlue};
     .css-1s2u09g-control,
     .css-4ljt47-MenuList {
       border: none;
     }
     .css-4ljt47-MenuList {
-      box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+      box-shadow: ${shadows.royalBlue};
     }
     margin-top: 5px;
     margin-bottom: 15px;
@@ -77,7 +85,7 @@ const Container = styled.form`
       margin-top: 10px;
     }
     .button:first-child {
-      background-color: white;
+      background-color: ${colors.ebb};
       color: ${colors.royalBlue};
       border: 2px solid ${colors.royalBlue};
     }
@@ -105,17 +113,20 @@ const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
     validationSchema: transactionValidationSchema,
     validateOnChange: false,
     onSubmit: (values) => {
-      dispatch(onSendTransaction(values, onCloseTransaction));
+      dispatch(
+        onSendTransaction(
+          { ...values, price: Number(values.price) },
+          onCloseTransaction
+        )
+      );
     },
   });
 
   const [transactionComment, setTransactionComment] = useState("");
 
   useEffect(() => {
-    if (formik.values.price) {
-      formik.setFieldValue("price", +formik.values.price);
-    }
-  }, [formik.values.price]);
+    dispatch(resetTransactionError());
+  }, [formik.values.senderCard, formik.values.price]);
 
   const handleChangeComment = ({ target: { value } }) => {
     setTransactionComment(value);
@@ -127,12 +138,15 @@ const MembersTransaction = ({ recipientId, onCloseTransaction }) => {
     formik.setFieldValue("recipientCard", value);
   };
 
-  const recipientCards = recipients
-    .find((user) => user.info.id === recipientId)
-    .cards.map((card) => ({
+  const recipientCards = pipe(
+    find(["info.id", recipientId]),
+    defaultTo({ cards: [] }),
+    get("cards"),
+    map((card) => ({
       value: card.number,
       label: splitCardNumber(card.number),
-    }));
+    }))
+  )(recipients);
 
   return (
     <Container className="transaction" onSubmit={formik.handleSubmit}>

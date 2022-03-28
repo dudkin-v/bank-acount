@@ -1,4 +1,5 @@
 import axios from "axios";
+import i18n from "i18next";
 import { store } from "../store";
 import { logOut } from "../store/login/actions";
 
@@ -27,6 +28,10 @@ instance.interceptors.response.use(
   (error) => {
     if (error.message.includes("403")) {
       store.dispatch(logOut());
+    }
+    if (error.message.includes("Network")) {
+      // eslint-disable-next-line no-param-reassign
+      error.message = i18n.t("errors.internet");
     }
     throw error;
   }

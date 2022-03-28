@@ -20,7 +20,7 @@ import colors from "./utils/colors";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${colors.ebb};
   min-width: 100vw;
   min-height: 100vh;
 `;

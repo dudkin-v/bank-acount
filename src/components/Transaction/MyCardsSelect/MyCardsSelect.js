@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Select } from "../../Select";
 import { splitCardNumber } from "../../../utils/card";
 import colors from "../../../utils/colors";
+import shadows from "../../../utils/shadows";
 
 const Container = styled.div`
   .iwueWg .select .css-1s2u09g-control {
@@ -20,7 +21,7 @@ const Container = styled.div`
       border: none;
     }
     .css-4ljt47-MenuList {
-      box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+      box-shadow: ${shadows.royalBlue};
     }
     margin-top: 5px;
     margin-bottom: 15px;
@@ -43,14 +44,16 @@ const MyCardsSelect = ({ handleChange, errorMessage }) => {
   const { t } = useTranslation();
   const myCards = useSelector((rootStore) => rootStore.cards.cards);
 
+  const getSelectLabel = (card) => (
+    <div className="select-label">
+      <div>{splitCardNumber(card.number)}</div>
+      <div className="balance">{`${card.balance}.00 UAH`}</div>
+    </div>
+  );
+
   const selectOptions = myCards.map((card) => ({
     value: card.number,
-    label: (
-      <div className="select-label">
-        <div>{splitCardNumber(card.number)}</div>
-        <div className="balance">{`${card.balance}.00 UAH`}</div>
-      </div>
-    ),
+    label: getSelectLabel(card),
   }));
 
   return (

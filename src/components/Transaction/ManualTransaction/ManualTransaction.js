@@ -47,7 +47,7 @@ const Container = styled.form`
       margin-top: 10px;
     }
     .button:first-child {
-      background-color: white;
+      background-color: ${colors.ebb};
       color: ${colors.royalBlue};
       border: 2px solid ${colors.royalBlue};
     }
@@ -71,21 +71,24 @@ const ManualTransaction = ({ onCloseTransaction }) => {
     initialValues: initialData,
     validationSchema: transactionValidationSchema,
     onSubmit: (values) => {
-      dispatch(onSendTransaction(values, onCloseTransaction));
+      dispatch(
+        onSendTransaction(
+          {
+            ...values,
+            price: Number(values.price),
+            recipientCard: values.recipientCard.toString(),
+          },
+          onCloseTransaction
+        )
+      );
     },
   });
 
   const [transactionComment, setTransactionComment] = useState("");
 
   useEffect(() => {
-    if (formik.values.price) {
-      formik.setFieldValue("price", +formik.values.price);
-    }
-  }, [formik.values.price]);
-
-  useEffect(() => {
     dispatch(resetTransactionError());
-  }, [formik.values.recipientCard]);
+  }, [formik.values.recipientCard, formik.values.price]);
 
   const handleChangeComment = ({ target: { value } }) => {
     setTransactionComment(value);

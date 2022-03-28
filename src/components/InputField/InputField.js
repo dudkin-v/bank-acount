@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import colors from "../../utils/colors";
+import shadows from "../../utils/shadows";
 
 const Label = styled.label`
   position: relative;
@@ -42,7 +43,7 @@ const Input = styled.input`
   margin: 5px 0 20px;
   border-radius: 5px;
   outline: none;
-  box-shadow: 0 1px 3px 0 ${colors.royalBlue};
+  box-shadow: ${shadows.royalBlue};
 `;
 
 const InputField = ({

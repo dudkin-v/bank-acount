@@ -12,6 +12,7 @@ import { CardNumberInput } from "../CardNumberInput";
 import PayPassSVG from "./PayPassSVG";
 import { getCardType } from "../../../../utils/card";
 import colors from "../../../../utils/colors";
+import shadows from "../../../../utils/shadows";
 
 const Container = styled.div`
   position: fixed;
@@ -39,7 +40,7 @@ const Container = styled.div`
     border-radius: 20px;
     width: 370px;
     min-height: 220px;
-    box-shadow: 0 3px 5px 0 ${colors.royalBlue};
+    box-shadow: ${shadows.royalBlue};
     ${colors.cardBackground};
 
     .card {

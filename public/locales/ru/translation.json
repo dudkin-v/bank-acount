@@ -94,5 +94,8 @@
       "account": "Акаунт",
       "settings": "Настройки"
     }
+  },
+  "errors": {
+    "internet": "Problems with your internet connection."
   }
 }

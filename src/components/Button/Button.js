@@ -8,7 +8,7 @@ const Btn = styled.button`
   height: 100%;
   min-height: 37.5px;
   padding: 8px 20px;
-  color: white;
+  color: ${colors.ebb};
   font-size: 16px;
   background-color: ${colors.royalBlue};
   border-radius: 5px;
@@ -23,7 +23,7 @@ const Btn = styled.button`
 
   :hover:enabled,
   :active:enabled {
-    background: #311bbb;
+    background: ${colors.persianBlue};
     transition: 0.4s;
     transform: scale(98%);
   }

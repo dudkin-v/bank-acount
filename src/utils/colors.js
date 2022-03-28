@@ -3,6 +3,7 @@ export default {
   gray: "#808080",
   ebb: "#fff",
   royalBlue: "#5e43e6",
+  persianBlue: "#311bbb",
   error: "#FC2E20",
   warning: "#FD7F20",
   cardBackground:

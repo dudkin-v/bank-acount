@@ -13,6 +13,7 @@ import { Recipients } from "../../components/Recipients";
 
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
+import shadows from "../../utils/shadows";
 
 const Container = styled.div`
   display: flex;
@@ -28,12 +29,19 @@ const Container = styled.div`
       height: 90%;
       overflow-x: scroll;
       max-width: 400px;
+      .error-message {
+        max-width: 370px;
+      }
       .no-cards-description {
-        width: 250px;
+        max-width: 370px;
         font-size: 16px;
         line-height: 30px;
         text-align: center;
         color: ${colors.gray};
+        background-color: rgba(128, 128, 128, 0.05);
+        padding: 15px 30px;
+        border-radius: 15px;
+        border: 1px solid ${colors.gray};
       }
     }
     .button {
@@ -47,7 +55,7 @@ const Container = styled.div`
   .content {
     display: flex;
     flex-direction: column;
-    box-shadow: -2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: ${shadows.gray};
     border-radius: 30px;
     width: 60%;
     height: 100%;
@@ -76,11 +84,6 @@ const Cards = () => {
 
   useEffect(onGetCards, []);
 
-  const errorMessage =
-    error && error.includes("Network")
-      ? t("transaction.errors.internet")
-      : error;
-
   return (
     <Container className="page">
       <div className="cards-container">
@@ -108,7 +111,7 @@ const Cards = () => {
             </RenderingCondition.Fulfilled>
 
             <RenderingCondition.Rejected>
-              <Error errorMessage={errorMessage} />
+              <Error errorMessage={error} />
             </RenderingCondition.Rejected>
           </RenderingCondition>
           {isOpenCardCreator && (

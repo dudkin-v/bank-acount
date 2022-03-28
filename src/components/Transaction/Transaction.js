@@ -40,15 +40,14 @@ const Transaction = () => {
       }
       if (error.includes("402")) {
         setErrorMessage(t("transaction.errors.402"));
-      }
-      if (error.includes("Network Error")) {
-        setErrorMessage(t("transaction.errors.internet"));
+      } else {
+        setErrorMessage(error);
       }
     }
   }, [error]);
 
   return (
-    <Container isOpen={params.id}>
+    <Container>
       {params.id &&
         (params.id === "manual" ? (
           <ManualTransaction onCloseTransaction={onCloseTransaction} />
