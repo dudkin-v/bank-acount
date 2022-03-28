@@ -8,4 +8,6 @@ export default {
   SETTINGS: "/settings",
   TRANSACTION: "/cards/transaction/:id",
   NEW_TRANSACTION: "/cards/transaction/",
+  HISTORY: "/cards/transaction/history/:cardId",
+  CARD_HISTORY: "/cards/transaction/history/",
 };

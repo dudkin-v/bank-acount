@@ -36,3 +36,17 @@ export const removeCard = (cardId) => async (dispatch) => {
     dispatch(action.removeCardLoading(false));
   }
 };
+
+export const getCardHistory = (cardId) => async (dispatch) => {
+  try {
+    dispatch(action.cardHistoryLoading(true));
+    const response = await instance.get(
+      `${endpoint.TRANSACTIONS_HISTORY}/${cardId}`
+    );
+    dispatch(action.setCardHistory(response));
+  } catch (error) {
+    dispatch(action.cardHistoryError(error));
+  } finally {
+    dispatch(action.cardHistoryLoading(false));
+  }
+};

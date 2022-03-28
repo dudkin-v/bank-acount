@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+
 import { CardLogo } from "../CardLogo";
 import PayPassSVG from "./PayPassSVG";
 import colors from "../../../../utils/colors";
+import routes from "../../../../utils/routes";
 
 const Container = styled.div`
   border-radius: 20px;
@@ -10,6 +13,12 @@ const Container = styled.div`
   min-height: 220px;
   margin: 0 20px 20px 0;
   ${colors.cardBackground};
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+    transform: scale(97%);
+  }
 
   .card {
     width: 100%;
@@ -112,34 +121,46 @@ const Container = styled.div`
   }
 `;
 
-const Card = ({ number, expiredDate, cardType, userName }) => (
-  <Container className="card-container">
-    <div className="card">
-      <form>
-        <div className="bank-name">
-          <h2>Banking App</h2>
-        </div>
-        <div className="card-data">
-          <PayPassSVG />
-          <div className="curd-number">
-            <p>{number.substring(0, 4)}</p>
-            <p>{number.substring(4, 8)}</p>
-            <p>{number.substring(8, 12)}</p>
-            <p>{number.substring(12, 16)}</p>
+const Card = ({ number, expiredDate, cardType, userName, id }) => {
+  const navigate = useNavigate();
+  const onShowCardHistory = () => {
+    navigate(`${routes.CARD_HISTORY}${id}`);
+  };
+  return (
+    <Container
+      className="card-container"
+      role="button"
+      aria-pressed={false}
+      tabIndex={0}
+      onClick={onShowCardHistory}
+    >
+      <div className="card">
+        <form>
+          <div className="bank-name">
+            <h2>Banking App</h2>
           </div>
-          <div className="expire-date">
-            <p className="expire-date-description">VALID THRU</p>
-            <p className="expire-date-value">{expiredDate.month}</p>
-            <span>/</span>
-            <p className="expire-date-value">{expiredDate.year}</p>
+          <div className="card-data">
+            <PayPassSVG />
+            <div className="curd-number">
+              <p>{number.substring(0, 4)}</p>
+              <p>{number.substring(4, 8)}</p>
+              <p>{number.substring(8, 12)}</p>
+              <p>{number.substring(12, 16)}</p>
+            </div>
+            <div className="expire-date">
+              <p className="expire-date-description">VALID THRU</p>
+              <p className="expire-date-value">{expiredDate.month}</p>
+              <span>/</span>
+              <p className="expire-date-value">{expiredDate.year}</p>
+            </div>
+            <h2>{userName}</h2>
+            <CardLogo cardType={cardType} />
           </div>
-          <h2>{userName}</h2>
-          <CardLogo cardType={cardType} />
-        </div>
-      </form>
-    </div>
-  </Container>
-);
+        </form>
+      </div>
+    </Container>
+  );
+};
 
 Card.propTypes = {
   number: PropTypes.string.isRequired,
@@ -149,6 +170,7 @@ Card.propTypes = {
   }).isRequired,
   cardType: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default Card;

@@ -69,6 +69,7 @@ const PrivateRoutes = () => {
         />
         <Route path={routes.CARDS} element={<Cards />} />
         <Route path={routes.TRANSACTION} element={<Cards />} />
+        <Route path={routes.HISTORY} element={<Cards />} />
         <Route exact path={routes.PAYMENTS} element={<Payments />} />
         <Route exact path={routes.MY_STAT} element={<MyStat />} />
         <Route exact path={routes.ACCOUNT} element={<Account />} />

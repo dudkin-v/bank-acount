@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { RenderingCondition } from "../../components/RenderingCondition";
@@ -10,6 +11,7 @@ import { Card } from "./components/Card";
 import { Spinner } from "../../components/Spinner";
 import { Error } from "../../components/Error";
 import { Recipients } from "../../components/Recipients";
+import { CardHistory } from "../../components/CardHistory";
 
 import { addCard, getCards } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
@@ -70,6 +72,7 @@ const Cards = () => {
   const error = useSelector((rootStore) => rootStore.cards.error);
   const user = useSelector((rootStore) => rootStore.user.user);
   const { t } = useTranslation();
+  const params = useParams();
 
   const [isOpenCardCreator, setOpenCardCreator] = useState(false);
 
@@ -103,6 +106,7 @@ const Cards = () => {
                     number={card.number}
                     cardType={card.cardType}
                     key={card.id}
+                    id={card.id}
                   />
                 ))
               ) : (
@@ -126,6 +130,7 @@ const Cards = () => {
       </div>
       <div className="content">
         <Recipients />
+        {params.cardId && <CardHistory />}
       </div>
     </Container>
   );
