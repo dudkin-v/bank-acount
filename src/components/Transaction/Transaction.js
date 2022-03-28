@@ -58,7 +58,7 @@ const Transaction = () => {
             recipientId={params.id}
           />
         ))}
-      {error && <Error errorMessage={errorMessage} />}
+      {params.id && error && <Error errorMessage={errorMessage} />}
     </Container>
   );
 };
