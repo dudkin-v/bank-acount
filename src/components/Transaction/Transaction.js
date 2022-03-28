@@ -32,16 +32,13 @@ const Transaction = () => {
   };
 
   const getErrorMessage = (e) => {
-    if (e) {
-      if (e.includes("404")) {
-        return t("transaction.errors.404");
-      }
-      if (e.includes("402")) {
-        return t("transaction.errors.402");
-      }
-      return e;
+    if (e.includes("404")) {
+      return t("transaction.errors.404");
     }
-    return null;
+    if (e.includes("402")) {
+      return t("transaction.errors.402");
+    }
+    return e;
   };
 
   return (
