@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { getPrice, getDate } from "../../../../utils/card";
+import { getDate } from "../../../../utils/card";
+import { Price } from "../../../Price";
 
 const Item = styled.li`
   display: flex;
@@ -36,18 +37,13 @@ const ListItem = ({ date, price }) => (
   <Item className="history-list-item">
     <p className="history-date">{getDate(date)}</p>
     <p className="history-recipient">Firstname Lastname</p>
-    {getPrice(price)}
+    <Price price={price} />
   </Item>
 );
 
 ListItem.propTypes = {
-  date: PropTypes.string,
-  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-ListItem.defaultProps = {
-  date: undefined,
-  price: "",
+  date: PropTypes.string.isRequired,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default ListItem;

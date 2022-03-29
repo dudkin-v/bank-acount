@@ -8,7 +8,7 @@ import find from "lodash/fp/find";
 import defaultTo from "lodash/fp/defaultTo";
 import pipe from "lodash/fp/pipe";
 import get from "lodash/fp/get";
-import orderBy from "lodash/fp/orderBy";
+import orderBy from "lodash/orderBy";
 
 import { RenderingCondition } from "../RenderingCondition";
 import { Spinner } from "../Spinner";
@@ -55,36 +55,36 @@ const CardHistory = () => {
 
   const [history, setHistory] = useState(cardHistory);
   const [isDescending, setDescending] = useState(true);
+  const [sortValue, setSortValue] = useState("");
 
   const onSortHistory = (value, status) =>
-    pipe(orderBy([value], [status]))(cardHistory);
+    orderBy(cardHistory, [value], [status]);
 
   const handleSort = (value) => () => {
-    if (isDescending) {
-      setDescending(!isDescending);
-      setHistory(onSortHistory(value, "asc"));
-    } else {
-      setDescending(!isDescending);
-      setHistory(onSortHistory(value, "desc"));
-    }
+    setDescending((prevDescending) => {
+      const newDescending = !prevDescending;
+      setHistory(onSortHistory(value, newDescending ? "desc" : "asc"));
+      return newDescending;
+    });
+    setSortValue(value);
   };
 
   useEffect(() => {
     dispatch(getCardHistory(params.cardId));
-    setHistory(onSortHistory("date", "desc"));
   }, [params.cardId]);
 
-  const cardNumber = pipe(
+  const secureCardNumber = pipe(
     find(["id", params.cardId]),
     defaultTo({ number: "" }),
-    get("number")
-  )(myCards).substring(12, 16);
+    get("number"),
+    (number) => `**** ${number.substring(12, 16)}`
+  )(myCards);
 
   return (
     <Container>
       <div className="history-heading">
         <h2 className="page-heading">{t("cardHistory.title")}</h2>
-        <h2 className="page-heading">{`**** ${cardNumber}`}</h2>
+        <h2 className="page-heading">{secureCardNumber}</h2>
       </div>
       <RenderingCondition
         error={cardHistoryError}
@@ -99,6 +99,7 @@ const CardHistory = () => {
               <ListHeadings
                 isDescending={isDescending}
                 handleSort={handleSort}
+                sortValue={sortValue}
               />
               <HistoryList history={history} />
             </div>

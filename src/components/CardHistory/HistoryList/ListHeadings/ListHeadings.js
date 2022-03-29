@@ -30,7 +30,7 @@ const List = styled.div`
   }
 `;
 
-const ListHeadings = ({ handleSort, isDescending }) => {
+const ListHeadings = ({ handleSort, isDescending, sortValue }) => {
   const { t } = useTranslation();
   return (
     <List className="history-list-heading">
@@ -41,7 +41,8 @@ const ListHeadings = ({ handleSort, isDescending }) => {
         onClick={handleSort("date")}
       >
         {t("cardHistory.date")}
-        {isDescending ? <HiSortDescending /> : <HiSortAscending />}
+        {sortValue === "date" &&
+          (isDescending ? <HiSortDescending /> : <HiSortAscending />)}
       </span>
       <span
         role="button"
@@ -50,7 +51,8 @@ const ListHeadings = ({ handleSort, isDescending }) => {
         onClick={handleSort("id")}
       >
         {t("cardHistory.recipient")}
-        {isDescending ? <HiSortDescending /> : <HiSortAscending />}
+        {sortValue === "id" &&
+          (isDescending ? <HiSortDescending /> : <HiSortAscending />)}
       </span>
       <span
         role="button"
@@ -59,7 +61,8 @@ const ListHeadings = ({ handleSort, isDescending }) => {
         onClick={handleSort("price")}
       >
         {t("cardHistory.price")}
-        {isDescending ? <HiSortDescending /> : <HiSortAscending />}
+        {sortValue === "price" &&
+          (isDescending ? <HiSortDescending /> : <HiSortAscending />)}
       </span>
     </List>
   );
@@ -68,6 +71,7 @@ const ListHeadings = ({ handleSort, isDescending }) => {
 ListHeadings.propTypes = {
   handleSort: PropTypes.func.isRequired,
   isDescending: PropTypes.bool.isRequired,
+  sortValue: PropTypes.string.isRequired,
 };
 
 export default ListHeadings;

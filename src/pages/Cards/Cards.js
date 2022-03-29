@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ import { Error } from "../../components/Error";
 import { Recipients } from "../../components/Recipients";
 import { CardHistory } from "../../components/CardHistory";
 
-import { addCard, getCards } from "../../store/cards/thunk";
+import { addCard } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
 import shadows from "../../utils/shadows";
 
@@ -76,7 +76,6 @@ const Cards = () => {
 
   const [isOpenCardCreator, setOpenCardCreator] = useState(false);
 
-  const onGetCards = () => dispatch(getCards());
   const onCreateCard = (cardData) => dispatch(addCard(cardData));
   const onOpenCardCreator = () =>
     setOpenCardCreator((prevIsOpen) => !prevIsOpen);
@@ -84,8 +83,6 @@ const Cards = () => {
   const userName = user.firstName
     ? `${user.firstName[0]}. ${user.lastName}`
     : "";
-
-  useEffect(onGetCards, []);
 
   return (
     <Container className="page">

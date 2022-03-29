@@ -1,3 +1,4 @@
+import orderBy from "lodash/orderBy";
 import * as action from "./actions";
 import { instance, endpoint } from "../../services/network";
 
@@ -43,7 +44,7 @@ export const getCardHistory = (cardId) => async (dispatch) => {
     const response = await instance.get(
       `${endpoint.TRANSACTIONS_HISTORY}/${cardId}`
     );
-    dispatch(action.setCardHistory(response));
+    dispatch(action.setCardHistory(orderBy(response, ["date"], ["desc"])));
   } catch (error) {
     dispatch(action.cardHistoryError(error));
   } finally {
