@@ -11,6 +11,7 @@ import { Card } from "./components/Card";
 import { Spinner } from "../../components/Spinner";
 import { Error } from "../../components/Error";
 import { Recipients } from "../../components/Recipients";
+import { Transaction } from "../../components/Transaction";
 import { CardHistory } from "../../components/CardHistory";
 
 import { addCard } from "../../store/cards/thunk";
@@ -127,6 +128,7 @@ const Cards = () => {
       </div>
       <div className="content">
         <Recipients />
+        {params.transactionId && <Transaction />}
         {params.cardId && <CardHistory />}
       </div>
     </Container>
