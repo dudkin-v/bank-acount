@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const cardTypes = {
   VISA: "visa",
   MASTERCARD: "mastercard",
@@ -42,3 +44,6 @@ export const getPrice = (price) => {
   }
   return null;
 };
+
+export const getDate = (date) =>
+    `${moment(date).format("DD.MM.YY")} ${moment(date).format("HH:mm")}`;

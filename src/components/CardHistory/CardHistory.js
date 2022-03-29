@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import moment from "moment";
 import find from "lodash/fp/find";
 import defaultTo from "lodash/fp/defaultTo";
 import pipe from "lodash/fp/pipe";
@@ -14,7 +13,7 @@ import { RenderingCondition } from "../RenderingCondition";
 import { Spinner } from "../Spinner";
 import { getCardHistory } from "../../store/cards/thunk";
 import { Error } from "../Error";
-import { getPrice } from "../../utils/card";
+import HistoryList from "./HistoryList/HistoryList";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
@@ -29,7 +28,6 @@ const Container = styled.div`
     }
   }
   .history-list-container {
-    overflow-y: scroll;
     .history-list-heading {
       display: flex;
       justify-content: space-between;
@@ -40,39 +38,6 @@ const Container = styled.div`
       }
       p:last-child {
         padding-right: 15px;
-      }
-    }
-    .history-list {
-      max-height: 370px;
-      overflow-y: scroll;
-      .history-list-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        margin-bottom: 10px;
-        border-radius: 15px;
-        background-color: rgba(128, 128, 128, 0.1);
-        p {
-          font-size: 16px;
-          span:first-child {
-            font-size: 12px;
-            padding-right: 10px;
-          }
-        }
-        .history-date {
-          width: 25%;
-          text-align: start;
-          padding-left: 15px;
-        }
-        .price {
-          width: 25%;
-          text-align: end;
-          padding-right: 15px;
-        }
-        .history-recipient {
-          width: 50%;
-          text-align: center;
-        }
       }
     }
   }
@@ -104,9 +69,6 @@ const CardHistory = () => {
     dispatch(getCardHistory(params.cardId));
   }, [params.cardId]);
 
-  const getDate = (date) =>
-    `${moment(date).format("DD.MM.YY")} ${moment(date).format("HH:mm")}`;
-
   const cardNumber = pipe(
     find(["id", params.cardId]),
     defaultTo({ number: "" }),
@@ -134,15 +96,7 @@ const CardHistory = () => {
                 <p>{t("cardHistory.recipient")}</p>
                 <p>{t("cardHistory.price")}</p>
               </ul>
-              <ul className="history-list">
-                {cardHistory.map((transaction) => (
-                  <li key={transaction.date} className="history-list-item">
-                    <p className="history-date">{getDate(transaction.date)}</p>
-                    <p className="history-recipient">Firstname Lastname</p>
-                    {getPrice(transaction.price)}
-                  </li>
-                ))}
-              </ul>
+              <HistoryList history={cardHistory} />
             </div>
           ) : (
             <p className="no-history-description">
