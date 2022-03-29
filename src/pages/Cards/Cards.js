@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -40,7 +40,7 @@ const Container = styled.div`
         line-height: 30px;
         text-align: center;
         color: ${colors.gray};
-        background-color: rgba(128, 128, 128, 0.05);
+        background-color: rgba(128, 128, 128, 0.1);
         padding: 15px 30px;
         border-radius: 15px;
         border: 1px solid ${colors.gray};
@@ -61,7 +61,7 @@ const Container = styled.div`
     border-radius: 30px;
     width: 60%;
     height: 100%;
-    padding: 0 40px;
+    padding: 0 40px 20px;
   }
 `;
 

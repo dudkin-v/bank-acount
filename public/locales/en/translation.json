@@ -94,6 +94,13 @@
       "settings": "Settings"
     }
   },
+  "cardHistory": {
+    "title": "Card transactions",
+    "recipient": "Recipient",
+    "date": "Date",
+    "price": "Amount",
+    "noHistory": "There are no transactions for this card yet."
+  },
   "errors": {
     "internet": "Problems with your internet connection."
   }

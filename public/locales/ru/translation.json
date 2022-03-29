@@ -71,7 +71,7 @@
         "required": "Обязательное поле",
         "invalid": "Значение не корректно"
       },
-      "card" : {
+      "card": {
         "required": "Обязательное поле",
         "invalid": "Не верный номер"
       }
@@ -94,6 +94,13 @@
       "account": "Акаунт",
       "settings": "Настройки"
     }
+  },
+  "cardHistory": {
+    "title": "Операции по карте",
+    "recipient": "Получатель",
+    "date": "Дата",
+    "price": "Сумма",
+    "noHistory": "Пока нет операций по данной карте."
   },
   "errors": {
     "internet": "Problems with your internet connection."
