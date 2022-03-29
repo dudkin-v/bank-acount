@@ -11,7 +11,7 @@ const HistoryList = ({ history }) => (
   <List className="history-list">
     {history.map((transaction) => (
       <ListItem
-        key={transaction.date}
+        key={`${transaction.date}${transaction.id}`}
         date={transaction.date}
         price={transaction.price}
       />
@@ -23,8 +23,7 @@ HistoryList.propTypes = {
   history: PropTypes.arrayOf(
     PropTypes.shape({
       date: PropTypes.string.isRequired,
-      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired,
+      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ).isRequired,
 };

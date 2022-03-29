@@ -41,8 +41,13 @@ const ListItem = ({ date, price }) => (
 );
 
 ListItem.propTypes = {
-  date: PropTypes.string.isRequired,
-  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  date: PropTypes.string,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+ListItem.defaultProps = {
+  date: undefined,
+  price: "",
 };
 
 export default ListItem;

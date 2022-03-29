@@ -25,6 +25,9 @@ export const splitCardNumber = (cardNumber) =>
     );
 
 export const getPrice = (price) => {
+  if (!price) {
+    return null;
+  }
   if (price.toString().includes(".")) {
     return (
       <p className="price">
@@ -46,4 +49,4 @@ export const getPrice = (price) => {
 };
 
 export const getDate = (date) =>
-    `${moment(date).format("DD.MM.YY")} ${moment(date).format("HH:mm")}`;
+  `${moment(date).format("DD.MM.YY")} ${moment(date).format("HH:mm")}`;

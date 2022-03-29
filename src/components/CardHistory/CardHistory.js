@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -8,12 +8,14 @@ import find from "lodash/fp/find";
 import defaultTo from "lodash/fp/defaultTo";
 import pipe from "lodash/fp/pipe";
 import get from "lodash/fp/get";
+import orderBy from "lodash/fp/orderBy";
 
 import { RenderingCondition } from "../RenderingCondition";
 import { Spinner } from "../Spinner";
 import { getCardHistory } from "../../store/cards/thunk";
 import { Error } from "../Error";
 import HistoryList from "./HistoryList/HistoryList";
+import ListHeadings from "./HistoryList/ListHeadings/ListHeadings";
 import colors from "../../utils/colors";
 
 const Container = styled.div`
@@ -25,20 +27,6 @@ const Container = styled.div`
     }
     .page-heading {
       padding-top: 0;
-    }
-  }
-  .history-list-container {
-    .history-list-heading {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid ${colors.royalBlue};
-      margin-bottom: 10px;
-      p:first-child {
-        padding-left: 15px;
-      }
-      p:last-child {
-        padding-right: 15px;
-      }
     }
   }
   .no-history-description {
@@ -65,8 +53,25 @@ const CardHistory = () => {
     (rootStore) => rootStore.cards.cardHistoryError
   );
 
+  const [history, setHistory] = useState(cardHistory);
+  const [isDescending, setDescending] = useState(true);
+
+  const onSortHistory = (value, status) =>
+    pipe(orderBy([value], [status]))(cardHistory);
+
+  const handleSort = (value) => () => {
+    if (isDescending) {
+      setDescending(!isDescending);
+      setHistory(onSortHistory(value, "asc"));
+    } else {
+      setDescending(!isDescending);
+      setHistory(onSortHistory(value, "desc"));
+    }
+  };
+
   useEffect(() => {
     dispatch(getCardHistory(params.cardId));
+    setHistory(onSortHistory("date", "desc"));
   }, [params.cardId]);
 
   const cardNumber = pipe(
@@ -91,12 +96,11 @@ const CardHistory = () => {
         <RenderingCondition.Fulfilled>
           {cardHistory.length ? (
             <div className="history-list-container">
-              <ul className="history-list-heading">
-                <p>{t("cardHistory.date")}</p>
-                <p>{t("cardHistory.recipient")}</p>
-                <p>{t("cardHistory.price")}</p>
-              </ul>
-              <HistoryList history={cardHistory} />
+              <ListHeadings
+                isDescending={isDescending}
+                handleSort={handleSort}
+              />
+              <HistoryList history={history} />
             </div>
           ) : (
             <p className="no-history-description">
