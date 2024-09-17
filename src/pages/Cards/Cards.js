@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { RenderingCondition } from "../../components/RenderingCondition";
@@ -10,8 +11,10 @@ import { Card } from "./components/Card";
 import { Spinner } from "../../components/Spinner";
 import { Error } from "../../components/Error";
 import { Recipients } from "../../components/Recipients";
+import { Transaction } from "../../components/Transaction";
+import { CardHistory } from "../../components/CardHistory";
 
-import { addCard, getCards } from "../../store/cards/thunk";
+import { addCard } from "../../store/cards/thunk";
 import colors from "../../utils/colors";
 import shadows from "../../utils/shadows";
 
@@ -38,7 +41,7 @@ const Container = styled.div`
         line-height: 30px;
         text-align: center;
         color: ${colors.gray};
-        background-color: rgba(128, 128, 128, 0.05);
+        background-color: rgba(128, 128, 128, 0.1);
         padding: 15px 30px;
         border-radius: 15px;
         border: 1px solid ${colors.gray};
@@ -59,7 +62,7 @@ const Container = styled.div`
     border-radius: 30px;
     width: 60%;
     height: 100%;
-    padding: 0 40px;
+    padding: 0 40px 20px;
   }
 `;
 
@@ -70,10 +73,10 @@ const Cards = () => {
   const error = useSelector((rootStore) => rootStore.cards.error);
   const user = useSelector((rootStore) => rootStore.user.user);
   const { t } = useTranslation();
+  const params = useParams();
 
   const [isOpenCardCreator, setOpenCardCreator] = useState(false);
 
-  const onGetCards = () => dispatch(getCards());
   const onCreateCard = (cardData) => dispatch(addCard(cardData));
   const onOpenCardCreator = () =>
     setOpenCardCreator((prevIsOpen) => !prevIsOpen);
@@ -81,8 +84,6 @@ const Cards = () => {
   const userName = user.firstName
     ? `${user.firstName[0]}. ${user.lastName}`
     : "";
-
-  useEffect(onGetCards, []);
 
   return (
     <Container className="page">
@@ -103,6 +104,7 @@ const Cards = () => {
                     number={card.number}
                     cardType={card.cardType}
                     key={card.id}
+                    id={card.id}
                   />
                 ))
               ) : (
@@ -126,6 +128,8 @@ const Cards = () => {
       </div>
       <div className="content">
         <Recipients />
+        {params.transactionId && <Transaction />}
+        {params.cardId && <CardHistory />}
       </div>
     </Container>
   );

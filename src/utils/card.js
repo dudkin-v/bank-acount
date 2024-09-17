@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const cardTypes = {
   VISA: "visa",
   MASTERCARD: "mastercard",
@@ -21,3 +23,6 @@ export const splitCardNumber = (cardNumber) =>
         `${acc}${index % 4 === 0 && index ? ` ${cur}` : cur}`,
       ""
     );
+
+export const getDate = (date) =>
+  `${moment(date).format("DD.MM.YY")} ${moment(date).format("HH:mm")}`;

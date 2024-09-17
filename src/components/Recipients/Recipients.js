@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Recipient } from "./Recipient";
 import { Manual } from "./Manual";
-import { Transaction } from "../Transaction";
 
 import { resetTransactionError } from "../../store/transactions/actions";
 import routes from "../../utils/routes";
@@ -29,8 +28,8 @@ const Recipients = () => {
     (rootStore) => rootStore.recipients.recipients
   );
 
-  const onNewTransaction = (id) => () => {
-    navigate(`${routes.NEW_TRANSACTION}${id}`);
+  const onNewTransaction = (transactionId) => () => {
+    navigate(`${routes.NEW_TRANSACTION}${transactionId}`);
     dispatch(resetTransactionError());
   };
 
@@ -48,7 +47,6 @@ const Recipients = () => {
           />
         ))}
       </div>
-      <Transaction />
     </Container>
   );
 };

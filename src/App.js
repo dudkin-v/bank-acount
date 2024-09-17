@@ -3,9 +3,11 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import get from "lodash/fp/get";
 
 import { SingIn } from "./pages/SingIn";
 import { SingUp } from "./pages/SingUp";
+import { Spinner } from "./pages/Settings/components/Spinner";
 import { NavBar } from "./navigation";
 import { Cards } from "./pages/Cards";
 import { Payments } from "./pages/Payments";
@@ -54,21 +56,27 @@ const PublicRoutes = () => (
 
 const PrivateRoutes = () => {
   const dispatch = useDispatch();
+  const cardId = useSelector(get("cards.cards.[0].id"));
+  const appIsReady = useSelector((rootStore) => rootStore.application.isReady);
 
   useEffect(() => {
     dispatch(getAppData());
   }, []);
 
-  return (
+  return !appIsReady ? (
+    <Spinner />
+  ) : (
     <Main>
       <NavBar />
       <Routes>
         <Route
           path="*"
-          element={<Navigate replace to={routes.CARDS} from="*" />}
+          element={
+            <Navigate replace to={`${routes.CARD_HISTORY}${cardId}`} from="*" />
+          }
         />
-        <Route path={routes.CARDS} element={<Cards />} />
         <Route path={routes.TRANSACTION} element={<Cards />} />
+        <Route path={routes.HISTORY} element={<Cards />} />
         <Route exact path={routes.PAYMENTS} element={<Payments />} />
         <Route exact path={routes.MY_STAT} element={<MyStat />} />
         <Route exact path={routes.ACCOUNT} element={<Account />} />
@@ -80,7 +88,7 @@ const PrivateRoutes = () => {
 
 const App = () => {
   const token = useSelector((rootStore) => rootStore.login.token);
-  const language = useSelector((rootStore) => rootStore.settings.language);
+  const language = useSelector((rootStore) => rootStore.settings.lenguage);
   const { i18n } = useTranslation();
 
   useEffect(() => {

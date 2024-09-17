@@ -43,16 +43,18 @@ const Transaction = () => {
 
   return (
     <Container>
-      {params.id &&
-        (params.id === "manual" ? (
+      {params.transactionId &&
+        (params.transactionId === "manual" ? (
           <ManualTransaction onCloseTransaction={onCloseTransaction} />
         ) : (
           <MembersTransaction
             onCloseTransaction={onCloseTransaction}
-            recipientId={params.id}
+            recipientId={params.transactionId}
           />
         ))}
-      {params.id && error && <Error errorMessage={getErrorMessage(error)} />}
+      {params.transactionId && error && (
+        <Error errorMessage={getErrorMessage(error)} />
+      )}
     </Container>
   );
 };
